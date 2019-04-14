@@ -1,0 +1,5 @@
+# NodeJS stuffs
+node_modules/
+# Parcel Bundler
+.cache/
+dist/
