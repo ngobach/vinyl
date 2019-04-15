@@ -21,11 +21,15 @@ class AudioService extends EventEmitter {
     this.rawPlaylist = null;
     this.filter = {};
     this.handleEnded = this.handleEnded.bind(this);
+    this.handleDurationChanged = this.handleDurationChanged.bind(this);
+    this.handleTimeChanged = this.handleTimeChanged.bind(this);
     this.mode = MODE_RANDOM;
 
     // Instantiate our Audio instance
     this.audio = new Audio();
-    this.audio.onended = this.handleEnded;
+    this.audio.addEventListener('ended', this.handleEnded);
+    this.audio.addEventListener('durationchange', this.handleDurationChanged);
+    this.audio.addEventListener('timeupdate', this.handleTimeChanged);
   }
 
   init() {
@@ -54,6 +58,14 @@ class AudioService extends EventEmitter {
     } else if (this.mode === MODE_RANDOM) {
       this.playItem(sample(this.getFilteredPlaylist()));
     }
+  }
+
+  handleDurationChanged() {
+    this.emit('progress', 0, this.audio.duration);
+  }
+
+  handleTimeChanged() {
+    this.emit('progress', this.audio.currentTime / this.audio.duration, this.audio.duration);
   }
 
   playItem(item) {
