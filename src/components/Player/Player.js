@@ -89,7 +89,8 @@ class Player extends React.PureComponent {
               <Box className="progress" width={`${progress * 100}%`} />
             </div>
           </div>
-          <div className="controls right"></div>
+          <div className="controls right">
+          </div>
         </div>
       </div>
     );
