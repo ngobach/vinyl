@@ -2,6 +2,7 @@ import React from 'react';
 import Box from 'ui-box';
 import audio, { MODE_RANDOM, MODE_REPEAT } from '../../services/audio';
 import './Player.scss';
+import PlayerButton from '../PlayerButton';
 
 function autoPrefix(s) {
   const str = String(s);
@@ -30,14 +31,17 @@ class Player extends React.PureComponent {
       volume: 0,
       duration: 0,
       mode: MODE_RANDOM,
+      isPlaying: false,
     };
     this.handleUpdate = this.handleUpdate.bind(this);
     this.handleProgress = this.handleProgress.bind(this);
+    this.handlePlayState = this.handlePlayState.bind(this);
   }
 
   componentWillMount() {
     audio.on('itemChanged', this.handleUpdate);
     audio.on('progress', this.handleProgress);
+    audio.on('playState', this.handlePlayState);
   }
 
   componentDidMount() {
@@ -47,6 +51,7 @@ class Player extends React.PureComponent {
   componentWillUnmount() {
     audio.off('itemChanged', this.handleUpdate);
     audio.off('progress', this.handleProgress);
+    audio.off('playState', this.handlePlayState);
   }
 
   handleUpdate(item) {
@@ -57,7 +62,13 @@ class Player extends React.PureComponent {
   }
 
   handleProgress(progress, duration) {
-    this.setState({ progress, duration });
+    if (!Number.isNaN(progress) && !Number.isNaN(duration)) {
+      this.setState({ progress, duration });
+    }
+  }
+
+  handlePlayState(isPlaying) {
+    this.setState({ isPlaying });
   }
 
   render() {
@@ -90,6 +101,8 @@ class Player extends React.PureComponent {
             </div>
           </div>
           <div className="controls right">
+            <PlayerButton icon={isPlaying ? 'pause' : 'play'} onClick={() => audio.togglePlay()} />
+            <PlayerButton icon="next" onClick={() => audio.playRandom()} />
           </div>
         </div>
       </div>

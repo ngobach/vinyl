@@ -25,9 +25,19 @@
 }
 
 .player .controls {
-  width: 280px;
+  width: 64px;
   height: 100%;
-  // background: #111;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  &.left {
+    justify-content: flex-end;
+    margin-right: 32px;
+  }
+  &.right {
+    justify-content: flex-start;
+    margin-left: 32px;
+  }
 }
 
 .player .current {

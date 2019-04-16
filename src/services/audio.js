@@ -30,6 +30,8 @@ class AudioService extends EventEmitter {
     this.audio.addEventListener('ended', this.handleEnded);
     this.audio.addEventListener('durationchange', this.handleDurationChanged);
     this.audio.addEventListener('timeupdate', this.handleTimeChanged);
+    this.audio.addEventListener('pause', this.handlePlayState.bind(this, false));
+    this.audio.addEventListener('play', this.handlePlayState.bind(this, true));
   }
 
   init() {
@@ -68,6 +70,10 @@ class AudioService extends EventEmitter {
     this.emit('progress', this.audio.currentTime / this.audio.duration, this.audio.duration);
   }
 
+  handlePlayState(isPlaying) {
+    this.emit('playState', isPlaying);
+  }
+
   playItem(item) {
     this.audio.src = getUrlOf(item.url);
     console.log(`🎧 %c${item.title}%c - %c${item.artist}`, 'font-weight: 900', 'font-weight: inherit', 'color: #AAA');
@@ -79,6 +85,14 @@ class AudioService extends EventEmitter {
 
   playRandom() {
     this.playItem(sample(this.getFilteredPlaylist()));
+  }
+
+  togglePlay() {
+    if (this.audio.paused) {
+      this.audio.play();
+    } else {
+      this.audio.pause();
+    }
   }
 
   // YAGNI???

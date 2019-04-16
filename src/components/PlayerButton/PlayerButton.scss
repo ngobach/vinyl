@@ -1,0 +1,30 @@
+@import '/global.scss';
+
+.player-button {
+  // Remote button styles
+  border: none;
+  background: none;
+  outline: none;
+  padding: 0;
+
+  cursor: pointer;
+
+  .icon {
+    width: $iconSize;
+    height: $iconSize;
+    background-size: $iconSize;
+    filter: invert(100%);
+    opacity: 0;
+    transition: all ease 0.2s;
+    .right & {
+      transform: scale(1.5) translateX(16px);
+    }
+    .left & {
+      transform: scale(1.5) translateX(-16px);
+    }
+    .player:hover & {
+      opacity: .25;
+      transform: scale(1);
+    }
+  }
+}
