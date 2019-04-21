@@ -16,15 +16,9 @@
     filter: invert(100%);
     opacity: 0;
     transition: all ease 0.2s;
-    .right & {
-      transform: scale(1.5) translateX(16px);
-    }
-    .left & {
-      transform: scale(1.5) translateX(-16px);
-    }
+    margin: 0 10px;
     .player:hover & {
-      opacity: .25;
-      transform: scale(1);
+      opacity: .3;
     }
   }
 }

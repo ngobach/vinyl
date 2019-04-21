@@ -18,19 +18,16 @@ const fileList = {
   icon_shuffle_filled: require('../assets/icons8-shuffle-filled-100.png'),
   icon_next: require('../assets/icons8-end-100.png'),
   icon_next_filled: require('../assets/icons8-end-filled-100.png'),
-  bg_image: 'https://images.unsplash.com/photo-1490023859957-aaf2fcc67fd1?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1920&q=80',
+  // bg_image: 'https://images.unsplash.com/photo-1490023859957-aaf2fcc67fd1?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1920&q=80',
 };
 /* eslint-enable global-require */
 
 const loaded = {};
 
-function loadImage(url) {
-  const node = new Image();
-  node.src = url;
-  return new Promise((resolve, reject) => {
-    node.onload = () => resolve(url);
-    node.onerror = err => reject(err);
-  });
+async function loadImage(url) {
+  const response = await fetch(url);
+  const blob = await response.blob();
+  return URL.createObjectURL(blob);
 }
 
 function getLoadedAssert() {
@@ -39,9 +36,9 @@ function getLoadedAssert() {
 
 async function load() {
   if (Object.keys(loaded).length !== fileList) {
-    await Object.entries(fileList).map(async ([name, value]) => {
+    await Promise.all(Object.entries(fileList).map(async ([name, value]) => {
       loaded[name] = await loadImage(value);
-    });
+    }));
 
     console.log('Assets loaded');
   }

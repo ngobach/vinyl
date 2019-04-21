@@ -87,7 +87,7 @@ class Player extends React.PureComponent {
     return (
       <div className="player">
         <div className="box">
-          <div className="controls left"></div>
+          <Box height="8px" />
           <div className="current">
             <p className="title">{title}</p>
             <div className="subtitle">{artist}</div>
@@ -100,9 +100,12 @@ class Player extends React.PureComponent {
               <Box className="progress" width={`${progress * 100}%`} />
             </div>
           </div>
-          <div className="controls right">
+          <div className="controls">
+            <PlayerButton icon={`repeat`} />
+            <PlayerButton icon={`audio_${volume}`} />
             <PlayerButton icon={isPlaying ? 'pause' : 'play'} onClick={() => audio.togglePlay()} />
             <PlayerButton icon="next" onClick={() => audio.playRandom()} />
+            <PlayerButton icon={`repeat`} />
           </div>
         </div>
       </div>
