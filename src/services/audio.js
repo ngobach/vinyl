@@ -24,6 +24,7 @@ class AudioService extends EventEmitter {
     this.handleDurationChanged = this.handleDurationChanged.bind(this);
     this.handleTimeChanged = this.handleTimeChanged.bind(this);
     this.mode = MODE_RANDOM;
+    this.current = null;
 
     // Instantiate our Audio instance
     this.audio = new Audio();
@@ -75,6 +76,7 @@ class AudioService extends EventEmitter {
   }
 
   playItem(item) {
+    this.current = item;
     this.audio.src = getUrlOf(item.url);
     console.log(`🎧 %c${item.title}%c - %c${item.artist}`, 'font-weight: 900', 'font-weight: inherit', 'color: #AAA');
     this.emit('itemChanged', item);
