@@ -35,6 +35,7 @@ class Bubble extends React.PureComponent {
 
   render() {
     const { item, isPlaying } = this.state;
+    const { setOpenState } = this.props;
 
     return (
       <Box className="bubble-container">
@@ -42,7 +43,7 @@ class Bubble extends React.PureComponent {
           <Box className="now-playing">
             <Box>
               <Box className="cover">
-                <img src={(item && item.cover) || ''} alt="thumbnail" />
+                <img src={(item && item.cover) || ''} alt="thumbnail" onClick={() => setOpenState(true)} />
               </Box>
               <Box className="controllers">
                 <Box className="button" paddingTop="2px" paddingLeft="8px" onClick={() => audio.togglePlay()}><i className={`im im-${isPlaying ? 'pause' : 'play'}`} /></Box>

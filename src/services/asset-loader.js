@@ -1,6 +1,5 @@
 /* eslint-disable global-require */
-const fileList = {
-};
+const fileList = {};
 /* eslint-enable global-require */
 
 const loaded = {};

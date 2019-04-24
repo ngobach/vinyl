@@ -13,7 +13,7 @@ import audio from './services/audio';
 
 const webfontConfig = {
   google: {
-    families: ['Pacifico', 'Saira Condensed:400:vietnamese'],
+    families: ['Pacifico', 'Saira Condensed:100,400,700:vietnamese'],
   },
   custom: {
     families: ['iconmonstr-iconic-font'],
