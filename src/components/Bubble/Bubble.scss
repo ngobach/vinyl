@@ -4,6 +4,7 @@
   position: absolute;
   bottom: 64px;
   left: 50%;
+  transition: bottom ease .4s;
 
   .bubble {
     margin-left: -50%;
@@ -18,6 +19,11 @@
     box-sizing: border-box;
     padding: 8px;
     color: $primaryColor;
+    transition: height ease 0.4s;
+
+    .opened & {
+      height: calc(100vh - 240px);
+    }
 
     .now-playing {
       display: flex;
@@ -36,7 +42,7 @@
         overflow: hidden;
         box-shadow: 0 8px 8px rgba(#000, 0.3), inset 1px 1px 8px #000;
         filter: brightness(0.8);
-        transition: all ease-in-out .1s;
+        transition: all ease 0.4s;
 
         &:hover {
           margin-top: $marginTop - $hoverSize;
@@ -45,35 +51,50 @@
           cursor: pointer;
         }
 
+        .opened & {
+          margin-top: 8px;
+          margin-bottom: 16px;
+          box-shadow: 0 8px 8px rgba(#000, 0.3), inset 1px 1px 8px #000;
+        }
+
         img {
           width: 100%;
           height: 100%;
         }
       }
 
-      .controllers {
-        display: flex;
-        flex-direction: row;
-        margin-left: 16px;
-        border-radius: 8px;
-        overflow: hidden;
+      .left {
+        .controllers {
+          display: flex;
+          flex-direction: row;
+          margin-left: 16px;
+          border-radius: 8px;
+          overflow: hidden;
+          transition: all ease 0.2s;
 
-        .button {
-          height: 36px;
-          background: rgba(darken($primaryColor, 90%), .5);
-          color: darken($primaryColor, 50%);
-          cursor: pointer;
-          flex: 1;
-          text-align: center;
-          border-left: solid 1px rgba(darken($primaryColor, 80%), .5);
-
-          i.im {
-            font-size: 16pt;
-            line-height: 36px;
+          .opened & {
+            transform: translateX(48px), translateY(-24px);
+            opacity: 0;
+            pointer-events: none;
           }
 
-          &:first-child {
-            border-left-width: 0;
+          .button {
+            height: 36px;
+            background: rgba(darken($primaryColor, 90%), .5);
+            color: darken($primaryColor, 50%);
+            cursor: pointer;
+            flex: 1;
+            text-align: center;
+            border-left: solid 1px rgba(darken($primaryColor, 80%), .5);
+
+            i.im {
+              font-size: 16pt;
+              line-height: 36px;
+            }
+
+            &:first-child {
+              border-left-width: 0;
+            }
           }
         }
       }
@@ -81,6 +102,12 @@
       .info {
         flex: 1;
         margin-left: 32px;
+        margin-right: 32px;
+        transition: all ease 0.4s;
+
+        .opened & {
+          padding-top: 16px;
+        }
 
         .first-line {
           color: darken($primaryColor, 80%);
@@ -115,6 +142,41 @@
           color: darken($primaryColor, 40%);
           margin-top: 4px;
           font-weight: 700;
+        }
+
+        .controllers {
+          width: 100%;
+          height: 48px;
+          background: rgba(darken($primaryColor, 90%), .5);
+          border-radius: 8px;
+          margin-top: 0px;
+          pointer-events: none;
+          opacity: 0;
+          display: flex;
+          flex-direction: row;  
+          transition: all ease 0.2s;
+          padding-left: 8px;
+          padding-right: 16px;
+
+          .opened & {
+            margin-top: 24px;
+            opacity: 1;
+            pointer-events: initial;
+            transition: all ease 0.4s;
+          }
+
+          .button {
+            align-self: center;
+            padding: 8px;
+            padding-top: 12px;
+            text-shadow: 0 0 8px rgba($bgColor, 1);
+            display: block;
+            cursor: pointer;
+
+            &:hover {
+              text-shadow: 0 0 8px rgba($primaryColor, .4);
+            }
+          }
         }
       }
     }

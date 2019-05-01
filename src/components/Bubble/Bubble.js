@@ -35,15 +35,15 @@ class Bubble extends React.PureComponent {
 
   render() {
     const { item, isPlaying } = this.state;
-    const { setOpenState } = this.props;
+    const { toggleOpen } = this.props;
 
     return (
       <Box className="bubble-container">
         <Box className="bubble">
           <Box className="now-playing">
-            <Box>
+            <Box className="left">
               <Box className="cover">
-                <img src={(item && item.cover) || ''} alt="thumbnail" onClick={() => setOpenState(true)} />
+                <img src={(item && item.cover) || ''} alt="thumbnail" onClick={() => toggleOpen()} />
               </Box>
               <Box className="controllers">
                 <Box className="button" paddingTop="2px" paddingLeft="8px" onClick={() => audio.togglePlay()}><i className={`im im-${isPlaying ? 'pause' : 'play'}`} /></Box>
@@ -55,6 +55,13 @@ class Bubble extends React.PureComponent {
               <Box>
                 <Box className="title">{(item && item.title) || ''}</Box>
                 <Box className="subtitle">{(item && item.artist) || ''}</Box>
+              </Box>
+              <Box className="controllers">
+                <Box className="button" onClick={() => audio.togglePlay()}><i className={`im im-${isPlaying ? 'pause' : 'play'}`} /></Box>
+                <Box className="button" onClick={() => audio.playRandom()}><i className="im im-next" /></Box>
+                <Box flex="1" />
+                <Box className="button" onClick={() => audio.playRandom()}><i className="im im-next" /></Box>
+                <Box className="button" onClick={() => audio.playRandom()}><i className="im im-next" /></Box>
               </Box>
             </Box>
           </Box>

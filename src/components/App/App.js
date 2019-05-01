@@ -1,4 +1,5 @@
 import React from 'react';
+import Helmet from 'react-helmet';
 import classnames from 'classnames';
 import audio from '../../services/audio';
 import Head from '../Head';
@@ -10,16 +11,26 @@ class App extends React.Component {
     super(props);
     this.state = {
       opened: false,
+      title: null,
     };
-    this.setOpenState = this.setOpenState.bind(this);
+    this.toggleOpen = this.toggleOpen.bind(this);
+    this.onItemChanged = this.onItemChanged.bind(this);
+    audio.on('itemChanged', this.onItemChanged);
   }
+
 
   componentDidMount() {
     audio.playRandom();
   }
 
-  setOpenState(opened) {
-    this.setState({ opened });
+  onItemChanged(item) {
+    this.setState({
+      title: `${item.title} - ${item.artist}`,
+    });
+  }
+
+  toggleOpen() {
+    this.setState({ opened: !this.state.opened });
   }
 
   render() {
@@ -27,8 +38,11 @@ class App extends React.Component {
 
     return (
       <div className={classnames('app', { opened })}>
+        <Helmet>
+          <title>{this.state.title}</title>
+        </Helmet>
         <Head />
-        <Bubble setOpenState={this.setOpenState} />
+        <Bubble opened={opened} toggleOpen={this.toggleOpen} />
       </div>
     );
   }

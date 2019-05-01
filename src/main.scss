@@ -10,6 +10,7 @@ html, body, #main {
   // No text selection
   user-select: none;
   -webkit-user-select: none;
+  overflow: hidden;
 }
 
 #loader {
