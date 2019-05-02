@@ -114,6 +114,14 @@ class AudioService extends EventEmitter {
     this.emit('filterChanged', newFilter);
   }
 
+  setMode(mode) {
+    this.mode = mode;
+  }
+
+  setVolume(volume) {
+    this.audio.volume = volume;
+  }
+
   getCurrentFilter() {
     return this.filter();
   }
