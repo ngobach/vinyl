@@ -116,6 +116,7 @@ class AudioService extends EventEmitter {
 
   setMode(mode) {
     this.mode = mode;
+    console.log(`Mode now is %c${mode}`, 'font-weight: bold');
   }
 
   setVolume(volume) {

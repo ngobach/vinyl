@@ -63,9 +63,11 @@ class Bubble extends React.PureComponent {
 
   togglePlayMode() {
     const { mode } = this.state;
+    const newMode = mode === MODE_RANDOM ? MODE_REPEAT : MODE_RANDOM;
     this.setState({
-      mode: mode === MODE_RANDOM ? MODE_REPEAT : MODE_RANDOM,
+      mode: newMode,
     });
+    audio.setMode(newMode);
   }
 
   changeVolume() {
@@ -86,8 +88,8 @@ class Bubble extends React.PureComponent {
       item, isPlaying, progress, duration, mode, volumeLevel,
     } = this.state;
     const { toggleOpen } = this.props;
-    const progressLeft = formatSeconds(duration * progress);
-    const progressRight = formatSeconds(duration);
+    const progressLeft = formatSeconds(duration * progress); // eslint-disable-line
+    const progressRight = formatSeconds(duration); // eslint-disable-line
 
     return (
       <Box className="bubble-container">
@@ -112,9 +114,6 @@ class Bubble extends React.PureComponent {
                 <Box className="button" onClick={() => audio.togglePlay()}><i className={`im im-${isPlaying ? 'pause' : 'play'}`} /></Box>
                 <Box className="button" onClick={() => audio.playRandom()}><i className="im im-next" /></Box>
                 <Box className="progress">
-                  <Box>{progressLeft}</Box>
-                  <Box flex="1" />
-                  <Box>{progressRight}</Box>
                   <Box className="progress-value" width={`${progress * 100}%`} />
                 </Box>
                 <Box className="button" onClick={() => this.togglePlayMode()}><i className={`im im-${mode === MODE_REPEAT ? 'loop' : 'random'}`} /></Box>
