@@ -58,6 +58,7 @@ class AudioService extends EventEmitter {
   handleEnded() {
     if (this.mode === MODE_REPEAT) {
       this.audio.currentTime = 0;
+      this.audio.play();
     } else if (this.mode === MODE_RANDOM) {
       this.playItem(sample(this.getFilteredPlaylist()));
     }
