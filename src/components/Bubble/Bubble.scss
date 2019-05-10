@@ -155,7 +155,7 @@ $buttonColor: darken($primaryColor, 50%);
           pointer-events: none;
           opacity: 0;
           display: flex;
-          flex-direction: row;  
+          flex-direction: row;
           transition: all ease 0.2s;
           padding-left: 8px;
           padding-right: 16px;
@@ -212,5 +212,5 @@ $buttonColor: darken($primaryColor, 50%);
         }
       }
     }
-  }  
+  }
 }
