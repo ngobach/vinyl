@@ -1,5 +1,6 @@
 import React from 'react';
 import Box from 'ui-box';
+import classNames from 'classnames';
 import audio, { MODE_RANDOM, MODE_REPEAT } from '../../services/audio';
 import './Bubble.scss';
 
@@ -90,6 +91,7 @@ class Bubble extends React.PureComponent {
     const { toggleOpen } = this.props;
     const progressLeft = formatSeconds(duration * progress); // eslint-disable-line
     const progressRight = formatSeconds(duration); // eslint-disable-line
+    const filter = Object.entries(audio.getCurrentFilter());
 
     return (
       <Box className="bubble-container">
@@ -119,6 +121,21 @@ class Bubble extends React.PureComponent {
                 <Box className="button" onClick={() => this.togglePlayMode()}><i className={`im im-${mode === MODE_REPEAT ? 'loop' : 'random'}`} /></Box>
                 <Box className="button" onClick={() => this.changeVolume()}><i className={`im im-volume${volumeLevel ? '' : '-off'}`} /></Box>
               </Box>
+            </Box>
+          </Box>
+          <Box className="playlist">
+            <Box className="sidebar">
+              <Box className="caption">Genres</Box>
+              {filter.map(([name, active]) => (
+                <Box className={classNames('item', { active })} onClick={() => this.toggleFilter(name)}>{name}</Box>
+              ))}
+            </Box>
+            <Box className="picker">
+              {audio.getFilteredPlaylist().map(it => (
+                <Box className="item">
+                  {it.title}
+                </Box>
+              ))}
             </Box>
           </Box>
         </Box>

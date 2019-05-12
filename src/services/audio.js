@@ -49,7 +49,7 @@ class AudioService extends EventEmitter {
         const gg = [];
         this.rawPlaylist = data;
         this.rawPlaylist.sort(({ title: a }, { title: b }) => (a < b ? -1 : 1));
-        this.rawPlaylist.forEach(({ genres: g }) => gg.push(g));
+        this.rawPlaylist.forEach(({ genres: g }) => gg.push(...g));
         this.filter = fromPairs(union(gg).map(s => [s, true]));
         this.emit('loaded');
       });
@@ -125,7 +125,7 @@ class AudioService extends EventEmitter {
   }
 
   getCurrentFilter() {
-    return this.filter();
+    return this.filter;
   }
 
   getPlaylist() {
