@@ -1,5 +1,6 @@
 import React from 'react';
 import Box from 'ui-box';
+import Scrollbars from 'react-custom-scrollbars';
 import classNames from 'classnames';
 import audio, { MODE_RANDOM, MODE_REPEAT } from '../../services/audio';
 import './Bubble.scss';
@@ -99,7 +100,7 @@ class Bubble extends React.PureComponent {
           <Box className="now-playing">
             <Box className="left">
               <Box className="cover">
-                <img src={(item && item.cover) || ''} alt="thumbnail" onClick={() => toggleOpen()} />
+                <img draggable="false" src={(item && item.cover) || ''} alt="thumbnail" onClick={() => toggleOpen()} />
               </Box>
               <Box className="controllers">
                 <Box className="button" paddingTop="2px" paddingLeft="8px" onClick={() => audio.togglePlay()}><i className={`im im-${isPlaying ? 'pause' : 'play'}`} /></Box>
@@ -130,13 +131,15 @@ class Bubble extends React.PureComponent {
                 <Box className={classNames('item', { active })} onClick={() => this.toggleFilter(name)}>{name}</Box>
               ))}
             </Box>
-            <Box className="picker">
+            <Scrollbars className="picker">
               {audio.getFilteredPlaylist().map(it => (
-                <Box className="item">
-                  {it.title}
+                <Box className={classNames('item', { active: it === item })} onClick={() => audio.playItem(it)}>
+                  <Box>{it.title}</Box>
+                  <Box flex="1" />
+                  <Box className="sub">{it.artist}</Box>
                 </Box>
               ))}
-            </Box>
+            </Scrollbars>
           </Box>
         </Box>
       </Box>
