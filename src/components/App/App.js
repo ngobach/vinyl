@@ -10,7 +10,7 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      opened: false,
+      opened: true,
       title: null,
     };
     this.toggleOpen = this.toggleOpen.bind(this);
@@ -38,7 +38,7 @@ class App extends React.Component {
 
     return (
       <div className={classnames('app', { opened })}>
-        <Helmet>
+        <Helmet defer={false}>
           <title>{this.state.title}</title>
         </Helmet>
         <Head />

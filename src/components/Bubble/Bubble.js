@@ -4,6 +4,7 @@ import Scrollbars from 'react-custom-scrollbars';
 import classNames from 'classnames';
 import audio, { MODE_RANDOM, MODE_REPEAT } from '../../services/audio';
 import './Bubble.scss';
+import PlayItem from './components/PlayItem';
 
 function autoPrefix(s) {
   const str = String(s);
@@ -128,16 +129,12 @@ class Bubble extends React.PureComponent {
             <Box className="sidebar">
               <Box className="caption">Genres</Box>
               {filter.map(([name, active]) => (
-                <Box className={classNames('item', { active })} onClick={() => this.toggleFilter(name)}>{name}</Box>
+                <Box key={name} className={classNames('item', { active })} onClick={() => this.toggleFilter(name)}>{name}</Box>
               ))}
             </Box>
             <Scrollbars className="picker">
               {audio.getFilteredPlaylist().map(it => (
-                <Box className={classNames('item', { active: it === item })} onClick={() => audio.playItem(it)}>
-                  <Box>{it.title}</Box>
-                  <Box flex="1" />
-                  <Box className="sub">{it.artist}</Box>
-                </Box>
+                <PlayItem key={it.url} {...it} onClick={() => audio.playItem(it)} active={it === item} />
               ))}
             </Scrollbars>
           </Box>
