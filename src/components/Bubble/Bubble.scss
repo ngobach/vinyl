@@ -1,6 +1,6 @@
 @import '/global.scss';
 
-$buttonColor: darken($primaryColor, 50%);
+$buttonColor: darken($primaryColor, 20%);
 
 .bubble-container {
   position: absolute;
@@ -82,12 +82,12 @@ $buttonColor: darken($primaryColor, 50%);
 
           .button {
             height: 36px;
-            background: rgba(darken($primaryColor, 90%), .5);
+            background: rgba(darken($primaryColor, 80%), .3);
             color: $buttonColor;
             cursor: pointer;
             flex: 1;
             text-align: center;
-            border-left: solid 1px rgba(darken($primaryColor, 80%), .5);
+            border-left: solid 1px rgba(darken($primaryColor, 60%), .5);
 
             i.im {
               font-size: 16pt;
@@ -113,7 +113,7 @@ $buttonColor: darken($primaryColor, 50%);
 
         .first-line {
           color: darken($primaryColor, 80%);
-          background: rgba(darken($primaryColor, 20%), .8);
+          background: rgba($primaryColor, .8);
           display: inline-block;
           padding: 2px 4px;
           margin-top: 4px;
@@ -135,13 +135,13 @@ $buttonColor: darken($primaryColor, 50%);
         .title {
           font-size: 20pt;
           font-weight: 100;
-          color: darken($primaryColor, 20%);
+          color: $primaryColor;
           margin-top: 4px;
         }
 
         .subtitle {
           font-size: 12pt;
-          color: darken($primaryColor, 40%);
+          color: $primaryColor;
           margin-top: 4px;
           font-weight: 700;
         }
@@ -149,7 +149,7 @@ $buttonColor: darken($primaryColor, 50%);
         .controllers {
           width: 100%;
           height: 48px;
-          background: rgba(darken($primaryColor, 90%), .5);
+          background: rgba(darken($primaryColor, 80%), .3);
           border-radius: 8px;
           margin-top: 0px;
           pointer-events: none;
@@ -247,7 +247,7 @@ $buttonColor: darken($primaryColor, 50%);
       }
 
       .item {
-        $color: darken($primaryColor, 20%);
+        $color: $primaryColor;
         padding: 8px;
         padding-right: 8px;
         margin-bottom: 4px;

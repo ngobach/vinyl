@@ -41,7 +41,7 @@ class App extends React.Component {
         <Helmet defer={false}>
           <title>{this.state.title}</title>
         </Helmet>
-        <Head />
+        <Head title="Vinyl" />
         <Bubble opened={opened} toggleOpen={this.toggleOpen} />
       </div>
     );
