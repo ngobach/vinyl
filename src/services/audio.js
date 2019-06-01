@@ -48,7 +48,7 @@ class AudioService extends EventEmitter {
       .then((data) => {
         const gg = [];
         this.rawPlaylist = data;
-        this.rawPlaylist.sort(({ title: a }, { title: b }) => (a < b ? -1 : 1));
+        this.rawPlaylist.sort(({ title: a }, { title: b }) => a.localeCompare(b));
         this.rawPlaylist.forEach(({ genres: g }) => gg.push(...g));
         this.filter = fromPairs(union(gg).map(s => [s, true]));
         this.emit('loaded');
