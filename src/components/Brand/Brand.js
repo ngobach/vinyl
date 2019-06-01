@@ -9,7 +9,7 @@ const Logo = function Logo({ title, src }) {
   return (
     <React.Fragment>
       <Box is="img" width={64} height={64} src={src || defaultSrc} />
-      <Fly>{title}</Fly>
+      <Fly fontSize="24pt">{title}</Fly>
     </React.Fragment>
   );
 };
