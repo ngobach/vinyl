@@ -1,9 +1,3 @@
-/**
- * Application entrypoint
- */
-
-import '@babel/polyfill';
-
 import React from 'react';
 import ReactDOM from 'react-dom';
 import WebFont from 'webfontloader';
@@ -13,7 +7,7 @@ import audio from './services/audio';
 
 const webfontConfig = {
   google: {
-    families: ['Pacifico', 'Saira Condensed:100,400,700:vietnamese'],
+    families: ['Inter:200,400,900'],
   },
   custom: {
     families: ['iconmonstr-iconic-font'],
@@ -47,7 +41,6 @@ function loadFonts() {
       mountPoint,
     );
   } catch (error) {
-    console.error('Encountered error while attempting to bootstrap vinyl');
     console.error(error);
   }
 })();
