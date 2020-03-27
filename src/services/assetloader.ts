@@ -1,8 +1,5 @@
-/* eslint-disable global-require */
-const fileList = {};
-/* eslint-enable global-require */
-
-const loaded = {};
+const fileList: {} = {};
+const loaded: {} = {};
 
 async function loadImage(url) {
   const response = await fetch(url);

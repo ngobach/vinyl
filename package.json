@@ -8,14 +8,14 @@
     "url": "git+https://github.com/thanbaiks/vinyl.git"
   },
   "dependencies": {
+    "@emotion/core": "^10.0.28",
     "classnames": "^2.2.6",
-    "events": "^3.0.0",
     "lodash": "^4.17.11",
     "react": "^16.8.6",
-    "react-custom-scrollbars": "^4.2.1",
     "react-dom": "^16.8.6",
     "react-helmet": "^5.2.1",
-    "ui-box": "^1.4.0",
+    "reset-css": "^5.0.1",
+    "rxjs": "^6.5.4",
     "webfontloader": "^1.6.28"
   },
   "devDependencies": {

@@ -1,9 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import WebFont from 'webfontloader';
-import App from './components/App';
-import loadAssets from './services/asset-loader';
-import audio from './services/audio';
+import audio from '@/services/audioengine';
+import App from '@/components/App';
+import loadAssets from '@/services/assetloader';
 
 const webfontConfig = {
   google: {
