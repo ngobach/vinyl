@@ -51,6 +51,9 @@ function subscribeAll() {
   });
 
   currentItem.subscribe((track) => {
+    if (!track) {
+      return;
+    }
     audio.src = track.url;
     audio.play();
   });

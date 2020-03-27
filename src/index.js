@@ -32,7 +32,7 @@ function loadFonts() {
       throw new Error('Mount point not found!');
     }
     await Promise.all([
-      await audio.init(),
+      // await audio.init(),
       await loadAssets(),
       await loadFonts(),
     ]);
