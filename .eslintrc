@@ -15,6 +15,7 @@
         "jsx-a11y/no-noninteractive-element-interactions": "off",
         "no-console": "off",
         "object-curly-newline": "off",
-        "import/no-unresolved": "off"
+        "import/no-unresolved": "off",
+        "import/extensions": "off"
     }
 }
