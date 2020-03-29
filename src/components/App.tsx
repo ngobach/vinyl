@@ -1,9 +1,7 @@
-/** @jsx jsx */
-import { css, jsx } from '@emotion/core';
-import { useState, useEffect, FunctionComponent } from 'react';
+import React, { useState, useEffect, FunctionComponent } from 'react';
 import { useSpring, animated } from 'react-spring';
 import useMedialistLoader from '~/hooks/use-medialist-loader';
-
+import { LOADER_SKIPPED } from '~/env';
 import Loader from './Loader';
 import Panic from './Panic';
 
@@ -16,7 +14,7 @@ const App: FunctionComponent<{}> = () => {
   const [ready, setReady] = useState<boolean>(false);
 
   useEffect(() => {
-    if (ml) {
+    if (LOADER_SKIPPED || ml) {
       return;
     }
     if (progress === 0) {
@@ -28,9 +26,12 @@ const App: FunctionComponent<{}> = () => {
 
   useEffect(() => {
     if (ml) {
-      setTimeout(() => setProgress(100), 1000);
-      setTimeout(() => setReady(true), 2000);
-      return;
+      if (LOADER_SKIPPED) {
+        setReady(true)
+      } else {
+        setTimeout(() => setProgress(100), 1000);
+        setTimeout(() => setReady(true), 2000);
+      }
     }
   }, [ml]);
 
@@ -41,10 +42,11 @@ const App: FunctionComponent<{}> = () => {
   }
 
   if (!ready) {
-    return (
+    return LOADER_SKIPPED ? null : (
       <AnimatedLoader progress={p.progress} random={false} />
     );
   }
+
   return (
     <div>Nice</div>
   )

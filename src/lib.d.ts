@@ -7,3 +7,11 @@ interface RawTrack {
 }
 
 type MediaResponse = RawTrack[];
+
+interface FakeProcess {
+  env: {
+    NODE_ENV: string;
+  };
+}
+
+declare const process: FakeProcess;
