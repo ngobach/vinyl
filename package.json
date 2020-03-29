@@ -19,6 +19,10 @@
     "webfontloader": "^1.6.28"
   },
   "devDependencies": {
+    "@types/lodash": "^4.14.149",
+    "@types/react": "^16.9.27",
+    "@types/react-dom": "^16.9.5",
+    "@types/webfontloader": "^1.6.29",
     "babel-eslint": "^10.0.1",
     "eslint": "^5.16.0",
     "eslint-config-airbnb": "^17.1.0",
@@ -28,13 +32,14 @@
     "parcel-bundler": "^1.12.3",
     "pug": "^2.0.3",
     "sass": "^1.17.4",
+    "tslint": "^6.1.0",
     "typescript": "^3.8.3"
   },
   "scripts": {
     "start": "parcel serve src/index.pug",
     "build": "parcel build --no-source-maps src/index.pug",
     "clean": "rm -rf .cache dist",
-    "lint": "eslint src"
+    "lint": "tslint --project ."
   },
   "keywords": [],
   "author": "BachNX <thanbaiks@gmail.com>",

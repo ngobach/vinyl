@@ -1,3 +1,5 @@
+/* tslint:disable:max-classes-per-file */
+
 export type Cover = string;
 
 export class Track {
@@ -8,7 +10,19 @@ export class Track {
   public artists: Artist[];
 }
 
-export class Genre {
+interface PlayList {
+  tracks: Track[];
+  title: string;
+}
+
+export class AllItems implements PlayList {
+  constructor(
+    public title: string,
+    public tracks: Track[],
+  ) {}
+}
+
+export class Genre implements PlayList {
   public title: string;
   public cover: Cover;
   public tracks: Track[] = [];
@@ -18,7 +32,7 @@ export class Genre {
   }
 }
 
-export class Artist {
+export class Artist implements PlayList {
   public title: string;
   public cover: Cover;
   public tracks: Track[] = [];
@@ -28,3 +42,9 @@ export class Artist {
   }
 }
 
+export class SearchResult implements PlayList {
+  constructor(
+    public title: string,
+    public tracks: Track[],
+  ) {}
+}

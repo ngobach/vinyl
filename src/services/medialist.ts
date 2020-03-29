@@ -1,7 +1,5 @@
-import { EventEmitter } from 'events';
-import { union, fromPairs } from 'lodash';
-import { MEDIA_SOURCE } from '@/env';
-import { Artist, Genre, Track } from './common';
+import { MEDIA_SOURCE } from '~/env';
+import { Artist, Genre, Track, SearchResult } from './common';
 
 function urlFor(file: string): string {
   return `${MEDIA_SOURCE}${file}`;
@@ -19,8 +17,8 @@ class MediaList {
       const artists = new Map<string, Artist>();
 
       items.forEach((rawTrack) => {
-        let artist: Artist = artists.get(rawTrack.artist) || new Artist(rawTrack.artist);
-        let genre: Genre = genres.get(rawTrack.genre) || new Genre(rawTrack.genre);
+        const artist: Artist = artists.get(rawTrack.artist) || new Artist(rawTrack.artist);
+        const genre: Genre = genres.get(rawTrack.genre) || new Genre(rawTrack.genre);
         const t = new Track();
         t.title = rawTrack.title;
         t.artists = [artist];
@@ -36,7 +34,7 @@ class MediaList {
     });
   }
 
-  public search(keyword: string): Promise<Track[]> {
+  public search(keyword: string): Promise<SearchResult> {
     console.log('// TODO:');
     return Promise.resolve([]);
   }

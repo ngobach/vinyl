@@ -1,5 +1,5 @@
-import { css, jsx } from '@emotion/core';
 /** @jsx jsx */
+import { css, jsx } from '@emotion/core';
 
 const App = () => (
   <div>
