@@ -15,7 +15,7 @@ export interface PlayList {
   title: string;
 }
 
-export class AllItems implements PlayList {
+export class GenericList implements PlayList {
   constructor(
     public title: string,
     public tracks: Track[],

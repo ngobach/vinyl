@@ -4,6 +4,7 @@ import useMedialistLoader from '~/hooks/use-medialist-loader';
 import { LOADER_SKIPPED } from '~/env';
 import Loader from './Loader';
 import Panic from './Panic';
+import MediaPlayer from './MediaPlayer';
 
 const AnimatedLoader = animated(Loader);
 
@@ -48,7 +49,7 @@ const App: FunctionComponent<{}> = () => {
   }
 
   return (
-    <div>Nice</div>
+    <MediaPlayer />
   )
 }
 

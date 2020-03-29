@@ -1,5 +1,6 @@
 import { BehaviorSubject } from 'rxjs';
 import { sample } from 'lodash';
+import { DEV } from '~/env';
 import log from '~/utils/log';
 import { Track, PlayList } from './common';
 
@@ -36,6 +37,10 @@ function createAudio(): HTMLAudioElement {
       isPlaying: false,
     });
   });
+  if (DEV) {
+    const w: any = window;
+    w.AUDIO = myAudio;
+  }
   return myAudio;
 }
 
@@ -44,7 +49,7 @@ function subscribeAll() {
     if (!pl) {
       return;
     }
-    log(`🎶 %c ${pl.title}`, 'font-weight: bold');
+    log(`🎶 %c${pl.title}`, 'font-weight: bold');
     if (mode.value === PlaybackMode.Random) {
       currentItem.next(sample(pl.tracks));
     } else {
@@ -56,7 +61,7 @@ function subscribeAll() {
     if (!track) {
       return;
     }
-    log(`🎵 %c ${track.title} - %c${track.artists.join(', ')}`, 'font-weight: bold', 'font-weight: normal; color: #888888');
+    log(`🎵 %c${track.title} - %c${track.artists.map(a => a.title).join(', ')}`, 'font-weight: bold', 'font-weight: normal; color: #888888');
     audio.src = track.url;
     audio.play();
   });
