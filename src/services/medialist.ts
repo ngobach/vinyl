@@ -5,27 +5,33 @@ function urlFor(file: string): string {
   return `${MEDIA_SOURCE}${file}`;
 }
 
-class MediaList {
+export class MediaList {
   public tracks: Track[];
   public genres: Genre[];
   public artist: Artist[];
 
   public async fetch(): Promise<void> {
     (await fetch(urlFor('index.json'))).json().then((items: MediaResponse) => {
-      const tracks = new Map<string, Track>();
+      const tracks: Track[] = [];
       const genres = new Map<string, Genre>();
       const artists = new Map<string, Artist>();
 
       items.forEach((rawTrack) => {
-        const artist: Artist = artists.get(rawTrack.artist) || new Artist(rawTrack.artist);
-        const genre: Genre = genres.get(rawTrack.genre) || new Genre(rawTrack.genre);
         const t = new Track();
         t.title = rawTrack.title;
-        t.artists = [artist];
-        t.genres = [genre];
+        t.artists = [];
+        t.genres = [];
         t.url = urlFor(rawTrack.url);
+
+        const artist: Artist = artists.get(rawTrack.artist) || new Artist(rawTrack.artist);
         artist.tracks.push(t);
-        genre.tracks.push(t);
+        artists.set(artist.title, artist);
+        rawTrack.genres.forEach((g) => {
+          const genre: Genre = genres.get(g) || new Genre(g);
+          genre.tracks.push(t);
+          genres.set(genre.title, genre);
+        });
+        tracks.push(t);
       });
 
       this.tracks = [...tracks.values()];
@@ -35,8 +41,8 @@ class MediaList {
   }
 
   public search(keyword: string): Promise<SearchResult> {
-    console.log('// TODO:');
-    return Promise.resolve([]);
+    // TODO:
+    return Promise.resolve(null);
   }
 }
 

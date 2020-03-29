@@ -10,7 +10,7 @@ export class Track {
   public artists: Artist[];
 }
 
-interface PlayList {
+export interface PlayList {
   tracks: Track[];
   title: string;
 }

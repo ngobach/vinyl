@@ -1,7 +1,8 @@
+// tslint:disable:no-console
+
 import React from 'react';
 import ReactDOM from 'react-dom';
 import WebFont from 'webfontloader';
-import audio from '~/services/audioengine';
 import App from '~/components/App';
 import loadAssets from '~/services/assetloader';
 
@@ -19,8 +20,8 @@ function loadFonts() {
   return new Promise((resolve, reject) => {
     WebFont.load({
       ...webfontConfig,
-      active: resolve(),
-      inactive: reject(),
+      active: () => resolve(),
+      inactive: () => reject(),
     });
   });
 }
@@ -32,7 +33,6 @@ function loadFonts() {
       throw new Error('Mount point not found!');
     }
     await Promise.all([
-      // await audio.init(),
       await loadAssets(),
       await loadFonts(),
     ]);

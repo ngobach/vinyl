@@ -26,8 +26,6 @@ async function load() {
     await Promise.all(Object.entries(fileList).map(async ([name, value]) => {
       loaded[name] = await loadImage(value);
     }));
-
-    console.log('Assets loaded');
   }
 
   return loaded;

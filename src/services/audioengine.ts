@@ -1,6 +1,6 @@
 import { BehaviorSubject } from 'rxjs';
 import { sample } from 'lodash';
-import { Track } from './common';
+import { Track, PlayList } from './common';
 
 export enum PlaybackMode {
   Single,
@@ -14,39 +14,39 @@ export interface PlaybackStatus {
 
 const audio = createAudio();
 
-export const currentList: BehaviorSubject<Track[]> = new BehaviorSubject([]);
+export const currentList: BehaviorSubject<PlayList> = new BehaviorSubject(null);
 export const currentItem: BehaviorSubject<Track> = new BehaviorSubject(null);
 export const currentStatus: BehaviorSubject<PlaybackStatus> = new BehaviorSubject({ isPlaying: false });
 export const mode: BehaviorSubject<PlaybackMode> = new BehaviorSubject(PlaybackMode.Single);
 export const volume: BehaviorSubject<number> = new BehaviorSubject(0);
 
 function createAudio(): HTMLAudioElement {
-  const audio = new Audio();
-  audio.autoplay = false;
-  audio.addEventListener('play', () => {
+  const myAudio = new Audio();
+  myAudio.autoplay = false;
+  myAudio.addEventListener('play', () => {
     currentStatus.next({
       ...currentStatus.value,
       isPlaying: true,
     });
   });
-  audio.addEventListener('pause', () => {
+  myAudio.addEventListener('pause', () => {
     currentStatus.next({
       ...currentStatus.value,
       isPlaying: false,
     });
   });
-  return audio;
+  return myAudio;
 }
 
 function subscribeAll() {
-  currentList.subscribe((tracks: Track[]) => {
-    if (tracks.length === 0) {
+  currentList.subscribe((pl) => {
+    if (!pl) {
       return;
     }
     if (mode.value === PlaybackMode.Random) {
-      currentItem.next(sample(tracks));
+      currentItem.next(sample(pl.tracks));
     } else {
-      currentItem.next(tracks[0]);
+      currentItem.next(pl.tracks[0]);
     }
   });
 
@@ -63,20 +63,22 @@ function subscribeAll() {
   });
 }
 
-export function playList(items: Track[]): void {
-  currentList.next(items);
+export function playList(list: PlayList): void {
+  currentList.next(list);
 }
 
 export function playSingle(item: Track): void {
-  currentList.next([item]);
+  currentList.next({ title: item.title, tracks: [item] });
 }
 
-export function changeMode(newMode: PlaybackMode): void {
+export function setMode(newMode: PlaybackMode): void {
   mode.next(newMode);
 }
 
-export function changeVolume(vol: number): void {
+export function setVolume(vol: number): void {
   volume.next(vol);
 }
 
+
+// SIDE EFFECTS
 subscribeAll();

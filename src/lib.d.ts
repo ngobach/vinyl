@@ -3,7 +3,7 @@ interface RawTrack {
   title: string;
   artist: string;
   cover: string;
-  genre: string;
+  genres: string[];
 }
 
 type MediaResponse = RawTrack[];
