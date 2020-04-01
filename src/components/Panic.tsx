@@ -78,6 +78,7 @@ const Panic: FunctionComponent<Props> = ({ error }) => (
               border-radius: .25rem;
               background: var(--nord1);
               font-size: 0.8rem;
+              white-space: pre-wrap;
             `}
           >
             <code>{error.message}</code>

@@ -5,20 +5,22 @@ export type Cover = string;
 export class Track {
   public url: string;
   public title: string;
-  public genres: Genre[];
+  public genres: Genre[] = [];
   public cover: Cover;
-  public artists: Artist[];
+  public artists: Artist[] = [];
 }
 
 export interface PlayList {
   tracks: Track[];
   title: string;
+  cover: string;
 }
 
 export class GenericList implements PlayList {
   constructor(
     public title: string,
     public tracks: Track[],
+    public cover: string,
   ) {}
 }
 

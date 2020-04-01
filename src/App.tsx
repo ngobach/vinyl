@@ -2,9 +2,9 @@ import React, { useState, useEffect, FunctionComponent } from 'react';
 import { useSpring, animated } from 'react-spring';
 import useMedialistLoader from '~/hooks/use-medialist-loader';
 import { LOADER_SKIPPED } from '~/env';
-import Loader from './Loader';
-import Panic from './Panic';
-import MediaPlayer from './MediaPlayer';
+import Loader from '~/components/Loader';
+import Panic from '~/components/Panic';
+import AppRouter from '~/pages';
 
 const AnimatedLoader = animated(Loader);
 
@@ -28,7 +28,7 @@ const App: FunctionComponent<{}> = () => {
   useEffect(() => {
     if (ml) {
       if (LOADER_SKIPPED) {
-        setReady(true)
+        setReady(true);
       } else {
         setTimeout(() => setProgress(100), 1000);
         setTimeout(() => setReady(true), 2000);
@@ -49,7 +49,7 @@ const App: FunctionComponent<{}> = () => {
   }
 
   return (
-    <MediaPlayer />
+    <AppRouter />
   )
 }
 

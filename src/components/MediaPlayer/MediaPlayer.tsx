@@ -11,7 +11,7 @@ const MediaPlayer: FunctionComponent<{}> = () => {
   const playList = usePlayList();
 
   useEffect(() => {
-    playList(ml.all)
+    playList(ml.all);
   }, []);
 
   return (
@@ -19,6 +19,6 @@ const MediaPlayer: FunctionComponent<{}> = () => {
       {activePlaylist ? activePlaylist.title : 'null'}
     </div>
   );
-}
+};
 
-export default MediaPlayer
+export default MediaPlayer;

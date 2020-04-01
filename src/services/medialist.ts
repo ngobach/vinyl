@@ -9,41 +9,41 @@ function urlFor(file: string): string {
 export class MediaList {
   public tracks: Track[];
   public genres: Genre[];
-  public artist: Artist[];
+  public artists: Artist[];
   public all: PlayList;
 
   public async fetch(): Promise<void> {
     try {
       const mr: MediaResponse = await (await fetch(urlFor('index.json'))).json();
       log('📩 %cResponse received', 'font-weight: bold');
-      const tracks: Track[] = [];
       const genres = new Map<string, Genre>();
       const artists = new Map<string, Artist>();
-
-      mr.forEach((rawTrack) => {
-        const t = new Track();
-        t.title = rawTrack.title;
-        t.artists = [];
-        t.genres = [];
-        t.url = urlFor(rawTrack.url);
-
-        const artist: Artist = artists.get(rawTrack.artist) || new Artist(rawTrack.artist);
-        artist.tracks.push(t);
-        t.artists.push(artist);
-        artists.set(artist.title, artist);
-        rawTrack.genres.forEach((g) => {
-          const genre: Genre = genres.get(g) || new Genre(g);
-          genre.tracks.push(t);
-          t.genres.push(genre);
-          genres.set(genre.title, genre);
-        });
-        tracks.push(t);
+      Object.entries(mr.artists).forEach(([id, raw]) => {
+        const a = new Artist(raw.name);
+        a.cover = raw.cover;
+        artists.set(id, a);
       });
-
-      this.tracks = [...tracks.values()];
-      this.artist = [...artists.values()];
+      Object.entries(mr.genres).forEach(([id, raw]) => {
+        const g = new Genre(raw.name);
+        g.cover = raw.cover;
+        genres.set(id, g);
+      });
+      this.tracks = [];
+      Object.entries(mr.tracks).forEach(([id, raw]) => {
+        const t = new Track();
+        t.cover = raw.cover;
+        t.title = raw.title;
+        t.url = raw.url;
+        t.artists = raw.artists.map((i) => {
+          const a = artists.get(i);
+          a.tracks.push(t);
+          return a;
+        });
+        this.tracks.push(t);
+      });
+      this.artists = [...artists.values()];
       this.genres = [...genres.values()];
-      this.all = new GenericList('My tracks', this.tracks);
+      this.all = new GenericList('My tracks', this.tracks, mr.default_cover);
     } catch (error) {
       log(`😱%cCannot fetch media playlists: ${error.message}`, 'font-weight: bold');
       throw error;

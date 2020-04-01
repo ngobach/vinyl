@@ -1,12 +1,36 @@
 interface RawTrack {
+  id: string;
   url: string;
   title: string;
-  artist: string;
   cover: string;
+  artists: string[];
   genres: string[];
 }
 
-type MediaResponse = RawTrack[];
+interface Genre {
+  id: string;
+  name: string;
+  cover: string;
+}
+
+interface Artist {
+  id: string;
+  name: string;
+  cover: string;
+}
+
+interface MediaResponse {
+  default_cover: string;
+  tracks: {
+    [id: string]: RawTrack;
+  },
+  genres: {
+    [id: string]: Genre;
+  },
+  artists: {
+    [id: string]: Artist;
+  },
+}
 
 interface FakeProcess {
   env: {

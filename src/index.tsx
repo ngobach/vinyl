@@ -3,7 +3,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import WebFont from 'webfontloader';
-import App from '~/components/App';
+import App from '~/App';
 import loadAssets from '~/services/assetloader';
 
 const webfontConfig = {

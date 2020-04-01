@@ -8,6 +8,7 @@
     "paths": {
       "~/*": ["./*"]
     },
-    "jsx": "react"
+    "jsx": "react",
+    "module": "esnext"
   }
 }
