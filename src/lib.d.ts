@@ -39,3 +39,4 @@ interface FakeProcess {
 }
 
 declare const process: FakeProcess;
+declare module '~/assets/img/*';

@@ -8,7 +8,7 @@ import loadAssets from '~/services/assetloader';
 
 const webfontConfig = {
   google: {
-    families: ['Inter:200,400,900'],
+    families: ['Inter:200,400,700,900'],
   },
   custom: {
     families: ['iconmonstr-iconic-font'],

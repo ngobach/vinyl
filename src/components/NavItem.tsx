@@ -22,11 +22,20 @@ const NavItem: React.FunctionComponent<Props> = ({ iconName, text }) => (
       display: block;
       width: 1.2em;
       color: var(--nord8);
+      position: relative;
+      bottom: -2px;
     `}/>
     <span css={css`
       display: block;
       margin-left: .75rem;
       color: var(--nord4);
+      font-weight: 700;
+      transition: all ease .2s;
+      position: relative;
+      left: 0;
+      :hover {
+        left: -.2em;
+      }
     `}>
       { text }
     </span>
