@@ -8,7 +8,7 @@ export enum Color {
 }
 
 interface Props {
-  text: string;
+  title: string;
   color?: Color;
 }
 
@@ -21,7 +21,7 @@ function colorToCode (color: Color): string {
   }
 }
 
-const Block: FunctionComponent<Props> = ({ children, text, color = Color.Gray }) => {
+const Block: FunctionComponent<Props> = ({ children, title, color = Color.Gray }) => {
   return (
     <section>
       <h2
@@ -31,7 +31,7 @@ const Block: FunctionComponent<Props> = ({ children, text, color = Color.Gray })
           color: ${colorToCode(color)};
         `}
       >
-        { text }
+        { title }
       </h2>
       <div
         css={css`

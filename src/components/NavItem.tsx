@@ -1,12 +1,14 @@
 /** @jsx jsx */
 import { jsx, css } from '@emotion/core';
+import mq from '~/utils/mq';
 
 interface Props {
   iconName: string;
   text: string;
+  onClick?: () => any;
 }
 
-const NavItem: React.FunctionComponent<Props> = ({ iconName, text }) => (
+const NavItem: React.FunctionComponent<Props> = ({ iconName, text, onClick }) => (
   <li
     css={css`
       padding-top: .2em;
@@ -16,12 +18,13 @@ const NavItem: React.FunctionComponent<Props> = ({ iconName, text }) => (
       font-size: 18px;
       cursor: pointer;
     `}
+    onClick={() => onClick && onClick()}
   >
     <i className={`im im-${iconName}`} css={css`
       font-size: 1em;
       display: block;
       width: 1.2em;
-      color: var(--nord8);
+      color: var(--color-primary1);
       position: relative;
       bottom: -2px;
     `}/>
@@ -30,12 +33,7 @@ const NavItem: React.FunctionComponent<Props> = ({ iconName, text }) => (
       margin-left: .75rem;
       color: var(--nord4);
       font-weight: 700;
-      transition: all ease .2s;
-      position: relative;
       left: 0;
-      :hover {
-        left: -.2em;
-      }
     `}>
       { text }
     </span>
