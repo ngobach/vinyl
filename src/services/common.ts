@@ -45,6 +45,8 @@ export class Artist implements PlayList {
 }
 
 export class SearchResult implements PlayList {
+  public cover: string = '';
+
   constructor(
     public title: string,
     public tracks: Track[],

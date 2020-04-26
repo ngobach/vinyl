@@ -2,6 +2,7 @@
 import { jsx, css } from '@emotion/core';
 import { FunctionComponent } from 'react';
 import Thumbnail from './Thumbnail';
+import { Artist } from '~/services/common';
 
 enum DisplayMode {
   List,
@@ -18,20 +19,20 @@ interface ArtistProps {
   onTagClick?: (a: Artist) => any;
 }
 
-const Artist: FunctionComponent<ArtistProps> = ({ artist, mode = DisplayMode.List, subline = null, tag = null, onClick = null, onTagClick }) => {
+const ArtistComponent: FunctionComponent<ArtistProps> = ({ artist, mode = DisplayMode.List, subline = null, tag = null, onClick = null, onTagClick }) => {
   return mode === DisplayMode.Vertical ? (
     <div css={css`
-      display: flex;
+      display: inline-flex;
       flex-direction: column;
       align-items: center;
       cursor: ${onClick ? 'pointer': 'initial'};
     `}>
-      <Thumbnail src={artist.cover} alt={artist.name} size={100} rounded />
+      <Thumbnail src={artist.cover} alt={artist.title} size={100} rounded />
       <h3 css={css`
         margin-top: .5rem;
         font-weight: 600;
       `}>
-        { artist.name }
+        { artist.title }
       </h3>
       {subline && (
         <span css={css`
@@ -39,7 +40,7 @@ const Artist: FunctionComponent<ArtistProps> = ({ artist, mode = DisplayMode.Lis
           margin-top: .2rem;
           font-weight: 400;
           font-size: .8rem;
-          color: var(--color-gray);
+          color: var(--nord8);
         `}>
           { subline }
         </span>
@@ -54,12 +55,12 @@ const Artist: FunctionComponent<ArtistProps> = ({ artist, mode = DisplayMode.Lis
       `}
       onClick={() => onClick && onClick(artist)}
     >
-      <Thumbnail src={artist.cover} alt={artist.name} size={32} rounded />
+      <Thumbnail src={artist.cover} alt={artist.title} size={32} rounded />
       <h3 css={css`
         margin-left: 1em;
         font-weight: 600;
       `}>
-        { artist.name }
+        { artist.title }
       </h3>
     </div>
   ) : (
@@ -71,7 +72,7 @@ const Artist: FunctionComponent<ArtistProps> = ({ artist, mode = DisplayMode.Lis
       `}
       onClick={() => onClick && onClick(artist)}
     >
-      <Thumbnail src={artist.cover} alt={artist.name} size={80} />
+      <Thumbnail src={artist.cover} alt={artist.title} size={80} />
       <div css={css`
         flex: 1;
         display: flex;
@@ -103,14 +104,14 @@ const Artist: FunctionComponent<ArtistProps> = ({ artist, mode = DisplayMode.Lis
         <h3 css={css`
           font-weight: 600;
         `}>
-          { artist.name }
+          { artist.title }
         </h3>
         <span css={css`
           margin-top: .25rem;
           display: block;
           font-weight: 400;
           font-size: .8rem;
-          color: var(--color-gray);
+          color: var(--color-nord8);
         `}>
           { subline }
         </span>
@@ -119,5 +120,5 @@ const Artist: FunctionComponent<ArtistProps> = ({ artist, mode = DisplayMode.Lis
   );
 };
 
-export default Artist;
+export default ArtistComponent;
 export { DisplayMode };

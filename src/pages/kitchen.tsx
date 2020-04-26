@@ -8,19 +8,29 @@ import Logo from '~/components/Logo';
 import Nav from '~/components/Nav';
 import NavItem from '~/components/NavItem';
 import Block, { Color } from '~/components/Block';
-import Artist, { DisplayMode } from '~/components/Artist';
+import Artist, { DisplayMode as ArtistDM } from '~/components/Artist';
+import Track, { DisplayMode as TrackDM } from '~/components/Track';
+import { Track as TrackClass, Artist as ArtistClass } from '~/services/common';
 
 const fixtures: {
-  artist: Artist
+  artist: ArtistClass,
+  track: TrackClass,
 } = {
-  artist: {
-    cover: 'https://i.pravatar.cc/300?u=random@email.com',
-    id: '1xxxx',
-    name: 'Fancy Boiz',
-  }
+  artist: (() => {
+    const a = new ArtistClass('Random artist');
+    a.cover = 'https://i.pravatar.cc/300?u=toby@cover.com';
+    return a;
+  })(),
+  track: (() => {
+    const t = new TrackClass();
+    t.title = 'Something just like this';
+    t.cover = 'https://i.pravatar.cc/300?u=random@cover.com';
+    t.artists = [new ArtistClass('Ngo'), new ArtistClass('Bach')];
+    return t;
+  })(),
 };
 
-const Example: FunctionComponent<{ title: string}> = ({ title, children }) => (
+const Example: FunctionComponent<{ title: string }> = ({ title, children }) => (
   <section
     css={css`
       margin-bottom: 2rem;
@@ -64,11 +74,9 @@ const Kitchen: FunctionComponent<{}> = () => (
       <title>Kitchen sink</title>
     </Helmet>
     <main css={css`
-      margin-left: auto;
-      margin-right: auto;
+      margin: 2rem auto;
       max-width: 1024px;
-      padding-left: 2rem;
-      padding-right: 2rem;
+      padding: 0 2rem;
     `}>
       <h1 css={css`
         font-size: 2rem;
@@ -102,11 +110,21 @@ const Kitchen: FunctionComponent<{}> = () => (
 
       <Example title="Artist">
         <div css={css`width: 280px;`}>
-          <Artist mode={DisplayMode.List} artist={fixtures.artist} onClick={(a) => log(a)} />
+          <Artist mode={ArtistDM.List} artist={fixtures.artist} onClick={(a) => log(a)} />
           <Spacer />
-          <Artist mode={DisplayMode.Vertical} artist={fixtures.artist} onClick={(a) => log(a)} subline='See? It is easy'/>
+          <Artist mode={ArtistDM.Vertical} artist={fixtures.artist} onClick={(a) => log(a)} subline='See? It is easy'/>
           <Spacer />
-          <Artist mode={DisplayMode.Horizontal} artist={fixtures.artist} onClick={(a) => log(a)} subline='See? It is easy' tag='No 1' />
+          <Artist mode={ArtistDM.Horizontal} artist={fixtures.artist} onClick={(a) => log(a)} subline='See? It is easy' tag='No 1' />
+        </div>
+      </Example>
+
+      <Example title="Track">
+        <div css={css`
+          width: 400px;
+        `}>
+          <Track displayMode={TrackDM.Normal} track={fixtures.track} />
+          <Track displayMode={TrackDM.Wide} track={fixtures.track} />
+          <Track displayMode={TrackDM.Large} track={fixtures.track} />
         </div>
       </Example>
     </main>
