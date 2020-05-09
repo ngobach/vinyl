@@ -74,8 +74,8 @@ const Slider: FunctionComponent<SliderProps> = ({
           css={css`
             position: absolute;
             left: 0;
-            top: calc((100% - 8px) / 2);
-            height: 8px;
+            top: calc((100% - 6px) / 2);
+            height: 6px;
             width: 100%;
             background: var(--color-gray);
             border-radius: 4px;
@@ -86,8 +86,8 @@ const Slider: FunctionComponent<SliderProps> = ({
           css={css`
             position: absolute;
             left: 0;
-            top: calc((100% - 8px) / 2);
-            height: 8px;
+            top: calc((100% - 6px) / 2);
+            height: 6px;
             background: var(--color-primary1);
             border-radius: 4px;
             pointer-events: none;
