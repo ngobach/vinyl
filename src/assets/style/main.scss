@@ -37,3 +37,7 @@ body {
 * {
   box-sizing: border-box;
 }
+
+.im-fix {
+  transform: translateY(.1rem);
+}

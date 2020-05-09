@@ -27,6 +27,7 @@ const Slider: FunctionComponent<SliderProps> = ({
   onSeek,
   pre,
   post,
+  ...rest
 }) => {
   const [override, setOverride] = useState(0);
   const [capturing, setCapturing] = useState(false);
@@ -45,7 +46,9 @@ const Slider: FunctionComponent<SliderProps> = ({
       css={css`
         display: flex;
         flex-direction: row;
+        align-items: center;
       `}
+      {...rest}
     >
       {pre && <SliderLabel mr>{pre}</SliderLabel>}
       <div

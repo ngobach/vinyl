@@ -6,21 +6,24 @@ import { Track, PlaybackStatus } from '~/services/common';
 import MQ from '~/utils/mq';
 import Thumbnail from './Thumbnail';
 import Icon, { Icons } from './Icon';
+import Slider from './Slider';
 
-const IconButton = ({ icon, onClick }) => {
+const IconButton = ({ icon, onClick, color = null, active = false, size = null, disabled = false }) => {
   return (
     <Icon
       icon={icon}
-      size={24}
+      size={size ?? 16}
       css={css`
-        cursor: pointer;
+        cursor: ${!disabled ? 'pointer' : 'inherit'};
         padding: 4px;
-        margin: 0 4px;
+        margin: 0 12px;
         ${MQ.Small} {
           padding: 0;
-          margin: 0 2px;
+          margin: 0 6px;
         }
+        transition: color ease 100ms;
       `}
+      color={color ?? (active ? 'var(--color-primary1)'  : disabled ? 'var(--color-gray)' : '')}
       onClick={onClick}
     />
   );
@@ -29,6 +32,7 @@ const IconButton = ({ icon, onClick }) => {
 const PlayPauseButton = ({ playing, onClick }) => {
   return (
     <IconButton
+      size={32}
       icon={playing ? Icons.pause : Icons.play}
       onClick={onClick}
     />
@@ -92,20 +96,44 @@ interface PlaybarProps {
   onNext: () => void;
   onPause: () => void;
   onPlay: () => void;
-  onSeek: (f: number) => void;
+  onModeChanged: (m: PlaybackMode) => void;
   onVolumeChange: (f: number) => void;
 }
 
 const Playbar: FunctionComponent<PlaybarProps> = ({
   track,
   status,
+  hasPrev,
+  hasNext,
+  mode,
+  volume,
   onPlay,
   onPause,
+  onPrev,
+  onNext,
+  onVolumeChange,
+  onModeChanged,
 }) => {
+  const volumeClicked = useCallback(() => {
+    if (volume > 0) {
+      onVolumeChange(0);
+    } else {
+      onVolumeChange(1);
+    }
+  }, [onVolumeChange, volume]);
+
+  const modeClicked = useCallback((m: PlaybackMode) => {
+    if (mode !== m) {
+      onModeChanged(m);
+    } else {
+      onModeChanged(PlaybackMode.RepeatOne);
+    }
+  }, [mode, onModeChanged]);
+
   return (
     <div
       css={css`
-        height: 100px;
+        height: 60px;
         display: flex;
         flex-direction: row;
       `}
@@ -116,7 +144,7 @@ const Playbar: FunctionComponent<PlaybarProps> = ({
           align-self: center;
           width: 240px;
           overflow: hidden;
-          margin-right: 4rem;
+          margin-right: 1rem;
           ${MQ.Small} {
             display: none;
           }
@@ -125,17 +153,42 @@ const Playbar: FunctionComponent<PlaybarProps> = ({
       />
       <div
         css={css`
-          flex: 1;
           display: flex;
           flex-direction: row;
+          align-items: center;
           align-self: center;
+          margin: 0 auto;
+          ${MQ.Small} {
+            margin-left: 0;
+          }
         `}
       >
-        <div>
-          <PlayPauseButton playing={status.playing} onClick={status.playing ? onPause : onPlay} />
-          <IconButton icon={Icons.volume} onClick={() => 0} />
-          <IconButton icon={Icons.volumeOff} onClick={() => 0} />
-        </div>
+        <IconButton icon={Icons.previous} onClick={onPrev} disabled={!hasPrev} />
+        <IconButton icon={Icons.random} active={mode === PlaybackMode.RepeatAll} onClick={modeClicked.bind(null, PlaybackMode.Shuffled)} />
+        <PlayPauseButton playing={status.playing} onClick={status.playing ? onPause : onPlay} />
+        <IconButton icon={Icons.loop} active={mode === PlaybackMode.Shuffled} onClick={modeClicked.bind(null, PlaybackMode.RepeatAll)} />
+        <IconButton icon={Icons.next} onClick={onNext} disabled={!hasNext} />
+      </div>
+      <div
+        css={css`
+          display: flex;
+          align-items: center;
+          margin-left: 1rem;
+        `}
+      >
+        <Slider
+          css={css`
+            width: 200px;
+            ${MQ.Small} {
+              width: 120px;
+            }
+          `}
+          value={volume}
+          onSeek={onVolumeChange}
+          pre={(
+            <IconButton icon={volume > 0 ? Icons.volume : Icons.volumeOff} onClick={volumeClicked} color="#ffffff" />
+          )
+        }/>
       </div>
     </div>
   );

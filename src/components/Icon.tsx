@@ -29,7 +29,7 @@ const Icon: FunctionComponent<IconProps> = ({ icon, size = 32, color = '#ffffff'
   }, [onClick]);
 
   return (
-    <span className={`im im-${icon} ${className ?? ''}`} css={css`font-size: ${size}px; color: ${color};`} onClick={clickCallback} {...rest} />
+    <span className={`im im-fix im-${icon} ${className ?? ''}`} css={css`line-height: 1; font-size: ${size}px; color: ${color};`} onClick={clickCallback} {...rest} />
   );
 };
 

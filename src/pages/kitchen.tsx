@@ -74,16 +74,17 @@ const Spacer: FunctionComponent<{}> = () => (
 
 
 const ExamplePlaybar: FunctionComponent<{}> = () => {
-  const [playing, setPlaying] = useState(false);
+  const [playing, setPlaying] = useState(true);
+  const [volume, setVolume] = useState(.2);
 
   return (
     <Playbar
-      hasPrev
       hasNext
-      mode={PlaybackMode.RepeatOne}
+      mode={PlaybackMode.Shuffled}
       status={{ duration: 300, played: 100, playing }}
       track={fixtures.track}
-      volume={.6}
+      volume={volume}
+      onVolumeChange={setVolume}
       onPause={() => setPlaying(false)}
       onPlay={() => setPlaying(true)}
     />
