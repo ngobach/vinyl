@@ -52,3 +52,9 @@ export class SearchResult implements PlayList {
     public tracks: Track[],
   ) {}
 }
+
+export interface PlaybackStatus {
+  duration: number;
+  played: number;
+  playing: boolean;
+}

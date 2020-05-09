@@ -10,7 +10,6 @@
   "dependencies": {
     "@emotion/core": "^10.0.28",
     "classnames": "^2.2.6",
-    "lodash": "^4.17.11",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "react-helmet": "^5.2.1",

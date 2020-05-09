@@ -50,7 +50,7 @@ const App: FunctionComponent<{}> = () => {
 
   return (
     <AppRouter />
-  )
-}
+  );
+};
 
 export default App;

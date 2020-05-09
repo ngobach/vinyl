@@ -9,7 +9,7 @@ interface Props {
   rounded?: boolean;
 }
 
-const Thumbnail: FunctionComponent<Props> = ({ size, src, alt, rounded }) => {
+const Thumbnail: FunctionComponent<Props> = ({ size, src, alt, rounded, ...rest }) => {
   return (
     <img
       src={src}
@@ -26,6 +26,7 @@ const Thumbnail: FunctionComponent<Props> = ({ size, src, alt, rounded }) => {
       ` : css`
         border-radius: .5rem;
       `]}
+      {...rest}
     />
   );
 };

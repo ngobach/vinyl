@@ -1,6 +1,6 @@
 /** @jsx jsx */
 import { jsx, css } from '@emotion/core';
-import { Fragment, FunctionComponent } from 'react';
+import { Fragment, FunctionComponent, useState } from 'react';
 import Helmet from 'react-helmet';
 
 import log from '~/utils/log';
@@ -10,7 +10,10 @@ import NavItem from '~/components/NavItem';
 import Block, { Color } from '~/components/Block';
 import Artist, { DisplayMode as ArtistDM } from '~/components/Artist';
 import Track, { DisplayMode as TrackDM } from '~/components/Track';
+import Playbar from '~/components/Playbar';
+import Slider from '~/components/Slider';
 import { Track as TrackClass, Artist as ArtistClass } from '~/services/common';
+import { PlaybackMode } from '~/services/audioengine';
 
 const fixtures: {
   artist: ArtistClass,
@@ -54,6 +57,7 @@ const Example: FunctionComponent<{ title: string }> = ({ title, children }) => (
       border-bottom: solid 1px var(--nord1);
       padding-top: .2rem;
       padding-bottom: .2rem;
+      overflow: hidden;
     `}>
       { children }
     </div>
@@ -67,6 +71,35 @@ const Spacer: FunctionComponent<{}> = () => (
     `}
   />
 );
+
+
+const ExamplePlaybar: FunctionComponent<{}> = () => {
+  const [playing, setPlaying] = useState(false);
+
+  return (
+    <Playbar
+      hasPrev
+      hasNext
+      mode={PlaybackMode.RepeatOne}
+      status={{ duration: 300, played: 100, playing }}
+      track={fixtures.track}
+      volume={.6}
+      onPause={() => setPlaying(false)}
+      onPlay={() => setPlaying(true)}
+    />
+  );
+};
+
+const ExampleSlider = () => {
+  const [v, setV] = useState(.5);
+  return (
+    <Slider value={v} onSeek={setV} pre={(
+      <span>Ahihi</span>
+    )} post={(
+      <span>Do Ngoc</span>
+    )}/>
+  );
+};
 
 const Kitchen: FunctionComponent<{}> = () => (
   <Fragment>
@@ -126,6 +159,14 @@ const Kitchen: FunctionComponent<{}> = () => (
           <Track displayMode={TrackDM.Wide} track={fixtures.track} />
           <Track displayMode={TrackDM.Large} track={fixtures.track} />
         </div>
+      </Example>
+
+      <Example title="Slider">
+        <ExampleSlider />
+      </Example>
+
+      <Example title="Playbar">
+        <ExamplePlaybar />
       </Example>
     </main>
   </Fragment>
