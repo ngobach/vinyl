@@ -15,7 +15,7 @@ const audio = createAudio();
 
 export const currentList: BehaviorSubject<PlayList> = new BehaviorSubject(null);
 export const currentItem: BehaviorSubject<Track> = new BehaviorSubject(null);
-export const currentStatus: BehaviorSubject<PlaybackStatus> = new BehaviorSubject({ isPlaying: false });
+export const currentStatus: BehaviorSubject<PlaybackStatus> = new BehaviorSubject({ playing: false, duration: 60, played: 40 });
 export const mode: BehaviorSubject<PlaybackMode> = new BehaviorSubject(PlaybackMode.RepeatOne);
 export const volume: BehaviorSubject<number> = new BehaviorSubject(0);
 
