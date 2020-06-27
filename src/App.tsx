@@ -1,6 +1,6 @@
 import React, { useState, useEffect, FunctionComponent } from 'react';
 import { useSpring, animated } from 'react-spring';
-import useMedialistLoader from '~/hooks/use-medialist-loader';
+import { useMediaLoader } from '~/hooks';
 import { LOADER_SKIPPED } from '~/env';
 import Loader from '~/components/Loader';
 import Panic from '~/components/Panic';
@@ -11,7 +11,7 @@ const AnimatedLoader = animated(Loader);
 const App: FunctionComponent<{}> = () => {
   const [progress, setProgress] = useState(0);
   const p = useSpring({ progress: progress / 100 });
-  const [ml, error] = useMedialistLoader();
+  const [ml, error] = useMediaLoader();
   const [ready, setReady] = useState<boolean>(false);
 
   useEffect(() => {

@@ -2,11 +2,11 @@
 import { css, jsx } from '@emotion/core';
 import { useEffect } from 'react';
 import { FunctionComponent } from 'react';
-import useMediaList from '~/hooks/use-medialist';
+import { useMedialist } from '~/hooks';
 import { useActivePlaylist, usePlayList } from '~/hooks/audioengine';
 
 const MediaPlayer: FunctionComponent<{}> = () => {
-  const ml = useMediaList();
+  const ml = useMedialist();
   const activePlaylist = useActivePlaylist();
   const playList = usePlayList();
 
