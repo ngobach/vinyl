@@ -70,7 +70,7 @@ const Loader: FunctionComponent<Props> = ({ progress, random = false }) => {
         />
       </div>
     </div>
-  )
+  );
 };
 
 export default Loader;
