@@ -1,9 +1,9 @@
 {
   "compilerOptions": {
     "lib": ["DOM", "ESNext"],
-    "moduleResolution": "Node",
+    "moduleResolution": "node",
     "allowSyntheticDefaultImports": true,
-    "target": "es2015",
+    "target": "ESNext",
     "baseUrl": "src/",
     "paths": {
       "~/*": ["./*"]
