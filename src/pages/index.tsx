@@ -3,8 +3,8 @@ import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
 
 
 interface AppRouteProps {
-  path?: string,
-  component: React.LazyExoticComponent<any>,
+  path?: string;
+  component: React.LazyExoticComponent<any>;
 }
 
 const AppRoute: React.FC<AppRouteProps> = ({
