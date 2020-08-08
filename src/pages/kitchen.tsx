@@ -84,6 +84,10 @@ const ExamplePlaybar: FunctionComponent<{}> = () => {
       status={{ duration: 300, played: 100, playing }}
       track={fixtures.track}
       volume={volume}
+      hasPrev={true}
+      onModeChanged={() => 0}
+      onPrev={() => 0}
+      onNext={() => 0}
       onVolumeChange={setVolume}
       onPause={() => setPlaying(false)}
       onPlay={() => setPlaying(true)}

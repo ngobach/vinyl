@@ -1,23 +1,32 @@
-import React, { FunctionComponent, Suspense } from 'react';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import React from 'react';
+import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
+
+
+interface AppRouteProps {
+  path?: string,
+  component: React.LazyExoticComponent<any>,
+}
+
+const AppRoute: React.FC<AppRouteProps> = ({
+  path,
+  component: Component,
+}) => (
+  <Route path={path}>
+    <React.Suspense fallback={null}>
+      <Component/>
+    </React.Suspense>
+  </Route>
+);
 
 const Kitchen = React.lazy(() => import('~/pages/kitchen'));
 const Player = React.lazy(() => import('~/pages/player'));
 
-const AppRouter: FunctionComponent<{}> = () => {
+const AppRouter: React.FC = () => {
   return (
     <Router>
       <Switch>
-        <Route path='/kitchen'>
-          <Suspense fallback={null}>
-            <Kitchen />
-          </Suspense>
-        </Route>
-        <Route>
-          <Suspense fallback={null}>
-            <Player />
-          </Suspense>
-        </Route>
+        <AppRoute path="/kitchen" component={Kitchen}/>
+        <AppRoute component={Player}/>
       </Switch>
     </Router>
   );
