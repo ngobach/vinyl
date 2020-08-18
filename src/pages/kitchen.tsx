@@ -106,7 +106,7 @@ const ExampleSlider = () => {
   );
 };
 
-const Kitchen: FunctionComponent<{}> = () => (
+const KitchenPage: FunctionComponent<{}> = () => (
   <Fragment>
     <Helmet>
       <title>Kitchen sink</title>
@@ -177,4 +177,4 @@ const Kitchen: FunctionComponent<{}> = () => (
   </Fragment>
 );
 
-export default Kitchen;
+export default KitchenPage;

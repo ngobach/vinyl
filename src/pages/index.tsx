@@ -1,32 +1,33 @@
 import React from 'react';
-import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
+import KitchenPage from '~/pages/kitchen';
+import PlayerPage from '~/pages/player';
 
-interface AppRouteProps {
-  path?: string;
-  component: React.LazyExoticComponent<any>;
-}
+// FIX: Parcel bundler has something wrong with dynamic import
+// interface AppRouteProps extends RouteProps {
+//   // path?: string;
+//   component: React.LazyExoticComponent<any>;
+// }
 
-const AppRoute: React.FC<AppRouteProps> = ({
-  path,
-  component: Component,
-}) => (
-  <Route path={path}>
-    <React.Suspense fallback={null}>
-      <Component/>
-    </React.Suspense>
-  </Route>
-);
-
-const Kitchen = React.lazy(() => import('~/pages/kitchen'));
-const Player = React.lazy(() => import('~/pages/player'));
+// const AppRoute: React.FC<AppRouteProps> = ({
+//   path,
+//   component: Component,
+//   ...rest
+// }) => (
+//   <Route path={path} {...rest}>
+//     <React.Suspense fallback={null}>
+//       <Component/>
+//     </React.Suspense>
+//   </Route>
+// );
 
 const AppRouter: React.FC = () => {
   return (
     <Router>
       <Switch>
-        <AppRoute path="/kitchen" component={Kitchen}/>
-        <AppRoute component={Player}/>
+        <Route path="/kitchen" exact component={KitchenPage} />
+        <Route component={PlayerPage} />
       </Switch>
     </Router>
   );
