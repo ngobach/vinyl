@@ -2,7 +2,7 @@
 import { jsx, css } from '@emotion/core';
 import { FunctionComponent } from 'react';
 import Thumbnail from './Thumbnail';
-import { Artist } from '~/services/common';
+import { Artist } from '~/types';
 
 enum DisplayMode {
   List,

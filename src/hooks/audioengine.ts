@@ -1,5 +1,5 @@
-import { currentList, playList } from '~/services/audioengine';
-import { PlayList } from '~/services/common';
+import { currentList, playPlayList } from '~/services/audioengine';
+import { PlayList } from '~/types';
 import { useState, useEffect } from 'react';
 
 export function useActivePlaylist(): PlayList {
@@ -10,6 +10,6 @@ export function useActivePlaylist(): PlayList {
   return pl;
 }
 
-export function usePlayList() {
-  return playList;
+export function usePlayPlayList() {
+  return playPlayList;
 }

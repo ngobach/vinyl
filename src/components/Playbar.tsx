@@ -2,7 +2,7 @@
 import { jsx, css } from '@emotion/core';
 import { FunctionComponent, useCallback } from 'react';
 import { PlaybackMode } from '~/services/audioengine';
-import { Track, PlaybackStatus } from '~/services/common';
+import { Track, PlaybackStatus } from '~/types';
 import MQ from '~/utils/mq';
 import Thumbnail from './Thumbnail';
 import Icon, { Icons } from './Icon';

@@ -1,7 +1,7 @@
 /** @jsx jsx */
 import { jsx, css } from '@emotion/core';
 import { FunctionComponent } from 'react';
-import { Track } from '~/services/common';
+import { Track } from '~/types';
 import Thumbnail from './Thumbnail';
 
 interface TrackProps {

@@ -1,5 +1,5 @@
 import { MEDIA_SOURCE } from '~/env';
-import { Artist, Genre, Track, SearchResult, GenericList, PlayList } from './common';
+import { Artist, Genre, Track, SearchResult, GenericList, PlayList } from '~/types';
 import log from '~/utils/log';
 
 function urlFor(file: string): string {

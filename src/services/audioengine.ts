@@ -2,7 +2,7 @@ import { BehaviorSubject } from 'rxjs';
 import { sample } from 'lodash';
 import { DEV } from '~/env';
 import log from '~/utils/log';
-import { Track, PlayList, PlaybackStatus } from './common';
+import { Track, PlayList, PlaybackStatus } from '~/types';
 
 export enum PlaybackMode {
   RepeatOne,
@@ -40,7 +40,7 @@ function createAudio(): HTMLAudioElement {
   return myAudio;
 }
 
-function subscribeAll() {
+function connect() {
   currentList.subscribe((pl) => {
     if (!pl) {
       return;
@@ -67,7 +67,7 @@ function subscribeAll() {
   });
 }
 
-export function playList(list: PlayList): void {
+export function playPlayList(list: PlayList): void {
   currentList.next(list);
 }
 
@@ -85,4 +85,4 @@ export function setVolume(vol: number): void {
 
 
 // SIDE EFFECTS
-subscribeAll();
+connect();

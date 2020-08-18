@@ -12,7 +12,7 @@ import Artist, { DisplayMode as ArtistDM } from '~/components/Artist';
 import Track, { DisplayMode as TrackDM } from '~/components/Track';
 import Playbar from '~/components/Playbar';
 import Slider from '~/components/Slider';
-import { Track as TrackClass, Artist as ArtistClass } from '~/services/common';
+import { Track as TrackClass, Artist as ArtistClass } from '~/types';
 import { PlaybackMode } from '~/services/audioengine';
 
 const fixtures: {
