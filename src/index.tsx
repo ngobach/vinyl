@@ -4,7 +4,6 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import WebFont from 'webfontloader';
 import App from '~/App';
-import loadAssets from '~/services/assetloader';
 
 const webfontConfig = {
   google: {
@@ -33,8 +32,8 @@ function loadFonts() {
       throw new Error('Mount point not found!');
     }
     await Promise.all([
-      await loadAssets(),
       await loadFonts(),
+      // TODO: more come here
     ]);
     ReactDOM.render(
       <App />,
