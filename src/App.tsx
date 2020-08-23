@@ -1,4 +1,4 @@
-import React, { useState, useEffect, FunctionComponent } from 'react';
+import React, { useState, useEffect, FC } from 'react';
 import { useSpring, animated } from 'react-spring';
 import { useMediaLoader } from '~/hooks';
 import { LOADER_SKIPPED } from '~/env';
@@ -8,7 +8,7 @@ import AppRouter from '~/pages';
 
 const AnimatedLoader = animated(Loader);
 
-const App: FunctionComponent<{}> = () => {
+const App: FC<{}> = () => {
   const [progress, setProgress] = useState(0);
   const p = useSpring({ progress: progress / 100 });
   const [ml, error] = useMediaLoader();

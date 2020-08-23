@@ -1,8 +1,8 @@
 /** @jsx jsx */
 import { jsx, css } from '@emotion/core';
-import { FunctionComponent, useState, useRef, useCallback } from 'react';
+import { FC, useState, useRef, useCallback } from 'react';
 
-const SliderLabel: FunctionComponent<{mr?: boolean, ml?: boolean}> = ({ children, ml, mr }) => (
+const SliderLabel: FC<{mr?: boolean, ml?: boolean}> = ({ children, ml, mr }) => (
   <div css={[css`
     color: var(--color-gray);
     font-size: .8rem;
@@ -22,7 +22,7 @@ interface SliderProps {
   post?: React.ReactNode;
 }
 
-const Slider: FunctionComponent<SliderProps> = ({
+const Slider: FC<SliderProps> = ({
   value,
   onSeek,
   pre,

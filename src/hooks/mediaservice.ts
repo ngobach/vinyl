@@ -1,4 +1,5 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
+import { useAsync } from 'react-use';
 import mediaList, { MediaList } from '~/services/medialist';
 import medialist from '~/services/medialist';
 
@@ -11,15 +12,13 @@ export function useMedialist() {
 export function useMediaLoader(): Result {
   const [ml, setMl] = useState<MediaList>(null);
   const [error, setError] = useState<Error>(null);
-  useEffect(() => {
-    (async () => {
-      try {
-        await mediaList.fetch();
-        setMl(mediaList);
-      } catch (error) {
-        setError(error);
-      }
-    })();
-  }, []);
+  useAsync(async () => {
+    try {
+      await mediaList.fetch();
+      setMl(mediaList);
+    } catch (error) {
+      setError(error);
+    }
+  });
   return [ml, error];
 }

@@ -1,6 +1,6 @@
 /** @jsx jsx */
 import { jsx, css } from '@emotion/core';
-import { FunctionComponent, useCallback } from 'react';
+import { FC, useCallback } from 'react';
 
 export enum Icons {
   play = 'play',
@@ -21,7 +21,7 @@ interface IconProps {
   onClick?: () => any;
 }
 
-const Icon: FunctionComponent<IconProps> = ({ icon, size = 32, color = '#ffffff', className, onClick, ...rest }) => {
+const Icon: FC<IconProps> = ({ icon, size = 32, color = '#ffffff', className, onClick, ...rest }) => {
   const clickCallback = useCallback(() => {
     if (onClick) {
       onClick();

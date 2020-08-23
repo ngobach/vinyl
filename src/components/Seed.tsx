@@ -1,8 +1,8 @@
 /** @jsx jsx */
 import { jsx, css } from '@emotion/core';
-import { FunctionComponent } from 'react';
+import { FC } from 'react';
 
-const Seed: FunctionComponent<{}> = ({}) => {
+const Seed: FC<{}> = ({}) => {
   return (
     <div />
   );

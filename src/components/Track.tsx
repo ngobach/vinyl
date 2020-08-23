@@ -1,6 +1,6 @@
 /** @jsx jsx */
 import { jsx, css } from '@emotion/core';
-import { FunctionComponent } from 'react';
+import { FC } from 'react';
 import { Track } from '~/types';
 import Thumbnail from './Thumbnail';
 
@@ -16,7 +16,7 @@ enum DisplayMode {
   Large,
 }
 
-const TrackComponent: FunctionComponent<TrackProps> = ({ track, displayMode = DisplayMode.Normal, onClick }) => {
+const TrackComponent: FC<TrackProps> = ({ track, displayMode = DisplayMode.Normal, onClick }) => {
   const artists = track.artists.map(a => a.title).join('; ');
   return (
     <div

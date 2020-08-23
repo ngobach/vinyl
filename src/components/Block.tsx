@@ -1,6 +1,6 @@
 /** @jsx jsx */
 import { jsx, css } from '@emotion/core';
-import { FunctionComponent } from 'react';
+import { FC } from 'react';
 
 export enum Color {
   White,
@@ -21,7 +21,7 @@ function colorToCode (color: Color): string {
   }
 }
 
-const Block: FunctionComponent<Props> = ({ children, title, color = Color.Gray }) => {
+const Block: FC<Props> = ({ children, title, color = Color.Gray }) => {
   return (
     <section>
       <h2

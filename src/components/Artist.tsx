@@ -1,6 +1,6 @@
 /** @jsx jsx */
 import { jsx, css } from '@emotion/core';
-import { FunctionComponent } from 'react';
+import { FC } from 'react';
 import Thumbnail from './Thumbnail';
 import { Artist } from '~/types';
 
@@ -19,7 +19,7 @@ interface ArtistProps {
   onTagClick?: (a: Artist) => any;
 }
 
-const ArtistComponent: FunctionComponent<ArtistProps> = ({ artist, mode = DisplayMode.List, subline = null, tag = null, onClick = null, onTagClick }) => {
+const ArtistComponent: FC<ArtistProps> = ({ artist, mode = DisplayMode.List, subline = null, tag = null, onClick = null, onTagClick }) => {
   return mode === DisplayMode.Vertical ? (
     <div css={css`
       display: inline-flex;

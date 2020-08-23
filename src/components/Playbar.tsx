@@ -1,6 +1,6 @@
 /** @jsx jsx */
 import { jsx, css } from '@emotion/core';
-import { FunctionComponent, useCallback } from 'react';
+import { FC, useCallback } from 'react';
 import { PlaybackMode } from '~/services/audioengine';
 import { Track, PlaybackStatus } from '~/types';
 import MQ from '~/utils/mq';
@@ -39,7 +39,7 @@ const PlayPauseButton = ({ playing, onClick }) => {
   );
 };
 
-const TrackInfo: FunctionComponent<{ track: Track }> = ({ track, ...rest }) => (
+const TrackInfo: FC<{ track: Track }> = ({ track, ...rest }) => (
   <div
     css={css`
       display: flex;
@@ -100,7 +100,7 @@ interface PlaybarProps {
   onVolumeChange: (f: number) => void;
 }
 
-const Playbar: FunctionComponent<PlaybarProps> = ({
+const Playbar: FC<PlaybarProps> = ({
   track,
   status,
   hasPrev,

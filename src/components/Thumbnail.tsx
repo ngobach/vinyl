@@ -1,6 +1,6 @@
 /** @jsx jsx */
 import { jsx, css } from '@emotion/core';
-import { FunctionComponent } from 'react';
+import { FC } from 'react';
 
 interface Props {
   size: number;
@@ -9,7 +9,7 @@ interface Props {
   rounded?: boolean;
 }
 
-const Thumbnail: FunctionComponent<Props> = ({ size, src, alt, rounded, ...rest }) => {
+const Thumbnail: FC<Props> = ({ size, src, alt, rounded, ...rest }) => {
   return (
     <img
       src={src}

@@ -1,13 +1,13 @@
 /** @jsx jsx */
 import { jsx, css } from '@emotion/core';
-import { FunctionComponent } from 'react';
+import { FC } from 'react';
 import MQ from '~/utils/mq';
 
 interface Props {
   error: Error;
 }
 
-const Panic: FunctionComponent<Props> = ({ error }) => (
+const Panic: FC<Props> = ({ error }) => (
   <div css={css`
     display: flex;
     width: 100%;

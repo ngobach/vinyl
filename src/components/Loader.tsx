@@ -1,6 +1,6 @@
 /** @jsx jsx */
 import { css, jsx } from '@emotion/core';
-import { FunctionComponent } from 'react';
+import { FC } from 'react';
 import { sample } from 'lodash';
 
 const randomIconList: string[] = [
@@ -21,7 +21,7 @@ interface Props {
   random: boolean;
 }
 
-const Loader: FunctionComponent<Props> = ({ progress, random = false }) => {
+const Loader: FC<Props> = ({ progress, random = false }) => {
   const icon: string = random ? randomIcon : defaultIcon;
 
   return (

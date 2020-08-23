@@ -1,6 +1,6 @@
 /** @jsx jsx */
 import { jsx, css } from '@emotion/core';
-import { Fragment, FunctionComponent, useState } from 'react';
+import { Fragment, FC, useState } from 'react';
 import Helmet from 'react-helmet';
 
 import log from '~/utils/log';
@@ -33,7 +33,7 @@ const fixtures: {
   })(),
 };
 
-const Example: FunctionComponent<{ title: string }> = ({ title, children }) => (
+const Example: FC<{ title: string }> = ({ title, children }) => (
   <section
     css={css`
       margin-bottom: 2rem;
@@ -64,7 +64,7 @@ const Example: FunctionComponent<{ title: string }> = ({ title, children }) => (
   </section>
 );
 
-const Spacer: FunctionComponent<{}> = () => (
+const Spacer: FC<{}> = () => (
   <div
     css={css`
       height: 1rem;
@@ -73,7 +73,7 @@ const Spacer: FunctionComponent<{}> = () => (
 );
 
 
-const ExamplePlaybar: FunctionComponent<{}> = () => {
+const ExamplePlaybar: FC<{}> = () => {
   const [playing, setPlaying] = useState(true);
   const [volume, setVolume] = useState(.2);
 
@@ -106,7 +106,7 @@ const ExampleSlider = () => {
   );
 };
 
-const KitchenPage: FunctionComponent<{}> = () => (
+const KitchenPage: FC<{}> = () => (
   <Fragment>
     <Helmet>
       <title>Kitchen sink</title>

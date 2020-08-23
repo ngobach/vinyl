@@ -9,7 +9,7 @@ interface Props {
   onClick?: () => any;
 }
 
-const NavItem: React.FunctionComponent<Props> = ({ iconName, text, onClick }) => (
+const NavItem: React.FC<Props> = ({ iconName, text, onClick }) => (
   <li
     css={css`
       padding-top: .2em;
