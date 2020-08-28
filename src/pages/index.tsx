@@ -2,7 +2,7 @@ import React from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
 import KitchenPage from '~/pages/kitchen';
-import PlayerPage from '~/pages/player';
+import HomePage from '~/pages/home';
 
 // FIX: Parcel bundler has something wrong with dynamic import
 // interface AppRouteProps extends RouteProps {
@@ -27,7 +27,7 @@ const AppRouter: React.FC = () => {
     <Router>
       <Switch>
         <Route path="/kitchen" exact component={KitchenPage} />
-        <Route component={PlayerPage} />
+        <Route component={HomePage} />
       </Switch>
     </Router>
   );
