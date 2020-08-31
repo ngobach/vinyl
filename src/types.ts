@@ -58,3 +58,5 @@ export interface PlaybackStatus {
   played: number;
   playing: boolean;
 }
+
+export type LinkTarget = { href?: string, onClick?: () => void; };

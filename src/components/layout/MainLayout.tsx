@@ -9,18 +9,24 @@ interface Props {
 
 const MainLayout: React.FC<Props> = ({
     sidebar,
+    children,
 }) => (
     <BlankLayout>
         <main css={css`
             display: flex;
             width: 100%;
-            height: 100%;
-            background: #ff000080;
+            min-height: 100%;
         `}>
             <div css={css`
-                width: 280px;
+                width: 200px;
             `}>
-                WOW
+                {sidebar}
+            </div>
+            <div css={css`
+                flex: 1;
+                overflow: hidden;
+            `}>
+                {children}
             </div>
         </main>
     </BlankLayout>
