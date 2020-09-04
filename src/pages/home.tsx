@@ -1,7 +1,11 @@
 /** @jsx jsx */
 import React from 'react';
+import { useRouteMatch } from 'react-router';
 import { css, jsx } from '@emotion/core';
 import * as env from '~/env';
+
+import Welcome from './home/Welcome';
+
 import Logo from '~/components/Logo';
 import MainLayout from '~/components/layout/MainLayout';
 import Nav from '~/components/Nav';
@@ -10,8 +14,17 @@ import Block from '~/components/Block';
 import { useMedialist } from '~/hooks';
 import Clickable from '~/components/Clickable';
 
+function resolveScreen<P>(q: Record<string, string>): [React.ComponentType<P>, Record<string, unknown>] {
+    const playlist = q.p;
+    const genre = q.g;
+
+    return [Welcome, {}];
+}
+
 const HomePage: React.FC = () => {
     const ml = useMedialist();
+    const route = useRouteMatch();
+    const [Component, params] = resolveScreen(route.params);
 
     const sidebar = (
         <div css={css`
@@ -29,7 +42,7 @@ const HomePage: React.FC = () => {
             </div>
             <Block title="Playlists">
                 <Nav>
-                    <NavItem iconName="care-right" text="Today Mood" target={{ href: '/?playlist=today' }} />
+                    <NavItem iconName="care-right" text="Today Mood" target={{ href: '/?p=today' }} />
                     <NavItem iconName="heart" text="Favorites" target={{}} />
                     <NavItem iconName="history" text="History" target={{}} />
                 </Nav>
@@ -38,7 +51,7 @@ const HomePage: React.FC = () => {
 
             <Block title="Genres">
                 {ml.genres.map((g) => (
-                    <NavItem iconName="audio" text={g.title} target={{ href: `/?playlist=genre&genre=${g.title}` }} />
+                    <NavItem iconName="audio" text={g.title} target={{ href: `/?g=${g.title}` }} />
                 ))}
             </Block>
             <div css={css`height: 2rem;`} />
@@ -75,15 +88,13 @@ const HomePage: React.FC = () => {
     );
 
     const content = (
-        <main>
-            The content
-        </main>
+        <Component {...params} />
     );
 
     return (
         <MainLayout sidebar={sidebar}>
-        {content}
-      </MainLayout>
+            {content}
+        </MainLayout>
     );
 };
 
