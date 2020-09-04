@@ -18,6 +18,7 @@ const Clickable: React.FC<Props> = ({ box = 'inline-block', href, onClick, child
     ) : (
         <div css={box === 'inline-block' ? css`
             display: inline-block;
+            cursor: ${onClick ? 'pointer' : 'default'};
         ` : null} onClick={onClick}>
             {children}
         </div>
