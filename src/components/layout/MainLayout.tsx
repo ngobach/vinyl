@@ -16,6 +16,9 @@ const MainLayout: React.FC<Props> = ({
             display: flex;
             width: 100%;
             min-height: 100%;
+            @media (min-height: 800px) {
+                padding: 2rem 0;
+            }
         `}>
             <div css={css`
                 width: 200px;
