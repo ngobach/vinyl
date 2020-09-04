@@ -35,6 +35,7 @@ interface MediaResponse {
 interface FakeProcess {
   env: {
     NODE_ENV: string;
+    APP_REVISION: string | undefined;
   };
 }
 
