@@ -13,8 +13,9 @@ import NavItem from '~/components/NavItem';
 import Block from '~/components/Block';
 import { useMedialist } from '~/hooks';
 import Clickable from '~/components/Clickable';
+import { FCWithTitle } from './types';
 
-function resolveScreen<P>(q: Record<string, string>): [React.ComponentType<P>, Record<string, unknown>] {
+function resolveScreen<P>(q: Record<string, string>): [FCWithTitle<P>, Record<string, unknown>] {
     const playlist = q.p;
     const genre = q.g;
 
@@ -30,6 +31,7 @@ const HomePage: React.FC = () => {
         <div css={css`
             position: sticky;
             top: 0;
+            padding-bottom: 1rem;
         `}>
             <div css={css`
                 display: flex;
@@ -92,7 +94,10 @@ const HomePage: React.FC = () => {
     );
 
     return (
-        <MainLayout sidebar={sidebar}>
+        <MainLayout
+            sidebar={sidebar}
+            title={Component.title ?? 'I\'m feeling happy'}
+        >
             {content}
         </MainLayout>
     );

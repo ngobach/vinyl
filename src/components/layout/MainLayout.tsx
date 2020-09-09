@@ -5,10 +5,12 @@ import BlankLayout from './BlankLayout';
 
 interface Props {
     sidebar?: React.ReactNode;
+    title?: string;
 }
 
 const MainLayout: React.FC<Props> = ({
     sidebar,
+    title,
     children,
 }) => (
     <BlankLayout>
@@ -29,7 +31,26 @@ const MainLayout: React.FC<Props> = ({
                 flex: 1;
                 overflow: hidden;
             `}>
-                {children}
+                <div css={css`
+                    display: flex;
+                    height: 150px;
+                    padding: 0 0 .8rem;
+                    justify-content: center;
+                    align-items: flex-end;
+                    font-size: 2rem;
+                    font-weight: bold;
+                `}>
+                    {title}
+                </div>
+                <div
+                    css={css`
+                        background: #ffffff05;
+                        border-radius: .25rem;
+                        padding: 1rem;
+                    `}
+                >
+                    {children}
+                </div>
             </div>
         </main>
     </BlankLayout>

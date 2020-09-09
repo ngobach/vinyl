@@ -3,11 +3,14 @@ import React from 'react';
 import {jsx, css } from '@emotion/core';
 
 interface Props {
+    className?: string;
     size?: keyof typeof sizes;
     bold?: boolean;
     color?: string;
     inline?: boolean;
     align?: 'left' | 'center' | 'right';
+    italic?: boolean;
+    underlined?: boolean;
     children: string;
 }
 
@@ -25,9 +28,12 @@ const Text: React.FC<Props> = ({
     color,
     children,
     inline,
-    align = 'right',
+    italic,
+    underlined,
+    align = 'left',
+    className,
 }) => (
-    <div css={css`
+    <div className={className} css={css`
         font-size: ${sizes[size]};
         text-align: ${align};
         ${inline && css`
@@ -41,6 +47,12 @@ const Text: React.FC<Props> = ({
         `}
         ${color && css`
             color: ${color};
+        `}
+        ${italic && css`
+            font-style: italic;
+        `}
+        ${underlined && css`
+            text-decoration: inherit;
         `}
     `}>
         {children}
