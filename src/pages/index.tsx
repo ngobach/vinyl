@@ -4,24 +4,6 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import KitchenPage from '~/pages/kitchen';
 import HomePage from '~/pages/home';
 
-// FIX: Parcel bundler has something wrong with dynamic import
-// interface AppRouteProps extends RouteProps {
-//   // path?: string;
-//   component: React.LazyExoticComponent<any>;
-// }
-
-// const AppRoute: React.FC<AppRouteProps> = ({
-//   path,
-//   component: Component,
-//   ...rest
-// }) => (
-//   <Route path={path} {...rest}>
-//     <React.Suspense fallback={null}>
-//       <Component/>
-//     </React.Suspense>
-//   </Route>
-// );
-
 const AppRouter: React.FC = () => {
   return (
     <Router>
