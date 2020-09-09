@@ -51,7 +51,7 @@ const HomePage: React.FC = () => {
 
             <Block title="Genres">
                 {ml.genres.map((g) => (
-                    <NavItem iconName="audio" text={g.title} target={{ href: `/?g=${g.title}` }} />
+                    <NavItem key={g.title} iconName="audio" text={g.title} target={{ href: `/?g=${g.title}` }} />
                 ))}
             </Block>
             <div css={css`height: 2rem;`} />
