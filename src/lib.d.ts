@@ -50,3 +50,16 @@ declare module '*.svg' {
     const url: string;
     export default url;
 }
+
+
+declare module 'excuses' {
+    type Excuses = {
+        developers: {
+            getAll: Function,
+            getRandom: Function,
+        },
+    };
+    const excuses: Excuses;
+
+    export default excuses;
+}

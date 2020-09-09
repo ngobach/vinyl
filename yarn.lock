@@ -3045,6 +3045,11 @@ evp_bytestokey@^1.0.0, evp_bytestokey@^1.0.3:
     md5.js "^1.3.4"
     safe-buffer "^5.1.1"
 
+excuses@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/excuses/-/excuses-1.0.0.tgz#c1c80e17c0b83cbefd10d890848660620f68f5d8"
+  integrity sha1-wcgOF8C4PL79ENiQhIZgYg9o9dg=
+
 execa@^0.7.0:
   version "0.7.0"
   resolved "https://registry.yarnpkg.com/execa/-/execa-0.7.0.tgz#944becd34cc41ee32a63a9faf27ad5a65fc59777"
