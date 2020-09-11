@@ -43,3 +43,8 @@ body {
 .im-fix {
   transform: translateY(.1rem);
 }
+
+a, a:visited {
+  color: inherit;
+  text-decoration: none;
+}

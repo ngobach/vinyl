@@ -15,6 +15,7 @@ const Welcome: FCWithTitle = () => {
     return (
         <main css={css`
             padding: 2rem;
+            padding-top: 4rem;
         `}>
             <div css={css`
                 text-align: center;
@@ -25,6 +26,7 @@ const Welcome: FCWithTitle = () => {
                 `}/>
             </div>
             <Spacer size="1rem" />
+
             <Text size="l" align="center">{excuse.current.replace(/(\w)$/, '$1.')}</Text>
             <Text align="center" color="var(--color-primary2)">- developer excuse</Text>
         </main>

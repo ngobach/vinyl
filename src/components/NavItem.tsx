@@ -7,10 +7,10 @@ import { LinkTarget } from '~/types';
 interface Props {
     iconName: string;
     text: string;
-    target: LinkTarget;
+    target?: LinkTarget;
 }
 
-const NavItem: React.FC<Props> = ({ iconName, text, target }) => (
+const NavItem: React.FC<Props> = ({ iconName, text, target = {} }) => (
     <Clickable {...target}>
         <li
             css={css`

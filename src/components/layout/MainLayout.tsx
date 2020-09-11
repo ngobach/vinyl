@@ -42,15 +42,7 @@ const MainLayout: React.FC<Props> = ({
                 `}>
                     {title}
                 </div>
-                <div
-                    css={css`
-                        background: #ffffff05;
-                        border-radius: .25rem;
-                        padding: 1rem;
-                    `}
-                >
-                    {children}
-                </div>
+                {children}
             </div>
         </main>
     </BlankLayout>

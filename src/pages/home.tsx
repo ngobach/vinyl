@@ -6,6 +6,7 @@ import * as env from '~/env';
 
 import Welcome from './home/Welcome';
 import Building from './home/Building';
+import Today from './home/Today';
 
 import Logo from '~/components/Logo';
 import MainLayout from '~/components/layout/MainLayout';
@@ -21,6 +22,14 @@ function resolveScreen<P>(q: Record<string, string>): [FCWithTitle<P>, Record<st
     const {l1, l2, l3, l4} = q;
 
     if (l1 === 'today') {
+        return [Today, { page: 'today' }];
+    }
+
+    if (l1 === 'favorites') {
+        return [Building, { page: 'favorites' }];
+    }
+
+    if (l1 === 'history') {
         return [Building, {}];
     }
 

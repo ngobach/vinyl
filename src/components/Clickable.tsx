@@ -15,13 +15,17 @@ const Clickable: React.FC<Props> = ({ box = 'inline-block', href, onClick, child
         `}>
           {children}
         </Link>
-    ) : (
+    ) : onClick ? (
         <div css={box === 'inline-block' ? css`
             display: inline-block;
             cursor: ${onClick ? 'pointer' : 'default'};
         ` : null} onClick={onClick}>
             {children}
         </div>
+    ) : (
+        <React.Fragment>
+            {children}
+        </React.Fragment>
     );
 };
 
