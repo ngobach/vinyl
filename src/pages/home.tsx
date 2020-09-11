@@ -5,6 +5,7 @@ import { css, jsx } from '@emotion/core';
 import * as env from '~/env';
 
 import Welcome from './home/Welcome';
+import Building from './home/Building';
 
 import Logo from '~/components/Logo';
 import MainLayout from '~/components/layout/MainLayout';
@@ -14,18 +15,26 @@ import Block from '~/components/Block';
 import { useMedialist } from '~/hooks';
 import Clickable from '~/components/Clickable';
 import { FCWithTitle } from './types';
+import Spacer from '~/components/Spacer';
 
 function resolveScreen<P>(q: Record<string, string>): [FCWithTitle<P>, Record<string, unknown>] {
-    const playlist = q.p;
-    const genre = q.g;
+    const {l1, l2, l3, l4} = q;
+
+    if (l1 === 'today') {
+        return [Building, {}];
+    }
+
+    if (l1 === 'genre') {
+        return [Building, {}];
+    }
 
     return [Welcome, {}];
 }
 
 const HomePage: React.FC = () => {
     const ml = useMedialist();
-    const route = useRouteMatch();
-    const [Component, params] = resolveScreen(route.params);
+    const routeParams = useRouteMatch('/:l1?/:l2?/:l3?/:l4?');
+    const [Component, params] = resolveScreen(routeParams.params);
 
     const sidebar = (
         <div css={css`
@@ -44,19 +53,19 @@ const HomePage: React.FC = () => {
             </div>
             <Block title="Playlists">
                 <Nav>
-                    <NavItem iconName="care-right" text="Today Mood" target={{ href: '/?p=today' }} />
+                    <NavItem iconName="care-right" text="Today Mood" target={{ href: '/today' }} />
                     <NavItem iconName="heart" text="Favorites" target={{}} />
                     <NavItem iconName="history" text="History" target={{}} />
                 </Nav>
             </Block>
-            <div css={css`height: 2rem;`} />
+            <Spacer size="2rem" />
 
             <Block title="Genres">
                 {ml.genres.map((g) => (
-                    <NavItem key={g.title} iconName="audio" text={g.title} target={{ href: `/?g=${g.title}` }} />
+                    <NavItem key={g.title} iconName="audio" text={g.title} target={{ href: `/genre/${g.title}` }} />
                 ))}
             </Block>
-            <div css={css`height: 2rem;`} />
+            <Spacer size="2rem" />
 
             <Block title="Vinyl">
                 <div css={css`
