@@ -17,6 +17,9 @@ import { useMedialist } from '~/hooks';
 import Clickable from '~/components/Clickable';
 import { FCWithTitle } from './types';
 import Spacer from '~/components/Spacer';
+import Helmet from 'react-helmet';
+import Playbar from '~/components/Playbar';
+import { PlaybackMode } from '~/services/audioengine';
 
 function resolveScreen<P>(q: Record<string, string>): [FCWithTitle<P>, Record<string, unknown>] {
     const {l1, l2, l3, l4} = q;
@@ -65,6 +68,8 @@ const HomePage: React.FC = () => {
                     <NavItem iconName="care-right" text="Today Mood" target={{ href: '/today' }} />
                     <NavItem iconName="heart" text="Favorites" target={{}} />
                     <NavItem iconName="history" text="History" target={{}} />
+                    <NavItem iconName="layer" text="All Tracks" target={{}} />
+                    <NavItem iconName="coffee" text="Artists" target={{}} />
                 </Nav>
             </Block>
             <Spacer size="2rem" />
@@ -110,12 +115,41 @@ const HomePage: React.FC = () => {
     const content = (
         <Component {...params} />
     );
+    const player = (
+        <div css={css`
+            background: #0004;
+            padding: 0 1rem;
+            margin: 0 .25rem;
+        `}>
+            <Playbar
+                hasNext={true}
+                hasPrev={false}
+                mode={PlaybackMode.RepeatAll}
+                track={ml.tracks[0]}
+                status={{ duration: 100, played: 100, playing: true }}
+                volume={.5}
+                onModeChanged={() => 0}
+                onNext={() => 0}
+                onPause={() => 0}
+                onPlay={() => 0}
+                onPrev={() => 0}
+                onVolumeChange={() => 0}
+            />
+        </div>
+    );
+
+    const pageTitle = Component.title ?? 'I\'m feeling happy';
 
     return (
         <MainLayout
             sidebar={sidebar}
-            title={Component.title ?? 'I\'m feeling happy'}
+            title={pageTitle}
+            playerArea={player}
         >
+            <Helmet>
+                <title>{pageTitle}</title>
+            </Helmet>
+
             {content}
         </MainLayout>
     );

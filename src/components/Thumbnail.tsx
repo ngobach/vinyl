@@ -19,7 +19,7 @@ const Thumbnail: FC<Props> = ({ size, src, alt, rounded, ...rest }) => {
         overflow: hidden;
         width: ${size}px;
         height: ${size}px;
-        object-fit: contain;
+        object-fit: cover;
         background: var(--nord1);
       `, rounded ? css`
         border-radius: 999999px;

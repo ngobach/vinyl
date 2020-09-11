@@ -1,51 +1,80 @@
 /** @jsx jsx */
-import React from 'react';
+import React, { useRef, useEffect } from 'react';
 import { jsx, css } from '@emotion/core';
 import BlankLayout from './BlankLayout';
+import { useWindowScroll } from 'react-use';
 
 interface Props {
     sidebar?: React.ReactNode;
+    playerArea?: React.ReactNode;
     title?: string;
 }
+
+const SIDEBAR_SIZE = '200px';
 
 const MainLayout: React.FC<Props> = ({
     sidebar,
     title,
+    playerArea,
     children,
-}) => (
-    <BlankLayout>
-        <main css={css`
-            display: flex;
-            width: 100%;
-            min-height: 100%;
-            @media (min-height: 800px) {
-                padding: 2rem 0;
-            }
-        `}>
-            <div css={css`
-                width: 200px;
-            `}>
-                {sidebar}
-            </div>
-            <div css={css`
-                flex: 1;
-                overflow: hidden;
+}) => {
+    return (
+        <BlankLayout>
+            <main css={css`
+                position: relative;
+                display: flex;
+                width: 100%;
+                min-height: 100%;
+                ${playerArea ? css`
+                    padding-bottom: calc(60px + 1rem);
+                ` : css`
+                    padding-bottom: 2rem;
+                `}
+                @media (min-height: 800px) {
+                    padding-top: 2rem;
+                }
             `}>
                 <div css={css`
-                    display: flex;
-                    height: 150px;
-                    padding: 0 0 .8rem;
-                    justify-content: center;
-                    align-items: flex-end;
-                    font-size: 2rem;
-                    font-weight: bold;
+                    width: ${SIDEBAR_SIZE};
                 `}>
-                    {title}
+                    {sidebar}
                 </div>
-                {children}
-            </div>
-        </main>
-    </BlankLayout>
-);
+                <div css={css`
+                    flex: 1;
+                    overflow: hidden;
+                `}>
+                    <div css={css`
+                        display: flex;
+                        height: 150px;
+                        padding: 0 0 .8rem;
+                        justify-content: center;
+                        align-items: flex-end;
+                        font-size: 2rem;
+                        font-weight: bold;
+                    `}>
+                        {title}
+                    </div>
+                    {children}
+                </div>
+            </main>
+            {playerArea && (
+                <div css={css`
+                    position: fixed;
+                    bottom: 0;
+                    left: 0;
+                    right: 0;
+                `}>
+                    <div css={css`
+                        max-width: 1024px;
+                        margin: 0 auto;
+                        padding-left: ${SIDEBAR_SIZE};
+                    `}>
+                        {playerArea}
+                    </div>
+                </div>
+            )}
+        </BlankLayout>
+    );
+}
 
 export default MainLayout;

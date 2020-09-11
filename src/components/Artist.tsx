@@ -19,6 +19,8 @@ interface ArtistProps {
   onTagClick?: (a: Artist) => any;
 }
 
+const DEFAULT_THUMBNAIL = 'https://minio.ngobach.com/web-assets/anonymous-artist.jpg';
+
 const ArtistComponent: FC<ArtistProps> = ({ artist, mode = DisplayMode.List, subline = null, tag = null, onClick = null, onTagClick }) => {
   return mode === DisplayMode.Vertical ? (
     <div css={css`
@@ -27,7 +29,7 @@ const ArtistComponent: FC<ArtistProps> = ({ artist, mode = DisplayMode.List, sub
       align-items: center;
       cursor: ${onClick ? 'pointer': 'initial'};
     `}>
-      <Thumbnail src={artist.cover} alt={artist.title} size={100} rounded />
+      <Thumbnail src={artist.cover ?? DEFAULT_THUMBNAIL} alt={artist.title} size={100} rounded />
       <h3 css={css`
         margin-top: .5rem;
         font-weight: 600;
@@ -55,7 +57,7 @@ const ArtistComponent: FC<ArtistProps> = ({ artist, mode = DisplayMode.List, sub
       `}
       onClick={() => onClick && onClick(artist)}
     >
-      <Thumbnail src={artist.cover} alt={artist.title} size={32} rounded />
+      <Thumbnail src={artist.cover ?? DEFAULT_THUMBNAIL} alt={artist.title} size={32} rounded />
       <h3 css={css`
         margin-left: 1em;
         font-weight: 600;
@@ -72,7 +74,7 @@ const ArtistComponent: FC<ArtistProps> = ({ artist, mode = DisplayMode.List, sub
       `}
       onClick={() => onClick && onClick(artist)}
     >
-      <Thumbnail src={artist.cover} alt={artist.title} size={80} />
+      <Thumbnail src={artist.cover ?? DEFAULT_THUMBNAIL} alt={artist.title} size={80} />
       <div css={css`
         flex: 1;
         display: flex;

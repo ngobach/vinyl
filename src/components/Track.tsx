@@ -4,6 +4,8 @@ import { FC } from 'react';
 import { Track } from '~/types';
 import Thumbnail from './Thumbnail';
 
+const DEFAULT_THUMBNAIL = 'https://minio.ngobach.com/web-assets/chilling.webp';
+
 interface TrackProps {
   track: Track;
   displayMode?: DisplayMode;
@@ -30,7 +32,7 @@ const TrackComponent: FC<TrackProps> = ({ track, displayMode = DisplayMode.Norma
       `]}
       onClick={() => onClick && onClick(track)}
     >
-      <Thumbnail src={track.cover} size={displayMode === DisplayMode.Large ? 160 : 32} rounded={displayMode !== DisplayMode.Large} />
+      <Thumbnail src={track.cover ?? DEFAULT_THUMBNAIL} size={displayMode === DisplayMode.Large ? 160 : 32} rounded={displayMode !== DisplayMode.Large} />
       <div
         css={[displayMode !== DisplayMode.Large ? css`
           flex: 1;

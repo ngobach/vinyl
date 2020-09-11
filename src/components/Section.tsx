@@ -18,14 +18,14 @@ const Section: React.FC<Props> = ({
     <section>
         {title && (
             <Clickable {...target}>
-                <Text size="l" bold>{title}</Text>
+                <Text size="l" bold inline>{title}</Text>
             </Clickable>
         )}
         <div css={css`
             margin-top: ${title ? '1rem' : '0'};
             border-radius: .25rem;
             padding: 1rem;
-            background: #0002;
+            background: #0001;
         `}>
             {children}
         </div>
