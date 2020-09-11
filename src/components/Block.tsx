@@ -28,6 +28,8 @@ const Block: FC<Props> = ({ children, title, color = Color.Gray }) => {
         css={css`
           display: block;
           font-weight: 700;
+          font-size: 80%;
+          text-transform: uppercase;
           color: ${colorToCode(color)};
         `}
       >
