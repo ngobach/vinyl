@@ -115,26 +115,42 @@ const HomePage: React.FC = () => {
     const content = (
         <Component {...params} />
     );
+
     const player = (
         <div css={css`
-            background: #0004;
             padding: 0 1rem;
-            margin: 0 .25rem;
+            position: relative;
         `}>
-            <Playbar
-                hasNext={true}
-                hasPrev={false}
-                mode={PlaybackMode.RepeatAll}
-                track={ml.tracks[0]}
-                status={{ duration: 100, played: 100, playing: true }}
-                volume={.5}
-                onModeChanged={() => 0}
-                onNext={() => 0}
-                onPause={() => 0}
-                onPlay={() => 0}
-                onPrev={() => 0}
-                onVolumeChange={() => 0}
-            />
+            <div css={css`
+                background: var(--color-background);
+                padding: 0 .5rem .25rem;
+                ::before {
+                    content: '';
+                    display: block;
+                    position: absolute;
+                    top: -10px;
+                    left: 1rem;
+                    right: 1rem;
+                    height: 10px;
+                    z-index: -1;
+                    background: linear-gradient(to bottom, transparent, var(--color-background));
+                }
+            `}>
+                <Playbar
+                    hasNext={true}
+                    hasPrev={false}
+                    mode={PlaybackMode.RepeatAll}
+                    track={ml.tracks[0]}
+                    status={{ duration: 100, played: 100, playing: true }}
+                    volume={.5}
+                    onModeChanged={() => 0}
+                    onNext={() => 0}
+                    onPause={() => 0}
+                    onPlay={() => 0}
+                    onPrev={() => 0}
+                    onVolumeChange={() => 0}
+                />
+            </div>
         </div>
     );
 

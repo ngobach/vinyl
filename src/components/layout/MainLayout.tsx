@@ -1,8 +1,7 @@
 /** @jsx jsx */
-import React, { useRef, useEffect } from 'react';
+import React from 'react';
 import { jsx, css } from '@emotion/core';
 import BlankLayout from './BlankLayout';
-import { useWindowScroll } from 'react-use';
 
 interface Props {
     sidebar?: React.ReactNode;
@@ -26,7 +25,7 @@ const MainLayout: React.FC<Props> = ({
                 width: 100%;
                 min-height: 100%;
                 ${playerArea ? css`
-                    padding-bottom: calc(60px + 1rem);
+                    padding-bottom: calc(60px + 2rem);
                 ` : css`
                     padding-bottom: 2rem;
                 `}
