@@ -14,17 +14,17 @@ const Welcome: FCWithTitle = () => {
 
     return (
         <main css={css`
-            padding: 4rem;
+            padding: 2rem;
         `}>
             <div css={css`
                 text-align: center;
             `}>
                 <img src={ImgIllustration} css={css`
-                    width: 400px;
+                    width: 320px;
                     height: auto;
                 `}/>
             </div>
-            <Spacer size="2rem" />
+            <Spacer size="1rem" />
             <Text size="l" align="center">{excuse.current.replace(/(\w)$/, '$1.')}</Text>
             <Text align="center" color="var(--color-primary2)">- developer excuse</Text>
         </main>
