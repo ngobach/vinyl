@@ -1,12 +1,14 @@
 /** @jsx jsx */
 import React from 'react';
 import { useRouteMatch } from 'react-router';
+import Helmet from 'react-helmet';
 import { css, jsx } from '@emotion/core';
 import * as env from '~/env';
 
 import Welcome from './home/Welcome';
 import Building from './home/Building';
 import Today from './home/Today';
+import Tracks from './home/Tracks';
 
 import Logo from '~/components/Logo';
 import MainLayout from '~/components/layout/MainLayout';
@@ -17,7 +19,6 @@ import { useMedialist } from '~/hooks';
 import Clickable from '~/components/Clickable';
 import { FCWithTitle } from './types';
 import Spacer from '~/components/Spacer';
-import Helmet from 'react-helmet';
 import Playbar from '~/components/Playbar';
 import { PlaybackMode } from '~/services/audioengine';
 
@@ -29,7 +30,7 @@ function resolveScreen<P>(q: Record<string, string>): [FCWithTitle<P>, Record<st
     }
 
     if (l1 === 'favorites') {
-        return [Building, { page: 'favorites' }];
+        return [Building, {}];
     }
 
     if (l1 === 'history') {
@@ -37,6 +38,14 @@ function resolveScreen<P>(q: Record<string, string>): [FCWithTitle<P>, Record<st
     }
 
     if (l1 === 'genre') {
+        return [Building, {}];
+    }
+
+    if (l1 === 'tracks') {
+        return [Tracks, {}];
+    }
+
+    if (l1 === 'artists') {
         return [Building, {}];
     }
 
@@ -66,10 +75,10 @@ const HomePage: React.FC = () => {
             <Block title="Playlists">
                 <Nav>
                     <NavItem iconName="care-right" text="Today Mood" target={{ href: '/today' }} />
-                    <NavItem iconName="heart" text="Favorites" target={{}} />
-                    <NavItem iconName="history" text="History" target={{}} />
-                    <NavItem iconName="layer" text="All Tracks" target={{}} />
-                    <NavItem iconName="coffee" text="Artists" target={{}} />
+                    <NavItem iconName="heart" text="Favorites" target={{ href: '/favorites' }} />
+                    <NavItem iconName="history" text="History" target={{ href: '/history' }} />
+                    <NavItem iconName="layer" text="All Tracks" target={{ href: '/tracks' }} />
+                    <NavItem iconName="coffee" text="Artists" target={{ href: '/artists' }} />
                 </Nav>
             </Block>
             <Spacer size="2rem" />
@@ -154,7 +163,12 @@ const HomePage: React.FC = () => {
         </div>
     );
 
-    const pageTitle = Component.title ?? 'I\'m feeling happy';
+    const pageTitle =
+        typeof Component.title === 'function'
+        ? Component.title(params) 
+        : typeof Component.title === 'string'
+            ? Component.title
+            : 'I\'m feeling happy';
 
     return (
         <MainLayout
