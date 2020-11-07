@@ -1,3 +1,5 @@
-import { FC } from 'react';
+import React from 'react';
 
-export type FCWithTitle<P = {}> = FC<P> & { title: string | ((p: P) => string) };
+type FCWithTitle<P> = React.FC<P> & { title: string | ((p: P) => string) };
+
+export { FCWithTitle };

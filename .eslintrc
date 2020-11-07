@@ -1,0 +1,14 @@
+{
+    "extends": [
+        "plugin:react/recommended",
+        "plugin:@typescript-eslint/recommended"
+    ],
+    "settings": {
+        "react": {
+            "version": "detect" // Tells eslint-plugin-react to automatically detect the version of React to use
+        }
+    },
+    "rules": {
+        "react/prop-types": "off"
+    }
+}

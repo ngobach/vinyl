@@ -1,8 +1,7 @@
 import { LOG_ENABLED } from '~/env';
 
-function log (...args: any[]) {
+function log(...args: unknown[]): void {
   if (LOG_ENABLED) {
-    // tslint:disable-next-line
     console.log(...args);
   }
 }

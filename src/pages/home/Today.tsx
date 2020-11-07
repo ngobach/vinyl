@@ -1,19 +1,19 @@
 /** @jsx jsx */
-import { jsx, css } from '@emotion/core';
-import { FCWithTitle } from '../types';
+import { useRef } from 'react';
 import { sampleSize } from 'lodash';
-import { useMedialist } from '~/hooks';
+import { jsx, css } from '@emotion/core';
+import { useMediaList } from '~/hooks';
 import Section from '~/components/Section';
 import TrackComponent, { DisplayMode } from '~/components/Track';
-import { useRef } from 'react';
 import Spacer from '~/components/Spacer';
 import ArtistComponent, { DisplayMode as ArtistDisplayMode } from '~/components/Artist';
+import { FCWithTitle } from '../types';
 
 const TRACK_SAMPLE_SIZE = 12;
 const ARTIST_SAMPLE_SIZE = 8;
 
 const Today: FCWithTitle = () => {
-    const ml = useMedialist();
+    const ml = useMediaList();
     const tracks = useRef(sampleSize(ml.tracks, TRACK_SAMPLE_SIZE)).current;
     const artists = useRef(sampleSize(ml.artists, ARTIST_SAMPLE_SIZE)).current;
 

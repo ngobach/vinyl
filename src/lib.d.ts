@@ -23,13 +23,13 @@ interface MediaResponse {
   default_cover: string;
   tracks: {
     [id: string]: RawTrack;
-  },
+  };
   genres: {
     [id: string]: Genre;
-  },
+  };
   artists: {
     [id: string]: Artist;
-  },
+  };
 }
 
 interface FakeProcess {
@@ -55,8 +55,8 @@ declare module '*.svg' {
 declare module 'excuses' {
     type Excuses = {
         developers: {
-            getAll: Function,
-            getRandom: Function,
+            getAll: () => void,
+            getRandom: () => void,
         },
     };
     const excuses: Excuses;
