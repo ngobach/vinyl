@@ -114,6 +114,7 @@ const Playbar: FC<PlaybarProps> = ({
   onVolumeChange,
   onModeChanged,
 }) => {
+  console.log(`Volume: ${volume}`);
   const volumeClicked = useCallback(() => {
     if (volume > 0) {
       onVolumeChange(0);

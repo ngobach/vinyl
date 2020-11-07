@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { useSpring, animated } from 'react-spring';
+import React, { useEffect, useState } from 'react';
+import { animated, useSpring } from 'react-spring';
 import { useMediaLoader } from '~/hooks';
 import { LOADER_SKIPPED } from '~/env';
 import Loader from '~/components/Loader';
@@ -21,7 +21,9 @@ const App: React.FC = () => {
     if (progress === 0) {
       requestAnimationFrame(() => setProgress(40));
     } else if (progress < 95) {
-      setTimeout(() => setProgress(Math.min(progress + Math.random() * 4 + 1, 95)), Math.random() * 500);
+      setTimeout(
+        () => setProgress(Math.min(progress + Math.random() * 4 + 1, 95)),
+        Math.random() * 500);
     }
   }, [progress, ml]);
 
@@ -38,18 +40,18 @@ const App: React.FC = () => {
 
   if (error) {
     return (
-      <Panic error={error} />
+      <Panic error={error}/>
     );
   }
 
   if (!ready) {
     return LOADER_SKIPPED ? null : (
-      <AnimatedLoader progress={p.progress} random={false} />
+      <AnimatedLoader progress={p.progress} random={false}/>
     );
   }
 
   return (
-    <AppRouter />
+    <AppRouter/>
   );
 };
 

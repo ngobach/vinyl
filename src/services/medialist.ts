@@ -1,9 +1,16 @@
 import { MEDIA_SOURCE } from '~/env';
-import { Artist, Genre, Track, SearchResult, GenericList, PlayList } from '~/types';
+import {
+  Artist,
+  GenericList,
+  Genre,
+  PlayList,
+  SearchResult,
+  Track,
+} from '~/types';
 import log from '~/utils/log';
 
 function urlFor(file: string): string {
-  return `${MEDIA_SOURCE}${file}`;
+  return `${MEDIA_SOURCE.replace(/\/$/, '')}/${file.replace(/^\//, '')}`;
 }
 
 export class MediaList {
@@ -14,7 +21,8 @@ export class MediaList {
 
   public async fetch(): Promise<void> {
     try {
-      const mr: MediaResponse = await (await fetch(urlFor('index.json'))).json();
+      const mr: MediaResponse = await (await fetch(
+        urlFor('index.json'))).json();
       log('📩 %cResponse received', 'font-weight: bold');
       const genres = new Map<string, Genre>();
       const artists = new Map<string, Artist>();
@@ -45,7 +53,8 @@ export class MediaList {
       this.genres = [...genres.values()];
       this.all = new GenericList('My tracks', this.tracks, mr.default_cover);
     } catch (error) {
-      log(`😱%cCannot fetch media playlists: ${error.message}`, 'font-weight: bold');
+      log(`😱%cCannot fetch media playlists: ${error.message}`,
+        'font-weight: bold');
       throw error;
     }
   }

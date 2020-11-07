@@ -1,9 +1,11 @@
 /** @jsx jsx */
-import { jsx, css } from '@emotion/core';
-import { FC, useState, useRef, useCallback } from 'react';
+import React, { useCallback, useRef, useState } from 'react';
+import { css, jsx } from '@emotion/core';
+import { clamp } from 'lodash';
 
-const SliderLabel: FC<{mr?: boolean, ml?: boolean}> = ({ children, ml, mr }) => (
-  <div css={[css`
+const SliderLabel: React.FC<{ mr?: boolean, ml?: boolean }> = ({ children, ml, mr }) => (
+  <div css={[
+    css`
     color: var(--color-gray);
     font-size: .8rem;
   `, mr && css`
@@ -17,29 +19,46 @@ const SliderLabel: FC<{mr?: boolean, ml?: boolean}> = ({ children, ml, mr }) => 
 
 interface SliderProps {
   value: number;
-  onSeek: (newValue: number) => void;
   pre?: React.ReactNode;
   post?: React.ReactNode;
+  live?: boolean;
+  onSeek: (newValue: number) => void;
 }
 
-const Slider: FC<SliderProps> = ({
+const Slider: React.FC<SliderProps> = ({
   value,
-  onSeek,
   pre,
   post,
+  live = false,
+  onSeek,
   ...rest
 }) => {
-  const [override, setOverride] = useState(0);
-  const [capturing, setCapturing] = useState(false);
-  const displayedValue = capturing ? override : value;
-  const holder = useRef(null);
+  const [override, setOverride] = useState<number | null>(null);
+  const displayedValue = override ?? value;
+  const holder = useRef<HTMLDivElement>(null);
 
-  const fromEvent = useCallback((e) => {
+  const pointerDownHandler = useCallback((e: React.PointerEvent) => {
+    holder.current.setPointerCapture(e.pointerId);
     const clientRect = holder.current.getBoundingClientRect();
     const v = (e.pageX - clientRect.left) / clientRect.width;
     setOverride(v);
-    setCapturing(true);
-  }, [setOverride, setCapturing]);
+  }, []);
+  const pointerMoveHandler = useCallback((e: React.PointerEvent) => {
+    if (typeof override !== 'number') {
+      return;
+    }
+    const clientRect = holder.current.getBoundingClientRect();
+    const v = clamp((e.pageX - clientRect.left) / clientRect.width, 0, 1);
+    setOverride(v);
+    if (live) {
+      onSeek(v);
+    }
+  }, [override, live]);
+  const pointerUpHandler = useCallback((e: React.PointerEvent) => {
+    holder.current.releasePointerCapture(e.pointerId);
+    onSeek(override);
+    setOverride(null);
+  }, [override]);
 
   return (
     <div
@@ -68,10 +87,9 @@ const Slider: FC<SliderProps> = ({
             border-radius: 4px;
             cursor: pointer;
           `}
-          onMouseEnter={fromEvent}
-          onMouseLeave={() => setCapturing(false)}
-          onMouseMove={fromEvent}
-          onMouseUp={() => capturing && onSeek(override)}
+          onPointerDown={pointerDownHandler}
+          onPointerMove={pointerMoveHandler}
+          onPointerUp={pointerUpHandler}
         />
         <i
           css={css`
@@ -96,7 +114,7 @@ const Slider: FC<SliderProps> = ({
             pointer-events: none;
           `}
           style={{
-            width: `calc(100% * ${displayedValue})`
+            width: `calc(100% * ${displayedValue})`,
           }}
         />
       </div>
