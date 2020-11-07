@@ -23,6 +23,7 @@ import Playbar from '~/components/Playbar';
 import { PlaybackMode } from '~/services/audioengine';
 
 function resolveScreen<P>(q: Record<string, string>): [FCWithTitle<P>, Record<string, unknown>] {
+    // eslint-disable-next-line
     const {l1, l2, l3, l4} = q;
 
     if (l1 === 'today') {
@@ -142,7 +143,7 @@ const HomePage: React.FC = () => {
                     right: 1rem;
                     height: 10px;
                     z-index: -1;
-                    background: linear-gradient(to bottom, transparent, var(--color-background));
+                    background: linear-gradient(to bottom, var(--color-background-transparent), var(--color-background));
                 }
             `}>
                 <Playbar
