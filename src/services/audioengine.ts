@@ -28,15 +28,18 @@ function createAudio(): HTMLAudioElement {
       playing: true,
     });
   });
+
   myAudio.addEventListener('pause', () => {
     currentStatus.next({
       ...currentStatus.value,
       playing: false,
     });
   });
+
   if (DEV) {
-    (window as any).AUDIO = myAudio;
+    Object.assign(window, { _audio: myAudio });
   }
+
   return myAudio;
 }
 

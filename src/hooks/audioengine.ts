@@ -11,6 +11,6 @@ export function useActivePlaylist(): PlayList {
   return playlist;
 }
 
-export function usePlayPlayList() {
+export function usePlayPlayList(): typeof playPlayList {
   return playPlayList;
 }

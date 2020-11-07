@@ -4,7 +4,7 @@ import mediaList, { MediaList } from '~/services/medialist';
 
 type Result = [MediaList, Error];
 
-export function useMediaList() {
+export function useMediaList(): MediaList {
   return mediaList;
 }
 
@@ -19,5 +19,6 @@ export function useMediaLoader(): Result {
       setError(error);
     }
   });
+
   return [ml, error];
 }
