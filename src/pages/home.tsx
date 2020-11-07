@@ -15,7 +15,7 @@ import MainLayout from '~/components/layout/MainLayout';
 import Nav from '~/components/Nav';
 import NavItem from '~/components/NavItem';
 import Block from '~/components/Block';
-import { useMedialist } from '~/hooks';
+import { useMediaList } from '~/hooks';
 import Clickable from '~/components/Clickable';
 import { FCWithTitle } from './types';
 import Spacer from '~/components/Spacer';
@@ -53,7 +53,7 @@ function resolveScreen<P>(q: Record<string, string>): [FCWithTitle<P>, Record<st
 }
 
 const HomePage: React.FC = () => {
-    const ml = useMedialist();
+    const ml = useMediaList();
     const routeParams = useRouteMatch('/:l1?/:l2?/:l3?/:l4?');
     const [Component, params] = resolveScreen(routeParams.params);
 
