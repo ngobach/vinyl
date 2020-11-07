@@ -48,7 +48,6 @@ const TrackComponent: FC<TrackProps> = ({ track, displayMode = DisplayMode.Norma
         <h3
           css={css`
             font-size: .8rem;
-            font-weight: 600;
           `}
         >
           { track.title }

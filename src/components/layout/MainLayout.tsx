@@ -42,15 +42,18 @@ const MainLayout: React.FC<Props> = ({
                     flex: 1;
                     overflow: hidden;
                 `}>
-                    <div css={css`
-                        display: flex;
-                        height: 150px;
-                        padding: 0 0 .8rem;
-                        justify-content: center;
-                        align-items: flex-end;
-                        font-size: 2rem;
-                        font-weight: bold;
-                    `}>
+                    <div
+                        css={css`
+                            display: flex;
+                            height: 150px;
+                            padding: 0 0 .8rem;
+                            justify-content: center;
+                            align-items: flex-end;
+                            font-size: 2rem;
+                            font-weight: bold;
+                        `}
+                        className="font-display"
+                    >
                         {title}
                     </div>
                     {children}

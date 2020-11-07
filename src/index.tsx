@@ -7,7 +7,7 @@ import App from '~/App';
 
 const webfontConfig = {
   google: {
-    families: ['Inter:200,400,700,900'],
+    families: ['Raleway:400,700', 'Nunito:400,700'],
   },
   custom: {
     families: ['iconmonstr-iconic-font'],

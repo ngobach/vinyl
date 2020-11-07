@@ -21,6 +21,7 @@ const NavItem: React.FC<Props> = ({ iconName, text, target = {} }) => (
                 font-size: 18px;
                 cursor: pointer;
             `}
+            className="font-display"
         >
             <i className={`im im-${iconName}`} css={css`
                 font-size: 1em;
