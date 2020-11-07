@@ -17,7 +17,7 @@ const SliderLabel: FC<{mr?: boolean, ml?: boolean}> = ({ children, ml, mr }) => 
 
 interface SliderProps {
   value: number;
-  onSeek: (newValue: number) => any;
+  onSeek: (newValue: number) => void;
   pre?: React.ReactNode;
   post?: React.ReactNode;
 }

@@ -50,10 +50,10 @@
     "dev": "parcel serve src/index.pug",
     "build": "parcel build --no-source-maps src/index.pug",
     "clean": "rm -rf .cache dist",
-    "lint": "false"
+    "lint": "eslint ./src"
   },
   "keywords": [],
-  "author": "BachNX <thanbaiks@gmail.com>",
+  "author": "Ngo Xuan Bach <thanbaiks@gmail.com>",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/thanbaiks/vinyl/issues"

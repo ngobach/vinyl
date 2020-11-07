@@ -9,7 +9,7 @@ const DEFAULT_THUMBNAIL = 'https://minio.ngobach.com/web-assets/chilling.webp';
 interface TrackProps {
   track: Track;
   displayMode?: DisplayMode;
-  onClick?: (t: Track) => any;
+  onClick?: (t: Track) => void;
 }
 
 enum DisplayMode {
