@@ -1,10 +1,9 @@
 /** @jsx jsx */
+import React from 'react';
 import { jsx, css } from '@emotion/core';
-import { FC } from 'react';
+import { DEFAULT_THUMBNAIL } from '~/env';
 import { Track } from '~/types';
 import Thumbnail from './Thumbnail';
-
-const DEFAULT_THUMBNAIL = 'https://minio.ngobach.com/web-assets/chilling.webp';
 
 interface TrackProps {
   track: Track;
@@ -18,7 +17,7 @@ enum DisplayMode {
   Large,
 }
 
-const TrackComponent: FC<TrackProps> = ({ track, displayMode = DisplayMode.Normal, onClick }) => {
+const TrackComponent: React.FC<TrackProps> = ({ track, displayMode = DisplayMode.Normal, onClick }) => {
   const artists = track.artists.map(a => a.title).join('; ');
   return (
     <div

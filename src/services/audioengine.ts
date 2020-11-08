@@ -101,9 +101,16 @@ export function playPlayList(list: PlayList, track: Track | null): void {
   }
 }
 
-export function playSingle(item: Track): void {
-  currentPlayList.next({ title: item.title, tracks: [item], coverUrl: item.coverUrl });
-  currentItem.next(item);
+export function playSingle(track: Track): void {
+  currentPlayList.next({ title: track.title, tracks: [track], coverUrl: track.coverUrl });
+  currentItem.next(track);
+}
+
+export function playNext(track: Track): void {
+  if (!currentPlayList.value.tracks.includes(track)) {
+    throw new Error('Track not in current playlist');
+  }
+  currentItem.next(track);
 }
 
 export function setMode(newMode: PlaybackMode): void {

@@ -15,7 +15,7 @@ import MainLayout from '~/components/layout/MainLayout';
 import Nav from '~/components/Nav';
 import NavItem from '~/components/NavItem';
 import Block from '~/components/Block';
-import { useMediaList } from '~/hooks';
+import { useMediaController, useMediaList, useMediaEngine } from '~/hooks';
 import Clickable from '~/components/Clickable';
 import { FCWithTitle } from './types';
 import Spacer from '~/components/Spacer';
@@ -55,6 +55,8 @@ function resolveScreen<P>(q: Record<string, string>): [FCWithTitle<P>, Record<st
 
 const HomePage: React.FC = () => {
     const ml = useMediaList();
+    const engine = useMediaEngine();
+    const controller = useMediaController();
     const routeParams = useRouteMatch('/:l1?/:l2?/:l3?/:l4?');
     const [Component, params] = resolveScreen(routeParams.params);
 
@@ -146,20 +148,22 @@ const HomePage: React.FC = () => {
                     background: linear-gradient(to bottom, var(--color-background-transparent), var(--color-background));
                 }
             `}>
-                <Playbar
-                    hasNext={true}
-                    hasPrev={false}
-                    mode={PlaybackMode.RepeatAll}
-                    track={ml.tracks[0]}
-                    status={{ duration: 100, played: 100, playing: true }}
-                    volume={.5}
-                    onModeChanged={() => 0}
-                    onNext={() => 0}
-                    onPause={() => 0}
-                    onPlay={() => 0}
-                    onPrev={() => 0}
-                    onVolumeChange={() => 0}
-                />
+                {engine.currentTrack && (
+                    <Playbar
+                        hasNext={true}
+                        hasPrev={true}
+                        mode={engine.mode}
+                        track={engine.currentTrack}
+                        status={{ duration: 100, played: 100, playing: true }}
+                        volume={engine.volume}
+                        onModeChanged={(m) => controller.setMode(m)}
+                        onNext={() => controller.next()}
+                        onPause={() => 0}
+                        onPlay={() => 0}
+                        onPrev={() => controller.prev()}
+                        onVolumeChange={(v) => controller.setVolume(v)}
+                    />
+                )}
             </div>
         </div>
     );
