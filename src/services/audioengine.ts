@@ -87,6 +87,21 @@ function connect() {
     log(`🎵 %c${track.title} - %c${track.artists.map(a => a.title).join(', ')}`, 'font-weight: bold', 'font-weight: normal; color: #888888');
     audio.src = track.url;
     audio.play();
+    const mediaSession: any = (navigator as any).mediaSession;
+    mediaSession.metadata = new MediaMetadata({
+      title: 'Never Gonna Give You Up',
+      artist: 'Rick Astley',
+      album: 'Whenever You Need Somebody',
+      artwork: [
+        { src: 'https://via.placeholder.com/96',   sizes: '96x96',   type: 'image/png' },
+        { src: 'https://via.placeholder.com/128', sizes: '128x128', type: 'image/png' },
+        { src: 'https://via.placeholder.com/192', sizes: '192x192', type: 'image/png' },
+        { src: 'https://via.placeholder.com/256', sizes: '256x256', type: 'image/png' },
+        { src: 'https://via.placeholder.com/384', sizes: '384x384', type: 'image/png' },
+        { src: 'https://via.placeholder.com/512', sizes: '512x512', type: 'image/png' },
+      ],
+    });
+    mediaSession.setActionHandler('nexttrack', () => playNext(sample(currentPlayList.value.tracks)));
   });
 
   volume.subscribe((v) => {
