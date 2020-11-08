@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useMount } from 'react-use';
-import { currentPlayList, playPlayList } from '~/services/audioengine';
+import { currentPlayList, playPlayList, playSingle } from '~/services/audioengine';
 import { PlayList } from '~/types';
 
 export function useActivePlaylist(): PlayList {
@@ -11,6 +11,10 @@ export function useActivePlaylist(): PlayList {
   return playlist;
 }
 
-export function usePlayPlayList(): typeof playPlayList {
-  return playPlayList;
+// eslint-disable-next-line
+export function useMediaController() {
+  return {
+    playPlayList: playPlayList,
+    playSingle: playSingle,
+  };
 }

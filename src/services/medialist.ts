@@ -97,7 +97,7 @@ const MediaList = {
               coverUrl: raw.cover,
               artists: [],
               genres: [],
-              url: raw.url,
+              url: genUrlForFile(raw.url),
             };
             track.artists = raw.artists.map((i) => {
               const a = artists.get(i);

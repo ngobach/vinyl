@@ -16,7 +16,7 @@ export const currentPlayList: BehaviorSubject<PlayList> = new BehaviorSubject(nu
 export const currentItem: BehaviorSubject<Track> = new BehaviorSubject(null);
 export const currentStatus: BehaviorSubject<PlaybackStatus> = new BehaviorSubject({ playing: false, duration: 0, played: 0 });
 export const mode: BehaviorSubject<PlaybackMode> = new BehaviorSubject(PlaybackMode.RepeatOne);
-export const volume: BehaviorSubject<number> = new BehaviorSubject(0);
+export const volume: BehaviorSubject<number> = new BehaviorSubject(1);
 
 function createAudio(): HTMLAudioElement {
   const myAudio = new Audio();
@@ -41,7 +41,24 @@ function createAudio(): HTMLAudioElement {
       duration: myAudio.duration ?? 0,
       played: myAudio.currentTime ?? 0,
     });
-  })
+  });
+
+  myAudio.addEventListener('ended', () => {
+    switch (mode.value) {
+      case PlaybackMode.RepeatOne:
+        myAudio.currentTime = 0;
+        myAudio.play();
+        break;
+      case PlaybackMode.RepeatAll: {
+        const tmp = currentPlayList.value.tracks.concat(currentPlayList.value.tracks);
+        currentItem.next(tmp[tmp.indexOf(currentItem.value) + 1]);
+        break;
+      }
+      case PlaybackMode.Shuffled:
+        currentItem.next(sample(currentPlayList.value.tracks));
+        break;
+    }
+  });
 
   if (DEV) {
     Object.assign(window, { _audio: myAudio });
@@ -56,11 +73,11 @@ function connect() {
       return;
     }
     log(`🎶 %c${pl.title}`, 'font-weight: bold');
-    if (mode.value === PlaybackMode.Shuffled) {
-      currentItem.next(sample(pl.tracks));
-    } else {
-      currentItem.next(pl.tracks[0]);
-    }
+    // if (mode.value === PlaybackMode.Shuffled) {
+    //   currentItem.next(sample(pl.tracks));
+    // } else {
+    //   currentItem.next(pl.tracks[0]);
+    // }
   });
 
   currentItem.subscribe((track) => {
@@ -77,12 +94,16 @@ function connect() {
   });
 }
 
-export function playPlayList(list: PlayList): void {
+export function playPlayList(list: PlayList, track: Track | null): void {
   currentPlayList.next(list);
+  if (track) {
+    currentItem.next(track);
+  }
 }
 
 export function playSingle(item: Track): void {
   currentPlayList.next({ title: item.title, tracks: [item], coverUrl: item.coverUrl });
+  currentItem.next(item);
 }
 
 export function setMode(newMode: PlaybackMode): void {
