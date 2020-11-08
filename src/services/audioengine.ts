@@ -121,6 +121,13 @@ export function setVolume(vol: number): void {
   volume.next(vol);
 }
 
+export function togglePlay(playing: boolean): void {
+  if (playing) {
+    audio.play();
+  } else {
+    audio.pause();
+  }
+}
 
 // SIDE EFFECTS
 connect();

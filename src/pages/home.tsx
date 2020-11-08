@@ -154,12 +154,12 @@ const HomePage: React.FC = () => {
                         hasPrev={true}
                         mode={engine.mode}
                         track={engine.currentTrack}
-                        status={{ duration: 100, played: 100, playing: true }}
+                        status={engine.status}
                         volume={engine.volume}
                         onModeChanged={(m) => controller.setMode(m)}
                         onNext={() => controller.next()}
-                        onPause={() => 0}
-                        onPlay={() => 0}
+                        onPause={() => controller.pause()}
+                        onPlay={() => controller.play()}
                         onPrev={() => controller.prev()}
                         onVolumeChange={(v) => controller.setVolume(v)}
                     />
