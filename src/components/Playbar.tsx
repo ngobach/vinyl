@@ -47,7 +47,7 @@ const TrackInfo: FC<{ track: Track }> = ({ track, ...rest }) => (
     `}
     {...rest}
   >
-    <Thumbnail size={48} src={track.cover} css={css`flex: none;`} />
+    <Thumbnail size={48} src={track.coverUrl} css={css`flex: none;`} />
     <div
       css={css`
         display: flex;

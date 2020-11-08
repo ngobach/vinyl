@@ -1,56 +1,15 @@
-/* tslint:disable:max-classes-per-file */
-
-export type Cover = string;
-
-export class Track {
-  public url: string;
-  public title: string;
-  public genres: Genre[] = [];
-  public cover: Cover;
-  public artists: Artist[] = [];
-}
-
-export interface PlayList {
-  tracks: Track[];
+export type Track = {
+  url: string;
   title: string;
-  cover: string;
+  genres: PlayList[];
+  coverUrl: string;
+  artists: PlayList[];
 }
 
-export class GenericList implements PlayList {
-  constructor(
-    public title: string,
-    public tracks: Track[],
-    public cover: string,
-  ) {}
-}
-
-export class Genre implements PlayList {
-  public title: string;
-  public cover: Cover;
-  public tracks: Track[] = [];
-
-  constructor (title: string) {
-    this.title = title;
-  }
-}
-
-export class Artist implements PlayList {
-  public title: string;
-  public cover: Cover;
-  public tracks: Track[] = [];
-
-  constructor (title: string) {
-    this.title = title;
-  }
-}
-
-export class SearchResult implements PlayList {
-  public cover: string = '';
-
-  constructor(
-    public title: string,
-    public tracks: Track[],
-  ) {}
+export type PlayList = {
+  title: string;
+  coverUrl: string;
+  tracks: Track[];
 }
 
 export interface PlaybackStatus {
@@ -59,4 +18,7 @@ export interface PlaybackStatus {
   playing: boolean;
 }
 
-export type LinkTarget = { href?: string, onClick?: () => void; };
+export type LinkTarget = {
+  href?: string;
+  onClick?: () => void;
+};

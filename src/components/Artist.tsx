@@ -2,7 +2,7 @@
 import { jsx, css } from '@emotion/core';
 import { FC } from 'react';
 import Thumbnail from './Thumbnail';
-import { Artist } from '~/types';
+import { PlayList } from '~/types';
 
 enum DisplayMode {
   List,
@@ -11,12 +11,12 @@ enum DisplayMode {
 }
 
 interface ArtistProps {
-  artist: Artist;
+  artist: PlayList;
   mode?: DisplayMode;
   subline?: string;
   tag?: string;
-  onClick?: (a: Artist) => any;
-  onTagClick?: (a: Artist) => any;
+  onClick?: (a: PlayList) => any;
+  onTagClick?: (a: PlayList) => any;
 }
 
 const DEFAULT_THUMBNAIL = 'https://minio.ngobach.com/web-assets/anonymous-artist.jpg';
@@ -29,7 +29,7 @@ const ArtistComponent: FC<ArtistProps> = ({ artist, mode = DisplayMode.List, sub
       align-items: center;
       cursor: ${onClick ? 'pointer': 'initial'};
     `}>
-      <Thumbnail src={artist.cover ?? DEFAULT_THUMBNAIL} alt={artist.title} size={100} rounded />
+      <Thumbnail src={artist.coverUrl ?? DEFAULT_THUMBNAIL} alt={artist.title} size={100} rounded />
       <h3 css={css`
         margin-top: .5rem;
         font-weight: 600;
@@ -57,7 +57,7 @@ const ArtistComponent: FC<ArtistProps> = ({ artist, mode = DisplayMode.List, sub
       `}
       onClick={() => onClick && onClick(artist)}
     >
-      <Thumbnail src={artist.cover ?? DEFAULT_THUMBNAIL} alt={artist.title} size={32} rounded />
+      <Thumbnail src={artist.coverUrl ?? DEFAULT_THUMBNAIL} alt={artist.title} size={32} rounded />
       <h3 css={css`
         margin-left: 1em;
         font-weight: 600;
@@ -74,7 +74,7 @@ const ArtistComponent: FC<ArtistProps> = ({ artist, mode = DisplayMode.List, sub
       `}
       onClick={() => onClick && onClick(artist)}
     >
-      <Thumbnail src={artist.cover ?? DEFAULT_THUMBNAIL} alt={artist.title} size={80} />
+      <Thumbnail src={artist.coverUrl ?? DEFAULT_THUMBNAIL} alt={artist.title} size={80} />
       <div css={css`
         flex: 1;
         display: flex;

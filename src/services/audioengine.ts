@@ -10,12 +10,11 @@ export enum PlaybackMode {
   Shuffled,
 }
 
-
 const audio = createAudio();
 
-export const currentList: BehaviorSubject<PlayList> = new BehaviorSubject(null);
+export const currentPlayList: BehaviorSubject<PlayList> = new BehaviorSubject(null);
 export const currentItem: BehaviorSubject<Track> = new BehaviorSubject(null);
-export const currentStatus: BehaviorSubject<PlaybackStatus> = new BehaviorSubject({ playing: false, duration: 60, played: 40 });
+export const currentStatus: BehaviorSubject<PlaybackStatus> = new BehaviorSubject({ playing: false, duration: 0, played: 0 });
 export const mode: BehaviorSubject<PlaybackMode> = new BehaviorSubject(PlaybackMode.RepeatOne);
 export const volume: BehaviorSubject<number> = new BehaviorSubject(0);
 
@@ -36,6 +35,14 @@ function createAudio(): HTMLAudioElement {
     });
   });
 
+  myAudio.addEventListener('progress', () => {
+    currentStatus.next({
+      ...currentStatus.value,
+      duration: myAudio.duration ?? 0,
+      played: myAudio.currentTime ?? 0,
+    });
+  })
+
   if (DEV) {
     Object.assign(window, { _audio: myAudio });
   }
@@ -44,7 +51,7 @@ function createAudio(): HTMLAudioElement {
 }
 
 function connect() {
-  currentList.subscribe((pl) => {
+  currentPlayList.subscribe((pl) => {
     if (!pl) {
       return;
     }
@@ -71,11 +78,11 @@ function connect() {
 }
 
 export function playPlayList(list: PlayList): void {
-  currentList.next(list);
+  currentPlayList.next(list);
 }
 
 export function playSingle(item: Track): void {
-  currentList.next({ title: item.title, tracks: [item], cover: item.cover });
+  currentPlayList.next({ title: item.title, tracks: [item], coverUrl: item.coverUrl });
 }
 
 export function setMode(newMode: PlaybackMode): void {

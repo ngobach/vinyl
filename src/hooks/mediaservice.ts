@@ -1,11 +1,11 @@
 import { useState } from 'react';
 import { useAsync } from 'react-use';
-import mediaList, { MediaList } from '~/services/medialist';
+import MediaList from '~/services/medialist';
 
 type Result = [MediaList, Error];
 
 export function useMediaList(): MediaList {
-  return mediaList;
+  return MediaList;
 }
 
 export function useMediaLoader(): Result {
@@ -13,8 +13,8 @@ export function useMediaLoader(): Result {
   const [error, setError] = useState<Error>(null);
   useAsync(async () => {
     try {
-      await mediaList.fetch();
-      setMl(mediaList);
+      await MediaList.ensureFetched();
+      setMl(MediaList);
     } catch (error) {
       setError(error);
     }

@@ -1,5 +1,3 @@
-// tslint:disable:no-console
-
 import React from 'react';
 import ReactDOM from 'react-dom';
 import WebFont from 'webfontloader';
@@ -19,8 +17,8 @@ function loadFonts() {
   return new Promise((resolve, reject) => {
     WebFont.load({
       ...webfontConfig,
-      active: () => resolve(),
-      inactive: () => reject(),
+      active: resolve,
+      inactive: reject,
     });
   });
 }
@@ -31,10 +29,12 @@ function loadFonts() {
     if (!mountPoint) {
       throw new Error('Mount point not found!');
     }
+
     await Promise.all([
       await loadFonts(),
       // TODO: more come here
     ]);
+
     ReactDOM.render(
       <App />,
       mountPoint,

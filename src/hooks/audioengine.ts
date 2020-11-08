@@ -1,12 +1,12 @@
 import { useState } from 'react';
 import { useMount } from 'react-use';
-import { currentList, playPlayList } from '~/services/audioengine';
+import { currentPlayList, playPlayList } from '~/services/audioengine';
 import { PlayList } from '~/types';
 
 export function useActivePlaylist(): PlayList {
-  const [playlist, setPlaylist] = useState(currentList.value);
+  const [playlist, setPlaylist] = useState(currentPlayList.value);
   useMount(() => {
-    return currentList.subscribe((next) => setPlaylist(next));
+    return currentPlayList.subscribe((next) => setPlaylist(next));
   });
   return playlist;
 }
