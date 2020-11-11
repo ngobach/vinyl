@@ -12,7 +12,7 @@ const randomIconList: string[] = [
   'pulse',
 ];
 
-const defaultIcon: string = 'pulse';
+const defaultIcon = 'pulse';
 
 const randomIcon: string = sample(randomIconList);
 
@@ -28,7 +28,7 @@ const Loader: FC<Props> = ({ progress, random = false }) => {
     <div css={css`
       display: flex;
       width: 100%;
-      height: 100%;
+      height: 100vh;
       justify-content: center;
       align-items: center;
     `}>

@@ -1,6 +1,5 @@
 /** @jsx jsx */
 import { jsx, css } from '@emotion/core';
-import { FC, useCallback } from 'react';
 
 export enum Icons {
   play = 'play',
@@ -17,20 +16,21 @@ interface IconProps {
   icon: Icons;
   size?: number;
   color?: string;
-  className?: any;
-  onClick?: () => any;
+  className?: string;
+  onClick?: () => void;
 }
 
-const Icon: FC<IconProps> = ({ icon, size = 32, color = '#ffffff', className, onClick, ...rest }) => {
-  const clickCallback = useCallback(() => {
-    if (onClick) {
-      onClick();
-    }
-  }, [onClick]);
-
-  return (
-    <span className={`im im-fix im-${icon} ${className ?? ''}`} css={css`line-height: 1; font-size: ${size}px; color: ${color};`} onClick={clickCallback} {...rest} />
-  );
-};
+const Icon: React.FC<IconProps> = ({ icon, size = 32, color = '#ffffff', className, onClick, ...rest }) => (
+  <span
+    className={`im im-fix im-${icon} ${className ?? ''}`}
+    css={css`
+      line-height: 1;
+      font-size: ${size}px;
+      color: ${color};
+    `}
+    onClick={onClick}
+    {...rest}
+  />
+);
 
 export default Icon;
