@@ -68,6 +68,6 @@ const Today: FCWithTitle = () => {
     );
 };
 
-Today.title = '';
+Today.title = title;
 
 export default Today;

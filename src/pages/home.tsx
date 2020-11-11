@@ -174,6 +174,7 @@ const HomePage: React.FC = () => {
         : typeof Component.title === 'string'
             ? Component.title
             : 'I\'m feeling happy';
+    const documentTitle = (engine.currentTrack && `${engine.currentTrack.title} - ${engine.currentTrack.artists.map(a => a.title).join(', ')}`) ?? pageTitle;
 
     return (
         <MainLayout
@@ -182,7 +183,7 @@ const HomePage: React.FC = () => {
             playerArea={player}
         >
             <Helmet>
-                <title>{pageTitle}</title>
+                <title>{documentTitle}</title>
             </Helmet>
 
             {content}
