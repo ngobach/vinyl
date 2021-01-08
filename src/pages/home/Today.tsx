@@ -1,6 +1,5 @@
 /** @jsx jsx */
-import { useMemo, useRef } from 'react';
-import { sampleSize } from 'lodash';
+import { useMemo } from 'react';
 import { jsx, css } from '@emotion/core';
 import fnv from 'fnv-plus';
 import { useMediaController, useMediaList } from '~/hooks';
@@ -15,15 +14,14 @@ const TRACK_SAMPLE_SIZE = 24;
 const ARTIST_SAMPLE_SIZE = 8;
 const title = 'Listen And Chill';
 
-function getDatePrefix(): string {
-    const d = new Date();
-    return `${d.getDate()}${d.getMonth()}${d.getFullYear()}`;
-}
-
 const Today: FCWithTitle = () => {
     const ml = useMediaList();
     const controller = useMediaController();
-    const datePrefix = useMemo(getDatePrefix, []);
+    const datePrefix = useMemo(() => {
+      const d = new Date();
+      return `${d.getDate()}${d.getMonth()}${d.getFullYear()}`;
+    }, []);
+
     const tracks = useMemo(() => {
         const tmp = Array.from(ml.tracks);
         tmp.sort((lhs, rhs) => {
