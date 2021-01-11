@@ -28,3 +28,12 @@ declare module 'excuses' {
 
     export default excuses;
 }
+
+declare module 'tieng-viet-khong-dau' {
+  type TVKD = {
+    c(s: string): string;
+  }
+
+  const TVKD: TVKD;
+  export default TVKD;
+}

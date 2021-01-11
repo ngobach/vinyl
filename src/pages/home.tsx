@@ -3,24 +3,16 @@ import React from 'react';
 import { useRouteMatch } from 'react-router';
 import Helmet from 'react-helmet';
 import { css, jsx } from '@emotion/core';
-import * as env from '~/env';
+import Playbar from '~/components/Playbar';
+import SideBar from '~/components/SideBar';
+import MainLayout from '~/components/layout/MainLayout';
+import { useMediaController, useMediaList, useMediaEngine } from '~/hooks';
 
+import { FCWithTitle } from './types';
 import Welcome from './home/Welcome';
 import Building from './home/Building';
 import Today from './home/Today';
 import Tracks from './home/Tracks';
-
-import Logo from '~/components/Logo';
-import MainLayout from '~/components/layout/MainLayout';
-import Nav from '~/components/Nav';
-import NavItem from '~/components/NavItem';
-import Block from '~/components/Block';
-import { useMediaController, useMediaList, useMediaEngine } from '~/hooks';
-import Clickable from '~/components/Clickable';
-import { FCWithTitle } from './types';
-import Spacer from '~/components/Spacer';
-import Playbar from '~/components/Playbar';
-import { PlaybackMode } from '~/services/audioengine';
 
 function resolveScreen<P>(q: Record<string, string>): [FCWithTitle<P>, Record<string, unknown>] {
     // eslint-disable-next-line
@@ -59,70 +51,6 @@ const HomePage: React.FC = () => {
     const controller = useMediaController();
     const routeParams = useRouteMatch('/:l1?/:l2?/:l3?/:l4?');
     const [Component, params] = resolveScreen(routeParams.params);
-
-    const sidebar = (
-        <div css={css`
-            position: sticky;
-            top: 0;
-            padding-bottom: 1rem;
-        `}>
-            <div css={css`
-                display: flex;
-                justify-content: center;
-                padding: 0 0 2rem;
-            `}>
-                <Clickable href="/">
-                    <Logo size={120} />
-                </Clickable>
-            </div>
-            <Block title="Playlists">
-                <Nav>
-                    <NavItem iconName="care-right" text="Today Mood" target={{ href: '/today' }} />
-                    <NavItem iconName="heart" text="Favorites" target={{ href: '/favorites' }} />
-                    <NavItem iconName="history" text="History" target={{ href: '/history' }} />
-                    <NavItem iconName="layer" text="All Tracks" target={{ href: '/tracks' }} />
-                    <NavItem iconName="coffee" text="Artists" target={{ href: '/artists' }} />
-                </Nav>
-            </Block>
-            <Spacer size="2rem" />
-
-            <Block title="Genres">
-                {ml.genres.map((g) => (
-                    <NavItem key={g.title} iconName="audio" text={g.title} target={{ href: `/genre/${g.title}` }} />
-                ))}
-            </Block>
-            <Spacer size="2rem" />
-
-            <Block title="Vinyl">
-                <div css={css`
-                    font-family: var(--font-mono);
-                    font-size: 75%;
-                    color: var(--color-gray);
-                `}>
-                    <dl>
-                        <dt css={css`font-weight: bold;`}>
-                            Build target
-                        </dt>
-                        <dd>
-                            {env.DEV ? 'dev' : 'prod'}
-                        </dd>
-                        <dt css={css`font-weight: bold;`}>
-                            Revision
-                        </dt>
-                        <dd>
-                            {env.REVISION}
-                        </dd>
-                        <dt css={css`font-weight: bold;`}>
-                            DB
-                        </dt>
-                        <dd>
-                            <a href={env.MEDIA_SOURCE} css={css`text-decoration: none; color: inherit;`}>Link</a>
-                        </dd>
-                    </dl>
-                </div>
-            </Block>
-        </div>
-    );
 
     const content = (
         <Component {...params} />
@@ -178,7 +106,7 @@ const HomePage: React.FC = () => {
 
     return (
         <MainLayout
-            sidebar={sidebar}
+            sidebar={<SideBar medialist={ml} />}
             title={pageTitle}
             playerArea={player}
         >

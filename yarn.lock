@@ -6392,6 +6392,11 @@ through2@^2.0.0, through2@~2.0.3:
     readable-stream "~2.3.6"
     xtend "~4.0.1"
 
+tieng-viet-khong-dau@^1.0.1:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/tieng-viet-khong-dau/-/tieng-viet-khong-dau-1.0.1.tgz#9e5ef4695efa8b2db548f38e832e6f9f03f7dc49"
+  integrity sha512-4Jt9cl3ALQsgxdI/EqX5MZhnZXgbdOmm3T2nmLwH38UrReKpf8otk86TXeoxhZzbTcqeUli7lS+5h/qdjIyeKg==
+
 timers-browserify@^2.0.4:
   version "2.0.11"
   resolved "https://registry.yarnpkg.com/timers-browserify/-/timers-browserify-2.0.11.tgz#800b1f3eee272e5bc53ee465a04d0e804c31211f"
