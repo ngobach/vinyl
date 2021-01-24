@@ -1,5 +1,6 @@
+/** @jsx jsx */
 import React from 'react';
-import { css } from '@emotion/core';
+import { jsx, css } from '@emotion/core';
 import type MediaList from '~/services/medialist';
 import * as env from '~/env';
 import Clickable from './Clickable';
