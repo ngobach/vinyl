@@ -29,9 +29,12 @@ const TrackComponent: React.FC<TrackProps> = ({ track, displayMode = DisplayMode
         display: inline-flex;
         flex-direction: column;
       `]}
-      onClick={() => onClick && onClick(track)}
+      onClick={() => onClick?.(track)}
     >
-      <Thumbnail src={track.coverUrl ?? DEFAULT_THUMBNAIL} size={displayMode === DisplayMode.Large ? 160 : 32} rounded={displayMode !== DisplayMode.Large} />
+      <Thumbnail
+        src={track.coverUrl ?? DEFAULT_THUMBNAIL}
+        size={displayMode === DisplayMode.Large ? 160 : 40}
+      />
       <div
         css={[displayMode !== DisplayMode.Large ? css`
           flex: 1;
@@ -47,6 +50,10 @@ const TrackComponent: React.FC<TrackProps> = ({ track, displayMode = DisplayMode
         <h3
           css={css`
             font-size: .8rem;
+            ${displayMode === DisplayMode.Wide && css`
+              font-size: 1rem;
+              font-weight: bold;
+            `}
           `}
         >
           { track.title }

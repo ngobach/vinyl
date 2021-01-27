@@ -6,7 +6,8 @@ import TVKD from 'tieng-viet-khong-dau';
 import { useMediaController, useMediaList } from '~/hooks';
 import { Track } from '~/types';
 import Section from '~/components/Section';
-import Spacer from '~/components/Spacer';
+import TrackComponent, { DisplayMode } from '~/components/Track';
+import ImgResting from '~/assets/img/undraw_chilling_8tii.svg';
 import { FCWithTitle } from '../types';
 
 type TrackGroup = {
@@ -36,44 +37,61 @@ const Tracks: FCWithTitle = () => {
   return (
     <main>
       {groups.map(({ name, tracks }) => (
-        <div key={name}>
-          <Section title={name}>
-            {tracks.map((t) => (
+        <div
+          key={name}
+          css={css`
+            & + & {
+              margin-top: 10px;
+            }
+          `}
+        >
+          <Section>
+            {tracks.map((t, idx) => (
               <div
-                key={t.title}
+                key={String(idx)}
                 css={css`
-                  padding: .5rem 0;
-                  cursor: pointer;
                   & + & {
-                    margin-top: 5px;
+                    margin-top: 10px;
                   }
                 `}
-                onClick={() => play(t)}
               >
-                <span
-                  css={css`
-                    font-weight: bold;
-                    color: var(--nord5);
-                  `}
-                >
-                  {t.title}
-                </span>
-                {' - '}
-                <span
-                  css={css`
-                    font-weight: bold;
-                    font-size: .8rem;
-                    color: var(--color-primary2);
-                  `}
-                >
-                  {t.artists.map(a => a.title).join(', ')}
-                </span>
+                <TrackComponent
+                  track={t}
+                  displayMode={DisplayMode.Wide}
+                  onClick={() => play(t)}
+                />
               </div>
             ))}
           </Section>
-          <Spacer size="20px" />
         </div>
       ))}
+
+      <section
+        css={css`
+          margin-top: 100px;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+        `}
+      >
+        <img
+          src={ImgResting}
+          css={css`
+            width: 400px;
+            height: auto;
+          `}
+        />
+        <p
+          css={css`
+            margin-top: 40px;
+            text-align: center;
+            font-size: 1.3rem;
+            color: var(--nord4);
+          `}
+        >
+          That is all. Let&apos;s chill!
+        </p>
+      </section>
     </main>
   );
 };
