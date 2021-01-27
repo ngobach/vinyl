@@ -1,5 +1,6 @@
 /** @jsx jsx */
 import React from 'react';
+import ReactDOM from 'react-dom';
 import { jsx, css } from '@emotion/core';
 import type MediaList from '~/services/medialist';
 import * as env from '~/env';
@@ -12,9 +13,10 @@ import Spacer from './Spacer';
 
 type Props = {
   medialist: MediaList;
+  slot: React.ReactNode;
 }
 
-const SideBar: React.FC<Props> = ({ medialist }) => (
+const SideBar: React.FC<Props> = ({ medialist, slot }) => (
   <div css={css`
     position: sticky;
     top: 0;
@@ -29,6 +31,9 @@ const SideBar: React.FC<Props> = ({ medialist }) => (
             <Logo size={120} />
         </Clickable>
     </div>
+
+    {/* Portal for page specific content */}
+    {slot}
     <Block title="Playlists">
         <Nav>
             <NavItem iconName="care-right" text="Today Mood" target={{ href: '/today' }} />

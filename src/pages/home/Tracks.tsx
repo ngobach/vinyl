@@ -1,5 +1,6 @@
 /** @jsx jsx */
 import { useMemo } from 'react';
+import ReactDOM from 'react-dom';
 import { jsx, css } from '@emotion/core';
 import { groupBy } from 'lodash';
 import TVKD from 'tieng-viet-khong-dau';
@@ -9,13 +10,14 @@ import Section from '~/components/Section';
 import TrackComponent, { DisplayMode } from '~/components/Track';
 import ImgResting from '~/assets/img/undraw_chilling_8tii.svg';
 import { FCWithTitle } from '../types';
+import LetterBoard from '~/components/LetterBoard';
 
 type TrackGroup = {
   name: string;
   tracks: Track[];
 };
 
-const Tracks: FCWithTitle = () => {
+const Tracks: FCWithTitle = ({ slotRef }) => {
   const ml = useMediaList();
   const mediaController = useMediaController();
   const groups = useMemo<TrackGroup[]>(() => {
@@ -33,6 +35,15 @@ const Tracks: FCWithTitle = () => {
   const play = (t: Track) => {
     mediaController.playPlayList(ml.all, t);
   };
+  const letters = groups.map(({ name }) => name).reduce((obj, letter) => ({ ...obj, [letter]: true }), {});
+  const scrollToLetter = (letter: string) => {
+    const el = document.querySelector(`[data-letter=${letter}]`);
+    if (el) {
+      el.scrollIntoView({ behavior: 'smooth' });
+    } else {
+      console.error('Selector not match');
+    }
+  };
 
   return (
     <main>
@@ -44,6 +55,7 @@ const Tracks: FCWithTitle = () => {
               margin-top: 10px;
             }
           `}
+          data-letter={name}
         >
           <Section>
             {tracks.map((t, idx) => (
@@ -92,6 +104,14 @@ const Tracks: FCWithTitle = () => {
           That is all. Let&apos;s chill!
         </p>
       </section>
+
+      {slotRef.current && ReactDOM.createPortal((
+        <div css={css`
+          margin-bottom: 20px;
+        `}>
+          <LetterBoard current='A' enabled={letters} onSelect={scrollToLetter} />
+        </div>
+      ), slotRef.current)}
     </main>
   );
 };

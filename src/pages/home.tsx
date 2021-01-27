@@ -1,5 +1,5 @@
 /** @jsx jsx */
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import { useRouteMatch } from 'react-router';
 import Helmet from 'react-helmet';
 import { css, jsx } from '@emotion/core';
@@ -13,8 +13,10 @@ import Welcome from './home/Welcome';
 import Building from './home/Building';
 import Today from './home/Today';
 import Tracks from './home/Tracks';
+import { useMount, useUpdate } from 'react-use';
+import { noop } from 'lodash';
 
-function resolveScreen<P>(q: Record<string, string>): [FCWithTitle<P>, Record<string, unknown>] {
+function resolveScreen(q: Record<string, string>): [FCWithTitle, Record<string, unknown>] {
     // eslint-disable-next-line
     const {l1, l2, l3, l4} = q;
 
@@ -46,14 +48,16 @@ function resolveScreen<P>(q: Record<string, string>): [FCWithTitle<P>, Record<st
 }
 
 const HomePage: React.FC = () => {
+    const slotRef = useRef<HTMLDivElement>(null);
     const ml = useMediaList();
     const engine = useMediaEngine();
     const controller = useMediaController();
     const routeParams = useRouteMatch('/:l1?/:l2?/:l3?/:l4?');
     const [Component, params] = resolveScreen(routeParams.params);
-
+    const update = useUpdate();
+    useMount(() => requestAnimationFrame(update));
     const content = (
-        <Component {...params} />
+        <Component {...params} slotRef={slotRef} />
     );
 
     const player = (
@@ -106,7 +110,14 @@ const HomePage: React.FC = () => {
 
     return (
         <MainLayout
-            sidebar={<SideBar medialist={ml} />}
+            sidebar={(
+              <SideBar
+                medialist={ml}
+                slot={(
+                  <div ref={slotRef} />
+                )}
+              />
+            )}
             title={pageTitle}
             playerArea={player}
         >
