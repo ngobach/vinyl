@@ -6,13 +6,13 @@ import { motion } from 'framer-motion';
 
 type Props = {
   enabled: Record<string, boolean>;
-  current: string;
+  active: Record<string, boolean>;
   onSelect: (letter: string) => void;
 }
 
 const LetterBoard: React.FC<Props> = ({
   enabled,
-  current,
+  active,
   onSelect,
 }) => (
   <motion.div
@@ -54,6 +54,9 @@ const LetterBoard: React.FC<Props> = ({
             ${enabled[letter] && css`
               color: #ffffff;
               cursor: pointer;
+            `}
+            ${active[letter] && css`
+              color: var(--color-primary1);
             `}
           `}
           onClick={() => enabled[letter] && onSelect(letter)}

@@ -1,5 +1,5 @@
 /** @jsx jsx */
-import { useMemo } from 'react';
+import { useMemo, useState } from 'react';
 import ReactDOM from 'react-dom';
 import { jsx, css } from '@emotion/core';
 import { groupBy } from 'lodash';
@@ -11,6 +11,7 @@ import TrackComponent, { DisplayMode } from '~/components/Track';
 import ImgResting from '~/assets/img/undraw_chilling_8tii.svg';
 import { FCWithTitle } from '../types';
 import LetterBoard from '~/components/LetterBoard';
+import { useEffectOnce } from 'react-use';
 
 type TrackGroup = {
   name: string;
@@ -36,6 +37,7 @@ const Tracks: FCWithTitle = ({ slotRef }) => {
     mediaController.playPlayList(ml.all, t);
   };
   const letters = groups.map(({ name }) => name).reduce((obj, letter) => ({ ...obj, [letter]: true }), {});
+  const [activeLetters, setActiveLetters] = useState<Record<string, boolean>>({});
   const scrollToLetter = (letter: string) => {
     const el = document.querySelector(`[data-letter=${letter}]`);
     if (el) {
@@ -44,6 +46,32 @@ const Tracks: FCWithTitle = ({ slotRef }) => {
       console.error('Selector not match');
     }
   };
+  useEffectOnce(() => {
+    const elements = document.querySelectorAll('[data-letter]');
+    const cb: IntersectionObserverCallback = (entries) => {
+      console.log('Hit');
+      setActiveLetters((current) => {
+        const cloned = { ...current };
+        entries.forEach((entry) => {
+          const letter = entry.target.getAttribute('data-letter');
+          if (entry.isIntersecting) {
+            cloned[letter] = true;
+          } else {
+            delete cloned[letter];
+          }
+        });
+
+        return cloned;
+      });
+    };
+
+    const observer = new IntersectionObserver(cb);
+    Array.from(elements).map((el) => {
+      observer.observe(el);
+    });
+
+    return () => observer.disconnect();
+  });
 
   return (
     <main>
@@ -109,7 +137,7 @@ const Tracks: FCWithTitle = ({ slotRef }) => {
         <div css={css`
           margin-bottom: 20px;
         `}>
-          <LetterBoard current='A' enabled={letters} onSelect={scrollToLetter} />
+          <LetterBoard active={activeLetters} enabled={letters} onSelect={scrollToLetter} />
         </div>
       ), slotRef.current)}
     </main>
