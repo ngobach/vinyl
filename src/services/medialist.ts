@@ -93,6 +93,7 @@ const MediaList = {
           this.tracks = [];
           Object.entries(mr.tracks).forEach(([, raw]) => {
             const track: Track = {
+              id: raw.id,
               title: raw.title,
               coverUrl: raw.cover,
               artists: [],

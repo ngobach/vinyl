@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import WebFont from 'webfontloader';
 import App from '~/App';
+import '~/services/history';
 
 const webfontConfig = {
   google: {
