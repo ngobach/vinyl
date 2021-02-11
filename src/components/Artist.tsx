@@ -1,8 +1,9 @@
 /** @jsx jsx */
 import { jsx, css } from '@emotion/core';
 import { FC } from 'react';
-import Thumbnail from './Thumbnail';
 import { PlayList } from '~/types';
+import { DEFAULT_THUMBNAIL } from '~/env';
+import Thumbnail from './Thumbnail';
 
 enum DisplayMode {
   List,
@@ -18,8 +19,6 @@ interface ArtistProps {
   onClick?: (a: PlayList) => any;
   onTagClick?: (a: PlayList) => any;
 }
-
-const DEFAULT_THUMBNAIL = 'https://minio.ngobach.com/web-assets/anonymous-artist.jpg';
 
 const ArtistComponent: FC<ArtistProps> = ({ artist, mode = DisplayMode.List, subline = null, tag = null, onClick = null, onTagClick }) => {
   return mode === DisplayMode.Vertical ? (
