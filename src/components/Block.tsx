@@ -1,6 +1,6 @@
 /** @jsx jsx */
-import { jsx, css } from '@emotion/core';
-import { FC } from 'react';
+import { jsx, css } from "@emotion/core";
+import { FC } from "react";
 
 export enum Color {
   White,
@@ -12,12 +12,12 @@ interface Props {
   color?: Color;
 }
 
-function colorToCode (color: Color): string {
+function colorToCode(color: Color): string {
   switch (color) {
     case Color.White:
-      return 'var(--nord4)';
+      return "var(--nord4)";
     case Color.Gray:
-      return 'var(--nord3)';
+      return "var(--nord3)";
   }
 }
 
@@ -33,14 +33,14 @@ const Block: FC<Props> = ({ children, title, color = Color.Gray }) => {
           color: ${colorToCode(color)};
         `}
       >
-        { title }
+        {title}
       </h2>
       <div
         css={css`
-          margin-top: .5rem;
+          margin-top: 0.5rem;
         `}
       >
-        { children }
+        {children}
       </div>
     </section>
   );

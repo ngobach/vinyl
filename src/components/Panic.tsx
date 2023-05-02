@@ -1,20 +1,22 @@
 /** @jsx jsx */
-import { jsx, css } from '@emotion/core';
-import { FC } from 'react';
-import MQ from '~/utils/mq';
+import { jsx, css } from "@emotion/core";
+import { FC } from "react";
+import MQ from "~/utils/mq";
 
 interface Props {
   error: Error;
 }
 
 const Panic: FC<Props> = ({ error }) => (
-  <div css={css`
-    display: flex;
-    width: 100%;
-    height: 100%;
-    justify-content: center;
-    align-items: center;
-  `}>
+  <div
+    css={css`
+      display: flex;
+      width: 100%;
+      height: 100%;
+      justify-content: center;
+      align-items: center;
+    `}
+  >
     <div
       css={css`
         display: flex;
@@ -66,16 +68,16 @@ const Panic: FC<Props> = ({ error }) => (
         </h1>
         <p
           css={css`
-            margin-top: .5rem;
+            margin-top: 0.5rem;
             color: var(--nord4);
           `}
         >
           Some error happened that we are unable to continue.
           <pre
             css={css`
-              margin-top: .5rem;
-              padding: .25rem .5rem;
-              border-radius: .25rem;
+              margin-top: 0.5rem;
+              padding: 0.25rem 0.5rem;
+              border-radius: 0.25rem;
               background: var(--nord1);
               font-size: 0.8rem;
               white-space: pre-wrap;

@@ -1,20 +1,16 @@
 /** @jsx jsx */
-import React from 'react';
-import { css, jsx } from '@emotion/core';
-import { range } from 'lodash';
-import { motion } from 'framer-motion';
+import React from "react";
+import { css, jsx } from "@emotion/core";
+import { range } from "lodash";
+import { motion } from "framer-motion";
 
 type Props = {
   enabled: Record<string, boolean>;
   active: Record<string, boolean>;
   onSelect: (letter: string) => void;
-}
+};
 
-const LetterBoard: React.FC<Props> = ({
-  enabled,
-  active,
-  onSelect,
-}) => (
+const LetterBoard: React.FC<Props> = ({ enabled, active, onSelect }) => (
   <motion.div
     css={css`
       margin-right: 20px;
@@ -32,13 +28,13 @@ const LetterBoard: React.FC<Props> = ({
         opacity: 0,
       },
       visible: {
-        height: 'auto',
+        height: "auto",
         opacity: 1,
       },
     }}
   >
     {range(26).map((no) => {
-      const letter = String.fromCharCode('A'.charCodeAt(0) + no);
+      const letter = String.fromCharCode("A".charCodeAt(0) + no);
 
       return (
         <div
@@ -51,11 +47,13 @@ const LetterBoard: React.FC<Props> = ({
             border-radius: 4px;
             color: #888888;
 
-            ${enabled[letter] && css`
+            ${enabled[letter] &&
+            css`
               color: #ffffff;
               cursor: pointer;
             `}
-            ${active[letter] && css`
+            ${active[letter] &&
+            css`
               color: var(--color-primary1);
             `}
           `}

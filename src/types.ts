@@ -1,17 +1,15 @@
 export type Track = {
-  id: string;
   url: string;
   title: string;
-  genres: PlayList[];
   coverUrl: string;
-  artists: PlayList[];
-}
+  artist: string;
+};
 
 export type PlayList = {
   title: string;
   coverUrl: string;
   tracks: Track[];
-}
+};
 
 export interface PlaybackStatus {
   duration: number;

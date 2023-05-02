@@ -1,9 +1,10 @@
-@import '~reset-css';
-@import 'nord';
-@import 'common';
+@import "~reset-css";
+@import "nord";
+@import "common";
 
 html {
-  font-family: 'Nunito', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  font-family: "Nunito", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   // Disable user text selection
@@ -11,7 +12,9 @@ html {
   -webkit-user-select: none;
 }
 
-html, body, #main {
+html,
+body,
+#main {
   padding: 0;
   margin: 0;
   width: 100%;
@@ -19,15 +22,18 @@ html, body, #main {
 }
 
 :root {
-  --color-background: #2E3440;
-  --color-background-transparent: #2E344000;
-  --color-primary1: #F5487F;
-  --color-primary2: #C7417B;
-  --color-primary3: #8F3B76;
+  --color-background: #2e3440;
+  --color-background-transparent: #2e344000;
+  --color-primary1: #f5487f;
+  --color-primary2: #c7417b;
+  --color-primary3: #8f3b76;
   --color-white: #ffffff;
   --color-gray: #53617d;
 
-  --font-mono: Consolas, "Andale Mono WT", "Andale Mono", "Lucida Console", "Lucida Sans Typewriter", "DejaVu Sans Mono", "Bitstream Vera Sans Mono", "Liberation Mono", "Nimbus Mono L", Monaco, "Courier New", Courier, monospace;
+  --font-mono: Consolas, "Andale Mono WT", "Andale Mono", "Lucida Console",
+    "Lucida Sans Typewriter", "DejaVu Sans Mono", "Bitstream Vera Sans Mono",
+    "Liberation Mono", "Nimbus Mono L", Monaco, "Courier New", Courier,
+    monospace;
 }
 
 body {
@@ -42,14 +48,16 @@ body {
 }
 
 .im-fix {
-  transform: translateY(.1rem);
+  transform: translateY(0.1rem);
 }
 
-a, a:visited {
+a,
+a:visited {
   color: inherit;
   text-decoration: none;
 }
 
 .font-display {
-  font-family: 'Raleway', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  font-family: "Raleway", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
 }

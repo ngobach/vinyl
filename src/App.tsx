@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from 'react';
-import { animated, useSpring } from 'react-spring';
-import { useMediaLoader } from '~/hooks';
-import { LOADER_SKIPPED } from '~/env';
-import Loader from '~/components/Loader';
-import Panic from '~/components/Panic';
-import AppRouter from '~/pages';
+import React, { useEffect, useState } from "react";
+import { animated, useSpring } from "react-spring";
+import { useMediaLoader } from "~/hooks";
+import { LOADER_SKIPPED } from "~/env";
+import Loader from "~/components/Loader";
+import Panic from "~/components/Panic";
+import AppRouter from "~/pages";
 
 const AnimatedLoader = animated(Loader);
 
@@ -23,9 +23,16 @@ const App: React.FC = () => {
     } else if (progress < 95) {
       setTimeout(
         () => setProgress(Math.min(progress + Math.random() * 4 + 1, 95)),
-        Math.random() * 500);
+        Math.random() * 500
+      );
     }
   }, [progress, ml]);
+
+  useEffect(() => {
+    if (error) {
+      console.error(error);
+    }
+  }, [error]);
 
   useEffect(() => {
     if (ml) {
@@ -39,20 +46,16 @@ const App: React.FC = () => {
   }, [ml]);
 
   if (error) {
-    return (
-      <Panic error={error}/>
-    );
+    return <Panic error={error} />;
   }
 
   if (!ready) {
     return LOADER_SKIPPED ? null : (
-      <AnimatedLoader progress={p.progress} random={false}/>
+      <AnimatedLoader progress={p.progress} random={false} />
     );
   }
 
-  return (
-    <AppRouter/>
-  );
+  return <AppRouter />;
 };
 
 export default App;

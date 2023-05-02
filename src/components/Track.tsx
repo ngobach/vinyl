@@ -1,9 +1,9 @@
 /** @jsx jsx */
-import React from 'react';
-import { jsx, css } from '@emotion/core';
-import { DEFAULT_THUMBNAIL } from '~/env';
-import { Track } from '~/types';
-import Thumbnail from './Thumbnail';
+import React from "react";
+import { jsx, css } from "@emotion/core";
+import { DEFAULT_THUMBNAIL } from "~/env";
+import { Track } from "~/types";
+import Thumbnail from "./Thumbnail";
 
 interface TrackProps {
   track: Track;
@@ -17,18 +17,25 @@ enum DisplayMode {
   Large,
 }
 
-const TrackComponent: React.FC<TrackProps> = ({ track, displayMode = DisplayMode.Normal, onClick }) => {
-  const artists = track.artists.map(a => a.title).join('; ');
+const TrackComponent: React.FC<TrackProps> = ({
+  track,
+  displayMode = DisplayMode.Normal,
+  onClick,
+}) => {
   return (
     <div
-      css={[css`
-        display: flex;
-        align-items: center;
-        cursor: pointer;
-      `, displayMode === DisplayMode.Large && css`
-        display: inline-flex;
-        flex-direction: column;
-      `]}
+      css={[
+        css`
+          display: flex;
+          align-items: center;
+          cursor: pointer;
+        `,
+        displayMode === DisplayMode.Large &&
+          css`
+            display: inline-flex;
+            flex-direction: column;
+          `,
+      ]}
       onClick={() => onClick?.(track)}
     >
       <Thumbnail
@@ -36,37 +43,42 @@ const TrackComponent: React.FC<TrackProps> = ({ track, displayMode = DisplayMode
         size={displayMode === DisplayMode.Large ? 160 : 40}
       />
       <div
-        css={[displayMode !== DisplayMode.Large ? css`
-          flex: 1;
-          margin-left: 2rem;
-          display: flex;
-          align-items: center;
-          justify-content: space-between;
-        ` : css`
-          width: 160px;
-          margin-top: .5rem;
-        `]}
+        css={[
+          displayMode !== DisplayMode.Large
+            ? css`
+                flex: 1;
+                margin-left: 2rem;
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+              `
+            : css`
+                width: 160px;
+                margin-top: 0.5rem;
+              `,
+        ]}
       >
         <h3
           css={css`
-            font-size: .8rem;
-            ${displayMode === DisplayMode.Wide && css`
+            font-size: 0.8rem;
+            ${displayMode === DisplayMode.Wide &&
+            css`
               font-size: 1rem;
               font-weight: bold;
             `}
           `}
         >
-          { track.title }
+          {track.title}
         </h3>
-        {displayMode !==  DisplayMode.Normal && artists && (
+        {displayMode !== DisplayMode.Normal && track.artist && (
           <h4
             css={css`
-              font-size: .8rem;
+              font-size: 0.8rem;
               font-weight: 600;
               color: var(--nord9);
             `}
           >
-            { artists }
+            {track.artist}
           </h4>
         )}
       </div>

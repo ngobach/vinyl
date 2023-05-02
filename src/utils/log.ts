@@ -1,4 +1,4 @@
-import { LOG_ENABLED } from '~/env';
+import { LOG_ENABLED } from "~/env";
 
 function log(...args: unknown[]): void {
   if (LOG_ENABLED) {

@@ -1,8 +1,8 @@
-import React from 'react';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import React from "react";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
-import KitchenPage from '~/pages/kitchen';
-import HomePage from '~/pages/home';
+import KitchenPage from "~/pages/kitchen";
+import HomePage from "~/pages/home";
 
 const AppRouter: React.FC = () => {
   return (

@@ -1,18 +1,18 @@
 /** @jsx jsx */
-import { css, jsx } from '@emotion/core';
-import { FC } from 'react';
-import { sample } from 'lodash';
+import { css, jsx } from "@emotion/core";
+import { FC } from "react";
+import { sample } from "lodash";
 
 const randomIconList: string[] = [
-  'headphones',
-  'spotify',
-  'play',
-  'flash',
-  'star',
-  'pulse',
+  "headphones",
+  "spotify",
+  "play",
+  "flash",
+  "star",
+  "pulse",
 ];
 
-const defaultIcon = 'pulse';
+const defaultIcon = "pulse";
 
 const randomIcon: string = sample(randomIconList);
 
@@ -25,13 +25,15 @@ const Loader: FC<Props> = ({ progress, random = false }) => {
   const icon: string = random ? randomIcon : defaultIcon;
 
   return (
-    <div css={css`
-      display: flex;
-      width: 100%;
-      height: 100vh;
-      justify-content: center;
-      align-items: center;
-    `}>
+    <div
+      css={css`
+        display: flex;
+        width: 100%;
+        height: 100vh;
+        justify-content: center;
+        align-items: center;
+      `}
+    >
       <div
         css={css`
           position: relative;
@@ -58,14 +60,18 @@ const Loader: FC<Props> = ({ progress, random = false }) => {
             left: 0;
             font-size: 8rem;
             color: var(--nord1);
-            background-image: linear-gradient(90deg, var(--nord13), var(--nord11));
+            background-image: linear-gradient(
+              90deg,
+              var(--nord13),
+              var(--nord11)
+            );
             background-size: 150px 150px;
             background-clip: text;
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
           `}
           style={{
-            width: `${progress * 100}%`
+            width: `${progress * 100}%`,
           }}
         />
       </div>

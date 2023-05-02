@@ -1,8 +1,8 @@
-import { BehaviorSubject } from 'rxjs';
-import { sample } from 'lodash';
-import { DEV } from '~/env';
-import log from '~/utils/log';
-import { Track, PlayList, PlaybackStatus } from '~/types';
+import { BehaviorSubject } from "rxjs";
+import { sample } from "lodash";
+import { DEV } from "~/env";
+import log from "~/utils/log";
+import { Track, PlayList, PlaybackStatus } from "~/types";
 
 export enum PlaybackMode {
   RepeatOne,
@@ -12,30 +12,35 @@ export enum PlaybackMode {
 
 const audio = createAudio();
 
-export const currentPlayList: BehaviorSubject<PlayList> = new BehaviorSubject(null);
+export const currentPlayList: BehaviorSubject<PlayList> = new BehaviorSubject(
+  null
+);
 export const currentItem: BehaviorSubject<Track> = new BehaviorSubject(null);
-export const currentStatus: BehaviorSubject<PlaybackStatus> = new BehaviorSubject({ playing: false, duration: 0, played: 0 });
-export const mode: BehaviorSubject<PlaybackMode> = new BehaviorSubject(PlaybackMode.RepeatOne);
+export const currentStatus: BehaviorSubject<PlaybackStatus> =
+  new BehaviorSubject({ playing: false, duration: 0, played: 0 });
+export const mode: BehaviorSubject<PlaybackMode> = new BehaviorSubject(
+  PlaybackMode.RepeatOne
+);
 export const volume: BehaviorSubject<number> = new BehaviorSubject(1);
 
 function createAudio(): HTMLAudioElement {
   const myAudio = new Audio();
   myAudio.autoplay = false;
-  myAudio.addEventListener('play', () => {
+  myAudio.addEventListener("play", () => {
     currentStatus.next({
       ...currentStatus.value,
       playing: true,
     });
   });
 
-  myAudio.addEventListener('pause', () => {
+  myAudio.addEventListener("pause", () => {
     currentStatus.next({
       ...currentStatus.value,
       playing: false,
     });
   });
 
-  myAudio.addEventListener('progress', () => {
+  myAudio.addEventListener("progress", () => {
     currentStatus.next({
       ...currentStatus.value,
       duration: myAudio.duration ?? 0,
@@ -43,14 +48,16 @@ function createAudio(): HTMLAudioElement {
     });
   });
 
-  myAudio.addEventListener('ended', () => {
+  myAudio.addEventListener("ended", () => {
     switch (mode.value) {
       case PlaybackMode.RepeatOne:
         myAudio.currentTime = 0;
         myAudio.play();
         break;
       case PlaybackMode.RepeatAll: {
-        const tmp = currentPlayList.value.tracks.concat(currentPlayList.value.tracks);
+        const tmp = currentPlayList.value.tracks.concat(
+          currentPlayList.value.tracks
+        );
         currentItem.next(tmp[tmp.indexOf(currentItem.value) + 1]);
         break;
       }
@@ -72,7 +79,7 @@ function connect() {
     if (!pl) {
       return;
     }
-    log(`🎶 %c${pl.title}`, 'font-weight: bold');
+    log(`🎶 %c${pl.title}`, "font-weight: bold");
     // if (mode.value === PlaybackMode.Shuffled) {
     //   currentItem.next(sample(pl.tracks));
     // } else {
@@ -84,24 +91,23 @@ function connect() {
     if (!track) {
       return;
     }
-    log(`🎵 %c${track.title} - %c${track.artists.map(a => a.title).join(', ')}`, 'font-weight: bold', 'font-weight: normal; color: #888888');
+    log(
+      `🎵 %c${track.title} - %c${track.artist}`,
+      "font-weight: bold",
+      "font-weight: normal; color: #888888"
+    );
     audio.src = track.url;
     audio.play();
-    const mediaSession: any = (navigator as any).mediaSession;
+    const mediaSession = navigator.mediaSession;
     mediaSession.metadata = new MediaMetadata({
-      title: 'Never Gonna Give You Up',
-      artist: 'Rick Astley',
-      album: 'Whenever You Need Somebody',
-      artwork: [
-        { src: 'https://via.placeholder.com/96',   sizes: '96x96',   type: 'image/png' },
-        { src: 'https://via.placeholder.com/128', sizes: '128x128', type: 'image/png' },
-        { src: 'https://via.placeholder.com/192', sizes: '192x192', type: 'image/png' },
-        { src: 'https://via.placeholder.com/256', sizes: '256x256', type: 'image/png' },
-        { src: 'https://via.placeholder.com/384', sizes: '384x384', type: 'image/png' },
-        { src: 'https://via.placeholder.com/512', sizes: '512x512', type: 'image/png' },
-      ],
+      title: track.title,
+      artist: track.artist,
+      artwork: [{ src: track.coverUrl }],
     });
-    mediaSession.setActionHandler('nexttrack', () => playNext(sample(currentPlayList.value.tracks)));
+
+    mediaSession.setActionHandler("nexttrack", () =>
+      playNext(sample(currentPlayList.value.tracks))
+    );
   });
 
   volume.subscribe((v) => {
@@ -117,13 +123,17 @@ export function playPlayList(list: PlayList, track: Track | null): void {
 }
 
 export function playSingle(track: Track): void {
-  currentPlayList.next({ title: track.title, tracks: [track], coverUrl: track.coverUrl });
+  currentPlayList.next({
+    title: track.title,
+    tracks: [track],
+    coverUrl: track.coverUrl,
+  });
   currentItem.next(track);
 }
 
 export function playNext(track: Track): void {
   if (!currentPlayList.value.tracks.includes(track)) {
-    throw new Error('Track not in current playlist');
+    throw new Error("Track not in current playlist");
   }
   currentItem.next(track);
 }

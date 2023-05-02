@@ -1,22 +1,29 @@
 /** @jsx jsx */
-import { FC, useCallback } from 'react';
-import { jsx, css } from '@emotion/core';
-import { throttle } from 'lodash';
-import { PlaybackMode } from '~/services/audioengine';
-import { Track, PlaybackStatus } from '~/types';
-import MQ from '~/utils/mq';
-import Thumbnail from './Thumbnail';
-import Icon, { Icons } from './Icon';
-import Slider from './Slider';
-import { DEFAULT_THUMBNAIL } from '~/env';
+import { FC, useCallback } from "react";
+import { jsx, css } from "@emotion/core";
+import { throttle } from "lodash";
+import { PlaybackMode } from "~/services/audioengine";
+import { Track, PlaybackStatus } from "~/types";
+import MQ from "~/utils/mq";
+import Thumbnail from "./Thumbnail";
+import Icon, { Icons } from "./Icon";
+import Slider from "./Slider";
+import { DEFAULT_THUMBNAIL } from "~/env";
 
-const IconButton = ({ icon, onClick, color = null, active = false, size = null, disabled = false }) => {
+const IconButton = ({
+  icon,
+  onClick,
+  color = null,
+  active = false,
+  size = null,
+  disabled = false,
+}) => {
   return (
     <Icon
       icon={icon}
       size={size ?? 16}
       css={css`
-        cursor: ${!disabled ? 'pointer' : 'inherit'};
+        cursor: ${!disabled ? "pointer" : "inherit"};
         padding: 4px;
         margin: 0 12px;
         ${MQ.Small} {
@@ -25,7 +32,10 @@ const IconButton = ({ icon, onClick, color = null, active = false, size = null, 
         }
         transition: color ease 100ms;
       `}
-      color={color ?? (active ? 'var(--color-primary1)'  : disabled ? 'var(--color-gray)' : '')}
+      color={
+        color ??
+        (active ? "var(--color-primary1)" : disabled ? "var(--color-gray)" : "")
+      }
       onClick={onClick}
     />
   );
@@ -49,7 +59,13 @@ const TrackInfo: FC<{ track: Track }> = ({ track, ...rest }) => (
     `}
     {...rest}
   >
-    <Thumbnail size={48} src={track.coverUrl ?? DEFAULT_THUMBNAIL} css={css`flex: none;`} />
+    <Thumbnail
+      size={48}
+      src={track.coverUrl ?? DEFAULT_THUMBNAIL}
+      css={css`
+        flex: none;
+      `}
+    />
     <div
       css={css`
         display: flex;
@@ -62,7 +78,7 @@ const TrackInfo: FC<{ track: Track }> = ({ track, ...rest }) => (
       <span
         css={css`
           color: var(--color-primary1);
-          font-size: .8rem;
+          font-size: 0.8rem;
           font-weight: bold;
           overflow: hidden;
           display: -webkit-box;
@@ -70,18 +86,18 @@ const TrackInfo: FC<{ track: Track }> = ({ track, ...rest }) => (
           -webkit-box-orient: vertical;
         `}
       >
-        { track.title }
+        {track.title}
       </span>
       <span
         css={css`
           color: var(--nord7);
-          font-size: .7rem;;
+          font-size: 0.7rem;
           white-space: nowrap;
           text-overflow: ellipsis;
           overflow: hidden;
         `}
       >
-        { track.artists.map(a => a.title).join(', ') }
+        {track.artist}
       </span>
     </div>
   </div>
@@ -125,13 +141,16 @@ const Playbar: FC<PlaybarProps> = ({
   }, [onVolumeChange, volume]);
   const throttledVolumeChange = throttle(onVolumeChange, 100);
 
-  const modeClicked = useCallback((m: PlaybackMode) => {
-    if (mode !== m) {
-      onModeChanged(m);
-    } else {
-      onModeChanged(PlaybackMode.RepeatOne);
-    }
-  }, [mode, onModeChanged]);
+  const modeClicked = useCallback(
+    (m: PlaybackMode) => {
+      if (mode !== m) {
+        onModeChanged(m);
+      } else {
+        onModeChanged(PlaybackMode.RepeatOne);
+      }
+    },
+    [mode, onModeChanged]
+  );
 
   return (
     <div
@@ -141,7 +160,6 @@ const Playbar: FC<PlaybarProps> = ({
         flex-direction: row;
       `}
     >
-
       <TrackInfo
         css={css`
           align-self: center;
@@ -166,10 +184,25 @@ const Playbar: FC<PlaybarProps> = ({
           }
         `}
       >
-        <IconButton icon={Icons.previous} onClick={onPrev} disabled={!hasPrev} />
-        <IconButton icon={Icons.random} active={mode === PlaybackMode.Shuffled} onClick={modeClicked.bind(null, PlaybackMode.Shuffled)} />
-        <PlayPauseButton playing={status.playing} onClick={status.playing ? onPause : onPlay} />
-        <IconButton icon={Icons.loop} active={mode === PlaybackMode.RepeatAll} onClick={modeClicked.bind(null, PlaybackMode.RepeatAll)} />
+        <IconButton
+          icon={Icons.previous}
+          onClick={onPrev}
+          disabled={!hasPrev}
+        />
+        <IconButton
+          icon={Icons.random}
+          active={mode === PlaybackMode.Shuffled}
+          onClick={modeClicked.bind(null, PlaybackMode.Shuffled)}
+        />
+        <PlayPauseButton
+          playing={status.playing}
+          onClick={status.playing ? onPause : onPlay}
+        />
+        <IconButton
+          icon={Icons.loop}
+          active={mode === PlaybackMode.RepeatAll}
+          onClick={modeClicked.bind(null, PlaybackMode.RepeatAll)}
+        />
         <IconButton icon={Icons.next} onClick={onNext} disabled={!hasNext} />
       </div>
       <div
@@ -188,9 +221,13 @@ const Playbar: FC<PlaybarProps> = ({
           `}
           value={volume}
           live
-          pre={(
-            <IconButton icon={volume > 0 ? Icons.volume : Icons.volumeOff} onClick={volumeClicked} color="#ffffff" />
-          )}
+          pre={
+            <IconButton
+              icon={volume > 0 ? Icons.volume : Icons.volumeOff}
+              onClick={volumeClicked}
+              color="#ffffff"
+            />
+          }
           onSeek={throttledVolumeChange}
         />
       </div>

@@ -1,15 +1,15 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import WebFont from 'webfontloader';
-import App from '~/App';
-import '~/services/history';
+import React from "react";
+import ReactDOM from "react-dom";
+import WebFont from "webfontloader";
+import App from "~/App";
+import "~/services/history";
 
 const webfontConfig = {
   google: {
-    families: ['Raleway:400,700', 'Nunito:400,700'],
+    families: ["Raleway:400,700", "Nunito:400,700"],
   },
   custom: {
-    families: ['iconmonstr-iconic-font'],
+    families: ["iconmonstr-iconic-font"],
   },
 };
 
@@ -25,9 +25,9 @@ function loadFonts() {
 
 (async () => {
   try {
-    const mountPoint = document.getElementById('main');
+    const mountPoint = document.getElementById("main");
     if (!mountPoint) {
-      throw new Error('Mount point not found!');
+      throw new Error("Mount point not found!");
     }
 
     await Promise.all([
@@ -35,10 +35,7 @@ function loadFonts() {
       // TODO: more come here
     ]);
 
-    ReactDOM.render(
-      <App />,
-      mountPoint,
-    );
+    ReactDOM.render(<App />, mountPoint);
   } catch (error) {
     console.error(error);
   }
