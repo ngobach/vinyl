@@ -51,7 +51,7 @@
     "start": "serve -d dist -s -l 8080",
     "dev": "parcel serve src/index.pug",
     "build": "parcel build --no-source-maps src/index.pug",
-    "surge": "./hacks/surge.sh",
+    "deploy": "./hacks/surge.sh",
     "clean": "rm -rf .cache dist",
     "lint": "eslint ./src"
   },

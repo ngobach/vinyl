@@ -3,8 +3,16 @@ import { MEDIA_SOURCE } from "~/env";
 import { PlayList, Track } from "~/types";
 import log from "~/utils/log";
 
-function genUrlForFile(file: string): string {
-  return `${MEDIA_SOURCE.replace(/\/$/, "")}/${file.replace(/^\//, "")}`;
+function genUrlForFile(fileOrUrl: string, fallback = null): string {
+  if (!fileOrUrl) {
+    return fallback;
+  }
+
+  if (fileOrUrl.match(/https?:\/\//)) {
+    return fileOrUrl;
+  }
+
+  return `${MEDIA_SOURCE.replace(/\/$/, "")}/${fileOrUrl.replace(/^\//, "")}`;
 }
 
 interface MediaList {
@@ -46,7 +54,7 @@ const MediaList: MediaList = {
 
       this.tracks = mr.tracks.map<Track>((raw) => ({
         title: raw.title,
-        coverUrl: genUrlForFile(raw.cover),
+        coverUrl: genUrlForFile(raw.cover, mr.default_cover),
         artist: raw.artist,
         url: genUrlForFile(raw.url),
       }));
