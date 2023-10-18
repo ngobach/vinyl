@@ -15,7 +15,6 @@
     "framer-motion": "^3.3.0",
     "localforage": "^1.9.0",
     "lodash": "^4.17.20",
-    "lodash-decorators": "^6.0.1",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "react-helmet": "^5.2.1",
@@ -38,22 +37,18 @@
     "@types/webfontloader": "^1.6.29",
     "@typescript-eslint/eslint-plugin": "^4.6.1",
     "@typescript-eslint/parser": "^4.6.1",
-    "babel-eslint": "^10.0.1",
-    "eslint": "^7.13.0",
-    "eslint-plugin-react": "^7.12.4",
-    "parcel-bundler": "^1.12.3",
+    "bun-types": "^1.0.6",
     "prettier": "^3.0.3",
     "pug": "^2.0.3",
     "sass": "^1.17.4",
-    "typescript": "^3.8.3"
+    "typescript": "^5.2.2"
   },
   "scripts": {
-    "start": "serve -d dist -s -l 8080",
-    "dev": "parcel serve src/index.pug",
+    "start": "false",
+    "dev": "",
     "build": "parcel build --no-source-maps src/index.pug",
     "deploy": "./hacks/surge.sh",
-    "clean": "rm -rf .cache dist",
-    "lint": "eslint ./src"
+    "clean": "rm -rf .cache dist"
   },
   "keywords": [],
   "author": "Ngo Xuan Bach <thanbaiks@gmail.com>",

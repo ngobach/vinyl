@@ -1,14 +1,24 @@
 {
   "compilerOptions": {
-    "lib": ["dom", "esnext"],
-    "moduleResolution": "node",
-    "allowSyntheticDefaultImports": true,
-    "target": "esnext",
-    "baseUrl": "src/",
+    "rootDir": "./src",
+    "baseUrl": ".",
     "paths": {
       "~/*": ["./*"]
     },
-    "jsx": "react",
-    "module": "esnext"
+
+    "target": "esnext",
+    "module": "esnext",
+    "lib": ["dom", "esnext"],
+    "types": ["bun-types"],
+    "moduleResolution": "Bundler",
+    "moduleDetection": "force",
+    "noEmit": true,
+    "allowImportingTsExtensions": true,
+    "jsx": "react-jsx",
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "strict": true
   }
 }
