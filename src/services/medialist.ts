@@ -1,7 +1,7 @@
-import { memoize } from "lodash";
-import { MEDIA_SOURCE } from "~/env";
-import { PlayList, Track } from "~/types";
-import log from "~/utils/log";
+import { memoize } from 'lodash';
+import { MEDIA_SOURCE } from '@/env';
+import { PlayList, Track } from '@/types';
+import log from '@/utils/log';
 
 function genUrlForFile(fileOrUrl: string, fallback = null): string {
   if (!fileOrUrl) {
@@ -12,7 +12,7 @@ function genUrlForFile(fileOrUrl: string, fallback = null): string {
     return fileOrUrl;
   }
 
-  return `${MEDIA_SOURCE.replace(/\/$/, "")}/${fileOrUrl.replace(/^\//, "")}`;
+  return `${MEDIA_SOURCE.replace(/\/$/, '')}/${fileOrUrl.replace(/^\//, '')}`;
 }
 
 interface MediaList {
@@ -41,16 +41,16 @@ namespace API {
 
 const MediaList: MediaList = {
   tracks: [],
-  defaultCover: "",
+  defaultCover: '',
   all: null,
 
   async ensureFetched(): Promise<MediaList> {
     try {
       const mr: API.Response = await (
-        await fetch(genUrlForFile("index.json"))
+        await fetch(genUrlForFile('index.json'))
       ).json();
 
-      log("📩 %cResponse received", "font-weight: bold");
+      log('📩 %cResponse received', 'font-weight: bold');
 
       this.tracks = mr.tracks.map<Track>((raw) => ({
         title: raw.title,
@@ -60,14 +60,14 @@ const MediaList: MediaList = {
       }));
 
       this.all = {
-        title: "Everything",
+        title: 'Everything',
         cover: this.defaultCover,
         tracks: this.tracks,
       };
     } catch (error) {
       log(
         `😱%cCannot fetch media playlists: ${error.message}`,
-        "font-weight: bold"
+        'font-weight: bold',
       );
       throw error;
     }
@@ -77,7 +77,7 @@ const MediaList: MediaList = {
 
   // eslint-disable-next-line
   async search(keyword: string): Promise<PlayList> {
-    throw new Error("Unimplemented");
+    throw new Error('Unimplemented');
   },
 };
 

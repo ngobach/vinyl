@@ -1,14 +1,14 @@
 /** @jsx jsx */
-import React from "react";
-import { jsx, css } from "@emotion/core";
-import type MediaList from "~/services/medialist";
-import * as env from "~/env";
-import Clickable from "./Clickable";
-import Logo from "./Logo";
-import Block from "./Block";
-import Nav from "./Nav";
-import NavItem from "./NavItem";
-import Spacer from "./Spacer";
+import React from 'react';
+import { jsx, css } from '@emotion/core';
+import type MediaList from '@/services/medialist';
+import * as env from '@/env';
+import Clickable from './Clickable';
+import Logo from './Logo';
+import Block from './Block';
+import Nav from './Nav';
+import NavItem from './NavItem';
+import Spacer from './Spacer';
 
 type Props = {
   medialist: MediaList;
@@ -42,27 +42,27 @@ const SideBar: React.FC<Props> = ({ medialist, slot }) => (
         <NavItem
           iconName="care-right"
           text="Today Mood"
-          target={{ href: "/today" }}
+          target={{ href: '/today' }}
         />
         <NavItem
           iconName="layer"
           text="All Tracks"
-          target={{ href: "/tracks" }}
+          target={{ href: '/tracks' }}
         />
         <NavItem
           iconName="heart"
           text="Favorites"
-          target={{ href: "/favorites" }}
+          target={{ href: '/favorites' }}
         />
         <NavItem
           iconName="history"
           text="History"
-          target={{ href: "/history" }}
+          target={{ href: '/history' }}
         />
         <NavItem
           iconName="coffee"
           text="Artists"
-          target={{ href: "/artists" }}
+          target={{ href: '/artists' }}
         />
       </Nav>
     </Block>
@@ -84,7 +84,7 @@ const SideBar: React.FC<Props> = ({ medialist, slot }) => (
           >
             Build target
           </dt>
-          <dd>{env.DEV ? "dev" : "prod"}</dd>
+          <dd>{env.DEV ? 'dev' : 'prod'}</dd>
           <dt
             css={css`
               font-weight: bold;

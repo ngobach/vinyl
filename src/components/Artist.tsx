@@ -1,9 +1,9 @@
 /** @jsx jsx */
-import { jsx, css } from "@emotion/core";
-import { FC } from "react";
-import { PlayList } from "~/types";
-import { DEFAULT_THUMBNAIL } from "~/env";
-import Thumbnail from "./Thumbnail";
+import { jsx, css } from '@emotion/core';
+import { FC } from 'react';
+import { PlayList } from '@/types';
+import { DEFAULT_THUMBNAIL } from '@/env';
+import Thumbnail from './Thumbnail';
 
 enum DisplayMode {
   List,
@@ -34,7 +34,7 @@ const ArtistComponent: FC<ArtistProps> = ({
         display: inline-flex;
         flex-direction: column;
         align-items: center;
-        cursor: ${onClick ? "pointer" : "initial"};
+        cursor: ${onClick ? 'pointer' : 'initial'};
       `}
     >
       <Thumbnail
@@ -70,7 +70,7 @@ const ArtistComponent: FC<ArtistProps> = ({
       css={css`
         display: flex;
         align-items: center;
-        cursor: ${onClick ? "pointer" : "initial"};
+        cursor: ${onClick ? 'pointer' : 'initial'};
       `}
       onClick={() => onClick && onClick(artist)}
     >
@@ -94,7 +94,7 @@ const ArtistComponent: FC<ArtistProps> = ({
       css={css`
         display: flex;
         align-items: center;
-        cursor: ${onClick ? "pointer" : "initial"};
+        cursor: ${onClick ? 'pointer' : 'initial'};
       `}
       onClick={() => onClick && onClick(artist)}
     >

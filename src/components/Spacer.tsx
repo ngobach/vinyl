@@ -1,6 +1,6 @@
 /** @jsx jsx */
-import React from "react";
-import { jsx, css } from "@emotion/core";
+import React from 'react';
+import { jsx, css } from '@emotion/core';
 
 interface Props {
   size: string;

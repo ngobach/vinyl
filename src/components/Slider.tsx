@@ -1,7 +1,7 @@
 /** @jsx jsx */
-import React, { useCallback, useRef, useState } from "react";
-import { css, jsx } from "@emotion/core";
-import { clamp } from "lodash";
+import React, { useCallback, useRef, useState } from 'react';
+import { css, jsx } from '@emotion/core';
+import { clamp } from 'lodash';
 
 const SliderLabel: React.FC<{ mr?: boolean; ml?: boolean }> = ({
   children,
@@ -56,7 +56,7 @@ const Slider: React.FC<SliderProps> = ({
   }, []);
   const pointerMoveHandler = useCallback(
     (e: React.PointerEvent) => {
-      if (typeof override !== "number") {
+      if (typeof override !== 'number') {
         return;
       }
       const clientRect = holder.current.getBoundingClientRect();
@@ -66,7 +66,7 @@ const Slider: React.FC<SliderProps> = ({
         onSeek(v);
       }
     },
-    [override, live]
+    [override, live],
   );
   const pointerUpHandler = useCallback(
     (e: React.PointerEvent) => {
@@ -74,7 +74,7 @@ const Slider: React.FC<SliderProps> = ({
       onSeek(override);
       setOverride(null);
     },
-    [override]
+    [override],
   );
 
   return (

@@ -1,7 +1,7 @@
-import localForage from "localforage";
-import { currentItem } from "./audioengine";
+import localForage from 'localforage';
+import { currentItem } from './audioengine';
 
-const StorageKey = "history";
+const StorageKey = 'history';
 
 const HistoryService = {
   async push(id: string): Promise<void> {
@@ -22,10 +22,5 @@ currentItem.subscribe((track) => {
     HistoryService.push(track.id);
   }
 });
-
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-(window as any).test = async () => {
-  console.log(await HistoryService.get());
-};
 
 export default HistoryService;

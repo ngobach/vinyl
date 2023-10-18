@@ -1,15 +1,15 @@
 /** @jsx jsx */
-import { jsx, css } from "@emotion/core";
+import { jsx, css } from '@emotion/core';
 
 export enum Icons {
-  play = "play",
-  pause = "pause",
-  random = "random",
-  loop = "loop",
-  previous = "previous",
-  next = "next",
-  volume = "volume",
-  volumeOff = "volume-off",
+  play = 'play',
+  pause = 'pause',
+  random = 'random',
+  loop = 'loop',
+  previous = 'previous',
+  next = 'next',
+  volume = 'volume',
+  volumeOff = 'volume-off',
 }
 
 interface IconProps {
@@ -23,13 +23,13 @@ interface IconProps {
 const Icon: React.FC<IconProps> = ({
   icon,
   size = 32,
-  color = "#ffffff",
+  color = '#ffffff',
   className,
   onClick,
   ...rest
 }) => (
   <span
-    className={`im im-fix im-${icon} ${className ?? ""}`}
+    className={`im im-fix im-${icon} ${className ?? ''}`}
     css={css`
       line-height: 1;
       font-size: ${size}px;

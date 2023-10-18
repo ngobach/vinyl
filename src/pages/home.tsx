@@ -1,47 +1,47 @@
 /** @jsx jsx */
-import React, { useRef } from "react";
-import { useRouteMatch } from "react-router";
-import Helmet from "react-helmet";
-import { css, jsx } from "@emotion/core";
-import Playbar from "~/components/Playbar";
-import SideBar from "~/components/SideBar";
-import MainLayout from "~/components/layout/MainLayout";
-import { useMediaController, useMediaList, useMediaEngine } from "~/hooks";
+import React, { useRef } from 'react';
+import { useRouteMatch } from 'react-router';
+import Helmet from 'react-helmet';
+import { css, jsx } from '@emotion/core';
+import Playbar from '@/components/Playbar';
+import SideBar from '@/components/SideBar';
+import MainLayout from '@/components/layout/MainLayout';
+import { useMediaController, useMediaList, useMediaEngine } from '@/hooks';
 
-import { FCWithTitle } from "./types";
-import Welcome from "./home/Welcome";
-import Building from "./home/Building";
-import Today from "./home/Today";
-import Tracks from "./home/Tracks";
-import { useMount, useUpdate } from "react-use";
+import { FCWithTitle } from './types';
+import Welcome from './home/Welcome';
+import Building from './home/Building';
+import Today from './home/Today';
+import Tracks from './home/Tracks';
+import { useMount, useUpdate } from 'react-use';
 
 function resolveScreen(
-  q: Record<string, string>
+  q: Record<string, string>,
 ): [FCWithTitle, Record<string, unknown>] {
   // eslint-disable-next-line
   const { l1, l2, l3, l4 } = q;
 
-  if (l1 === "today") {
-    return [Today, { page: "today" }];
+  if (l1 === 'today') {
+    return [Today, { page: 'today' }];
   }
 
-  if (l1 === "favorites") {
+  if (l1 === 'favorites') {
     return [Building, {}];
   }
 
-  if (l1 === "history") {
+  if (l1 === 'history') {
     return [Building, {}];
   }
 
-  if (l1 === "genre") {
+  if (l1 === 'genre') {
     return [Building, {}];
   }
 
-  if (l1 === "tracks") {
+  if (l1 === 'tracks') {
     return [Tracks, {}];
   }
 
-  if (l1 === "artists") {
+  if (l1 === 'artists') {
     return [Building, {}];
   }
 
@@ -53,7 +53,7 @@ const HomePage: React.FC = () => {
   const ml = useMediaList();
   const engine = useMediaEngine();
   const controller = useMediaController();
-  const routeParams = useRouteMatch("/:l1?/:l2?/:l3?/:l4?");
+  const routeParams = useRouteMatch('/:l1?/:l2?/:l3?/:l4?');
   const [Component, params] = resolveScreen(routeParams.params);
   const update = useUpdate();
   useMount(() => requestAnimationFrame(update));
@@ -71,7 +71,7 @@ const HomePage: React.FC = () => {
           background: var(--color-background);
           padding: 0 0.5rem 0.25rem;
           ::before {
-            content: "";
+            content: '';
             display: block;
             position: absolute;
             top: -10px;
@@ -108,9 +108,9 @@ const HomePage: React.FC = () => {
   );
 
   const pageTitle =
-    typeof Component.title === "function"
+    typeof Component.title === 'function'
       ? Component.title(params)
-      : typeof Component.title === "string"
+      : typeof Component.title === 'string'
       ? Component.title
       : "I'm feeling happy";
   const documentTitle = engine.currentTrack

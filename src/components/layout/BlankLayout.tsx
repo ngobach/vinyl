@@ -1,6 +1,6 @@
 /** @jsx jsx */
-import { jsx, css } from "@emotion/core";
-import React from "react";
+import { jsx, css } from '@emotion/core';
+import React from 'react';
 
 const BlankLayout: React.FC = ({ children }) => (
   <main

@@ -1,4 +1,4 @@
-import { useObservable } from "react-use";
+import { useObservable } from 'react-use';
 import {
   currentItem,
   currentPlayList,
@@ -11,7 +11,7 @@ import {
   setVolume,
   togglePlay,
   volume,
-} from "~/services/audioengine";
+} from '@/services/audioengine';
 
 // eslint-disable-next-line
 export function useMediaEngine() {
@@ -41,14 +41,14 @@ export function useMediaController() {
     },
     next() {
       const tracks = engine.currentPlayList.tracks.concat(
-        currentPlayList.value.tracks
+        currentPlayList.value.tracks,
       );
       const nextTrack = tracks[tracks.indexOf(engine.currentTrack) + 1];
       playNext(nextTrack);
     },
     prev() {
       const tracks = engine.currentPlayList.tracks.concat(
-        currentPlayList.value.tracks
+        currentPlayList.value.tracks,
       );
       const nextTrack = tracks[tracks.lastIndexOf(engine.currentTrack) - 1];
       playNext(nextTrack);

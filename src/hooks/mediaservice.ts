@@ -1,5 +1,5 @@
-import { useAsync } from "react-use";
-import MediaList from "~/services/medialist";
+import { useAsync } from 'react-use';
+import MediaList from '@/services/medialist';
 
 type Result = [MediaList, Error];
 

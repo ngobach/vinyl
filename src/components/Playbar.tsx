@@ -1,14 +1,14 @@
 /** @jsx jsx */
-import { FC, useCallback } from "react";
-import { jsx, css } from "@emotion/core";
-import { throttle } from "lodash";
-import { PlaybackMode } from "~/services/audioengine";
-import { Track, PlaybackStatus } from "~/types";
-import MQ from "~/utils/mq";
-import Thumbnail from "./Thumbnail";
-import Icon, { Icons } from "./Icon";
-import Slider from "./Slider";
-import { DEFAULT_THUMBNAIL } from "~/env";
+import { FC, useCallback } from 'react';
+import { jsx, css } from '@emotion/core';
+import { throttle } from 'lodash';
+import { PlaybackMode } from '@/services/audioengine';
+import { Track, PlaybackStatus } from '@/types';
+import MQ from '@/utils/mq';
+import Thumbnail from './Thumbnail';
+import Icon, { Icons } from './Icon';
+import Slider from './Slider';
+import { DEFAULT_THUMBNAIL } from '@/env';
 
 const IconButton = ({
   icon,
@@ -23,7 +23,7 @@ const IconButton = ({
       icon={icon}
       size={size ?? 16}
       css={css`
-        cursor: ${!disabled ? "pointer" : "inherit"};
+        cursor: ${!disabled ? 'pointer' : 'inherit'};
         padding: 4px;
         margin: 0 12px;
         ${MQ.Small} {
@@ -34,7 +34,7 @@ const IconButton = ({
       `}
       color={
         color ??
-        (active ? "var(--color-primary1)" : disabled ? "var(--color-gray)" : "")
+        (active ? 'var(--color-primary1)' : disabled ? 'var(--color-gray)' : '')
       }
       onClick={onClick}
     />
@@ -149,7 +149,7 @@ const Playbar: FC<PlaybarProps> = ({
         onModeChanged(PlaybackMode.RepeatOne);
       }
     },
-    [mode, onModeChanged]
+    [mode, onModeChanged],
   );
 
   return (

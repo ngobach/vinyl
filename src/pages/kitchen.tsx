@@ -1,37 +1,37 @@
 /** @jsx jsx */
 /* eslint-disable */
-import { jsx, css } from "@emotion/core";
-import { Fragment, FC, useState } from "react";
-import Helmet from "react-helmet";
+import { jsx, css } from '@emotion/core';
+import { Fragment, FC, useState } from 'react';
+import Helmet from 'react-helmet';
 
-import log from "~/utils/log";
-import Logo from "~/components/Logo";
-import Nav from "~/components/Nav";
-import NavItem from "~/components/NavItem";
-import Block, { Color } from "~/components/Block";
-import Artist, { DisplayMode as ArtistDM } from "~/components/Artist";
-import TrackComponent, { DisplayMode as TrackDM } from "~/components/Track";
-import Playbar from "~/components/Playbar";
-import Slider from "~/components/Slider";
-import { Track, PlayList } from "~/types";
-import { PlaybackMode } from "~/services/audioengine";
+import log from '@/utils/log';
+import Logo from '@/components/Logo';
+import Nav from '@/components/Nav';
+import NavItem from '@/components/NavItem';
+import Block, { Color } from '@/components/Block';
+import Artist, { DisplayMode as ArtistDM } from '@/components/Artist';
+import TrackComponent, { DisplayMode as TrackDM } from '@/components/Track';
+import Playbar from '@/components/Playbar';
+import Slider from '@/components/Slider';
+import { Track, PlayList } from '@/types';
+import { PlaybackMode } from '@/services/audioengine';
 
 const fixtures: {
   artist: PlayList;
   track: Track;
 } = {
   artist: {
-    title: "Random artist",
-    coverUrl: "https://i.pravatar.cc/300?u=toby@cover.com",
+    title: 'Random artist',
+    coverUrl: 'https://i.pravatar.cc/300?u=toby@cover.com',
     tracks: [],
   },
 
   track: {
-    title: "Something just like this",
+    title: 'Something just like this',
     artists: [],
     genres: [],
-    coverUrl: "https://i.pravatar.cc/300?u=random@cover.com",
-    url: "",
+    coverUrl: 'https://i.pravatar.cc/300?u=random@cover.com',
+    url: '',
   },
 };
 

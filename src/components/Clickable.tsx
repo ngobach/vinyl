@@ -1,15 +1,15 @@
 /** @jsx jsx */
-import React from "react";
-import { jsx, css } from "@emotion/core";
-import { LinkTarget } from "~/types";
-import { Link } from "react-router-dom";
+import React from 'react';
+import { jsx, css } from '@emotion/core';
+import { LinkTarget } from '@/types';
+import { Link } from 'react-router-dom';
 
 type Props = LinkTarget & {
-  box?: "inline-block" | "block";
+  box?: 'inline-block' | 'block';
 };
 
 const Clickable: React.FC<Props> = ({
-  box = "inline-block",
+  box = 'inline-block',
   href,
   onClick,
   children,
@@ -26,10 +26,10 @@ const Clickable: React.FC<Props> = ({
   ) : onClick ? (
     <div
       css={
-        box === "inline-block"
+        box === 'inline-block'
           ? css`
               display: inline-block;
-              cursor: ${onClick ? "pointer" : "default"};
+              cursor: ${onClick ? 'pointer' : 'default'};
             `
           : null
       }

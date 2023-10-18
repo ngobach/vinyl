@@ -1,10 +1,20 @@
-@import "~reset-css";
-@import "nord";
-@import "common";
+@import 'reset-css';
+@import 'nord';
+@import 'common';
 
 html {
-  font-family: "Nunito", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
-    Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  font-family:
+    'Nunito',
+    -apple-system,
+    BlinkMacSystemFont,
+    'Segoe UI',
+    Roboto,
+    Oxygen,
+    Ubuntu,
+    Cantarell,
+    'Open Sans',
+    'Helvetica Neue',
+    sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   // Disable user text selection
@@ -30,9 +40,9 @@ body,
   --color-white: #ffffff;
   --color-gray: #53617d;
 
-  --font-mono: Consolas, "Andale Mono WT", "Andale Mono", "Lucida Console",
-    "Lucida Sans Typewriter", "DejaVu Sans Mono", "Bitstream Vera Sans Mono",
-    "Liberation Mono", "Nimbus Mono L", Monaco, "Courier New", Courier,
+  --font-mono: Consolas, 'Andale Mono WT', 'Andale Mono', 'Lucida Console',
+    'Lucida Sans Typewriter', 'DejaVu Sans Mono', 'Bitstream Vera Sans Mono',
+    'Liberation Mono', 'Nimbus Mono L', Monaco, 'Courier New', Courier,
     monospace;
 }
 
@@ -58,6 +68,16 @@ a:visited {
 }
 
 .font-display {
-  font-family: "Raleway", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
-    Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  font-family:
+    'Raleway',
+    -apple-system,
+    BlinkMacSystemFont,
+    'Segoe UI',
+    Roboto,
+    Oxygen,
+    Ubuntu,
+    Cantarell,
+    'Open Sans',
+    'Helvetica Neue',
+    sans-serif;
 }

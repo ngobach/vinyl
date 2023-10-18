@@ -1,6 +1,6 @@
 /** @jsx jsx */
-import React from "react";
-import { css, jsx } from "@emotion/core";
+import React from 'react';
+import { css, jsx } from '@emotion/core';
 
 interface Props {
   title?: string;
@@ -15,7 +15,7 @@ const Dummy: React.FC<Props> = ({ title }) => (
       font-weight: bold;
     `}
   >
-    {title ?? "Dummy Component"}
+    {title ?? 'Dummy Component'}
   </main>
 );
 

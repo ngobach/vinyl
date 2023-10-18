@@ -1,7 +1,7 @@
 /** @jsx jsx */
-import { jsx, css } from "@emotion/core";
-import { FC } from "react";
-import MQ from "~/utils/mq";
+import { jsx, css } from '@emotion/core';
+import { FC } from 'react';
+import MQ from '@/utils/mq';
 
 interface Props {
   error: Error;

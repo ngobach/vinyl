@@ -1,8 +1,8 @@
 /** @jsx jsx */
-import React from "react";
-import { jsx, css } from "@emotion/core";
-import Clickable from "./Clickable";
-import { LinkTarget } from "~/types";
+import React from 'react';
+import { jsx, css } from '@emotion/core';
+import Clickable from './Clickable';
+import { LinkTarget } from '@/types';
 
 interface Props {
   iconName: string;

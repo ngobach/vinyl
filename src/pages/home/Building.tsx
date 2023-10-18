@@ -1,7 +1,7 @@
 /** @jsx jsx */
-import { jsx, css } from "@emotion/core";
-import { FCWithTitle } from "../types";
-import ImgSourceCode from "~/assets/img/undraw_source_code_xx2e.svg";
+import { jsx, css } from '@emotion/core';
+import { FCWithTitle } from '../types';
+import ImgSourceCode from '@/assets/img/undraw_source_code_xx2e.svg';
 
 const Building: FCWithTitle = () => (
   <main>
@@ -18,6 +18,6 @@ const Building: FCWithTitle = () => (
   </main>
 );
 
-Building.title = "Under construction";
+Building.title = 'Under construction';
 
 export default Building;

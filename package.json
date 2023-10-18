@@ -5,8 +5,9 @@
   "main": "dist/index.js",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/ngobach/vinyl.git"
+    "url": "https://github.com/ngobach/vinyl.git"
   },
+  "type": "module",
   "dependencies": {
     "@emotion/core": "^10.0.28",
     "classnames": "^2.2.6",
@@ -15,13 +16,13 @@
     "framer-motion": "^3.3.0",
     "localforage": "^1.9.0",
     "lodash": "^4.17.20",
-    "react": "^16.8.6",
-    "react-dom": "^16.8.6",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
     "react-helmet": "^5.2.1",
     "react-router": "^5.1.2",
     "react-router-dom": "^5.1.2",
     "react-spring": "^8.0.27",
-    "react-use": "^15.3.3",
+    "react-use": "^17.4.0",
     "reset-css": "^5.0.1",
     "rxjs": "^6.5.4",
     "tieng-viet-khong-dau": "^1.0.1",
@@ -29,8 +30,8 @@
   },
   "devDependencies": {
     "@types/lodash": "^4.14.161",
-    "@types/react": "^16.9.27",
-    "@types/react-dom": "^16.9.5",
+    "@types/react": "^18.2.29",
+    "@types/react-dom": "^18.2.13",
     "@types/react-helmet": "^5.0.15",
     "@types/react-router": "^5.1.4",
     "@types/react-router-dom": "^5.1.3",
@@ -41,14 +42,15 @@
     "prettier": "^3.0.3",
     "pug": "^2.0.3",
     "sass": "^1.17.4",
-    "typescript": "^5.2.2"
+    "typescript": "^5.2.2",
+    "vite": "^4.5.0"
   },
   "scripts": {
     "start": "false",
-    "dev": "",
-    "build": "parcel build --no-source-maps src/index.pug",
+    "dev": "vite",
+    "build": "vite build",
     "deploy": "./hacks/surge.sh",
-    "clean": "rm -rf .cache dist"
+    "clean": "rm -rf dist"
   },
   "keywords": [],
   "author": "Ngo Xuan Bach <thanbaiks@gmail.com>",
@@ -56,8 +58,5 @@
   "bugs": {
     "url": "https://github.com/thanbaiks/vinyl/issues"
   },
-  "homepage": "https://github.com/thanbaiks/vinyl#readme",
-  "directories": {
-    "test": "test"
-  }
+  "homepage": "https://github.com/thanbaiks/vinyl#readme"
 }

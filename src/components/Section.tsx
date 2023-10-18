@@ -1,9 +1,9 @@
 /** @jsx jsx */
-import React from "react";
-import { jsx, css } from "@emotion/core";
-import { LinkTarget } from "~/types";
-import Clickable from "./Clickable";
-import Text from "./Text";
+import React from 'react';
+import { jsx, css } from '@emotion/core';
+import { LinkTarget } from '@/types';
+import Clickable from './Clickable';
+import Text from './Text';
 
 interface Props {
   title?: string;
@@ -21,7 +21,7 @@ const Section: React.FC<Props> = ({ title, target = {}, children }) => (
     )}
     <div
       css={css`
-        margin-top: ${title ? "1rem" : "0"};
+        margin-top: ${title ? '1rem' : '0'};
         border-radius: 0.25rem;
         padding: 1rem;
         background: #0001;

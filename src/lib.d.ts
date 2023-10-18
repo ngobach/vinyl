@@ -1,3 +1,5 @@
+import 'vite/client';
+
 interface FakeProcess {
   env: {
     NODE_ENV: string;
@@ -7,22 +9,22 @@ interface FakeProcess {
 
 declare const process: FakeProcess;
 
-declare module "*.png" {
+declare module '*.png' {
   const url: string;
   export default url;
 }
 
-declare module "*.svg" {
+declare module '*.svg' {
   const url: string;
   export default url;
 }
 
-declare module "*.jpg" {
+declare module '*.jpg' {
   const url: string;
   export default url;
 }
 
-declare module "excuses" {
+declare module 'excuses' {
   type Excuses = {
     developers: {
       getAll: () => void;
@@ -34,7 +36,7 @@ declare module "excuses" {
   export default excuses;
 }
 
-declare module "tieng-viet-khong-dau" {
+declare module 'tieng-viet-khong-dau' {
   type TVKD = {
     c(s: string): string;
   };

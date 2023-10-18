@@ -1,18 +1,18 @@
 /** @jsx jsx */
-import { css, jsx } from "@emotion/core";
-import { FC } from "react";
-import { sample } from "lodash";
+import { css, jsx } from '@emotion/core';
+import { FC } from 'react';
+import { sample } from 'lodash';
 
 const randomIconList: string[] = [
-  "headphones",
-  "spotify",
-  "play",
-  "flash",
-  "star",
-  "pulse",
+  'headphones',
+  'spotify',
+  'play',
+  'flash',
+  'star',
+  'pulse',
 ];
 
-const defaultIcon = "pulse";
+const defaultIcon = 'pulse';
 
 const randomIcon: string = sample(randomIconList);
 
