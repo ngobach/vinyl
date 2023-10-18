@@ -50,6 +50,7 @@
     "dev": "vite",
     "build": "vite build",
     "deploy": "./hacks/surge.sh",
+    "format": "prettier -w .",
     "clean": "rm -rf dist"
   },
   "keywords": [],
