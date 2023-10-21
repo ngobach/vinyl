@@ -12,6 +12,6 @@ export default defineConfig({
     emptyOutDir: true,
   },
   resolve: {
-    alias: [{ find: '@', replacement: __dirname + '/src' }],
+    alias: [{ find: '@', replacement: import.meta.dir + '/src' }],
   },
 });
