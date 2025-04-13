@@ -1,14 +1,14 @@
 {
   "compilerOptions": {
-    "lib": ["dom", "esnext"],
-    "moduleResolution": "node",
-    "allowSyntheticDefaultImports": true,
     "target": "esnext",
-    "baseUrl": "src/",
+    "module": "esnext",
+    "moduleResolution": "node",
+    "esModuleInterop": true,
+    "lib": ["dom", "esnext"],
+    "jsx": "react",
+    "baseUrl": "src",
     "paths": {
       "~/*": ["./*"]
-    },
-    "jsx": "react",
-    "module": "esnext"
+    }
   }
 }

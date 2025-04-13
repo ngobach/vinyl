@@ -1,15 +1,9 @@
 {
   "name": "vinyl",
-  "version": "0.0.1",
-  "description": "Music player built with ReactJS",
-  "author": "Ngo Xuan Bach <thanbaiks@gmail.com>",
+  "version": "1.0.0",
+  "author": "BachNX <thanbaiks@gmail.com>",
   "keywords": [],
   "license": "MIT",
-  "homepage": "https://github.com/thanbaiks/vinyl#readme",
-  "bugs": {
-    "url": "https://github.com/thanbaiks/vinyl/issues"
-  },
-  "main": "dist/index.js",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/ngobach/vinyl.git"
@@ -55,8 +49,8 @@
     "typescript": "^3.8.3"
   },
   "scripts": {
-    "start": "serve -d dist -s -l 8080",
     "dev": "parcel serve src/index.pug",
+    "prebuild": "yarn clean",
     "build": "parcel build --no-source-maps src/index.pug && cp _redirects ./dist",
     "clean": "rm -rf .cache dist",
     "lint": "eslint ./src"

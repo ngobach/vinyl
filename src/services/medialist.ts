@@ -3,16 +3,8 @@ import { MEDIA_SOURCE } from "~/env";
 import { PlayList, Track } from "~/types";
 import log from "~/utils/log";
 
-function genUrlForFile(fileOrUrl: string, fallback = null): string {
-  if (!fileOrUrl) {
-    return fallback;
-  }
-
-  if (fileOrUrl.match(/https?:\/\//)) {
-    return fileOrUrl;
-  }
-
-  return `${MEDIA_SOURCE.replace(/\/$/, "")}/${fileOrUrl.replace(/^\//, "")}`;
+function mediaFileUrl(filename: string): string {
+  return new URL(filename, MEDIA_SOURCE).toString();
 }
 
 interface MediaList {
@@ -24,7 +16,7 @@ interface MediaList {
   search: (keyword: string) => Promise<PlayList>;
 }
 
-// eslint-disable-next-line
+// eslint-disable-next-line @typescript-eslint/no-namespace
 namespace API {
   export type Track = {
     url: string;
@@ -47,16 +39,16 @@ const MediaList: MediaList = {
   async ensureFetched(): Promise<MediaList> {
     try {
       const mr: API.Response = await (
-        await fetch(genUrlForFile("index.json"))
+        await fetch(mediaFileUrl("index.json"))
       ).json();
 
       log("📩 %cResponse received", "font-weight: bold");
 
       this.tracks = mr.tracks.map<Track>((raw) => ({
         title: raw.title,
-        coverUrl: genUrlForFile(raw.cover, mr.default_cover),
+        coverUrl: mediaFileUrl(raw.cover ?? mr.default_cover),
         artist: raw.artist,
-        url: genUrlForFile(raw.url),
+        url: mediaFileUrl(raw.url),
       }));
 
       this.all = {
