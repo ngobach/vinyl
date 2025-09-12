@@ -70,7 +70,7 @@ const MediaList: MediaList = {
       };
     } catch (error) {
       log(
-        `😱%cCannot fetch media playlists: ${(error as any).message}`,
+        `😱%cCannot fetch media playlists: ${(error as Error).message}`,
         'font-weight: bold',
       );
       throw error;

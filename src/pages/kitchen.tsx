@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { Fragment, FC, useState } from 'react';
+import { Fragment, useState } from 'react';
 import { log } from '@/utils';
 import Logo from '@/components/Logo';
 import Nav from '@/components/Nav';
@@ -30,7 +30,7 @@ const fixtures: {
   },
 };
 
-const Example: FC<React.PropsWithChildren<{ title: string }>> = ({
+const Example: React.FC<React.PropsWithChildren<{ title: string }>> = ({
   title,
   children,
 }) => (
@@ -66,7 +66,7 @@ const Example: FC<React.PropsWithChildren<{ title: string }>> = ({
   </section>
 );
 
-const Spacer: FC<{}> = () => (
+const Spacer: React.FC = () => (
   <div
     css={css`
       height: 1rem;
@@ -74,7 +74,7 @@ const Spacer: FC<{}> = () => (
   />
 );
 
-const ExamplePlaybar: FC<{}> = () => {
+const ExamplePlaybar: React.FC = () => {
   const [playing, setPlaying] = useState(true);
   const [volume, setVolume] = useState(0.2);
 
@@ -108,7 +108,7 @@ const ExampleSlider = () => {
   );
 };
 
-const KitchenPage: FC<{}> = () => (
+const KitchenPage: React.FC = () => (
   <Fragment>
     <title>Kitchen sink</title>
 

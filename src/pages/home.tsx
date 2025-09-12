@@ -1,10 +1,10 @@
-import React, { useRef } from 'react';
+import React, { RefObject, useRef } from 'react';
 import { useRouteMatch } from 'react-router';
 import { css } from '@emotion/react';
 import Playbar from '@/components/Playbar';
 import SideBar from '@/components/SideBar';
 import MainLayout from '@/components/layout/MainLayout';
-import { useMediaController, useMediaList, useMediaEngine } from '@/hooks';
+import { useMediaController, useMediaEngine } from '@/hooks';
 
 import { FCWithTitle } from './types';
 import Welcome from './home/Welcome';
@@ -48,14 +48,15 @@ function resolveScreen(
 
 const HomePage: React.FC = () => {
   const slotRef = useRef<HTMLDivElement>(null);
-  const ml = useMediaList();
   const engine = useMediaEngine();
   const controller = useMediaController();
   const routeParams = useRouteMatch('/:l1?/:l2?/:l3?/:l4?')!;
   const [Component, params] = resolveScreen(routeParams.params);
   const update = useUpdate();
   useMount(() => requestAnimationFrame(update));
-  const content = <Component {...params} slotRef={slotRef as any} />;
+  const content = (
+    <Component {...params} slotRef={slotRef as RefObject<HTMLDivElement>} />
+  );
 
   const player = (
     <div

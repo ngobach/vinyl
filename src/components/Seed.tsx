@@ -1,7 +1,4 @@
-import { css } from '@emotion/react';
-import { FC } from 'react';
-
-const Seed: FC<{}> = ({}) => {
+const Seed: React.FC = () => {
   return <div />;
 };
 
