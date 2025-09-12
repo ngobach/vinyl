@@ -1,13 +1,15 @@
 {
   "name": "vinyl",
-  "version": "0.0.1",
-  "description": "Music player built with ReactJS",
-  "main": "dist/index.js",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/ngobach/vinyl.git"
-  },
+  "version": "1.0.0",
+  "license": "UNLICENSED",
   "type": "module",
+  "scripts": {
+    "build": "vite build",
+    "clean": "rm -rf dist",
+    "deploy": "./hacks/surge.sh",
+    "format": "prettier -w .",
+    "start": "vite"
+  },
   "dependencies": {
     "@emotion/react": "^11.14.0",
     "classnames": "^2.5.1",
@@ -42,19 +44,5 @@
     "sass": "^1.92.1",
     "typescript": "^5.9.2",
     "vite": "^7.1.5"
-  },
-  "scripts": {
-    "start": "vite",
-    "build": "vite build",
-    "deploy": "./hacks/surge.sh",
-    "format": "prettier -w .",
-    "clean": "rm -rf dist"
-  },
-  "keywords": [],
-  "author": "Ngo Xuan Bach <thanbaiks@gmail.com>",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/thanbaiks/vinyl/issues"
-  },
-  "homepage": "https://github.com/thanbaiks/vinyl#readme"
+  }
 }
