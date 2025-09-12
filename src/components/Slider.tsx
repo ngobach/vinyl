@@ -1,13 +1,10 @@
-/** @jsx jsx */
-import React, { useCallback, useRef, useState } from "react";
-import { css, jsx } from "@emotion/core";
-import { clamp } from "lodash";
+import React, { useCallback, useRef, useState } from 'react';
+import { css } from '@emotion/react';
+import { clamp } from 'lodash';
 
-const SliderLabel: React.FC<{ mr?: boolean; ml?: boolean }> = ({
-  children,
-  ml,
-  mr,
-}) => (
+const SliderLabel: React.FC<
+  React.PropsWithChildren<{ mr?: boolean; ml?: boolean }>
+> = ({ children, ml, mr }) => (
   <div
     css={[
       css`
@@ -49,32 +46,34 @@ const Slider: React.FC<SliderProps> = ({
   const holder = useRef<HTMLDivElement>(null);
 
   const pointerDownHandler = useCallback((e: React.PointerEvent) => {
-    holder.current.setPointerCapture(e.pointerId);
-    const clientRect = holder.current.getBoundingClientRect();
+    holder.current!.setPointerCapture(e.pointerId);
+    const clientRect = holder.current!.getBoundingClientRect();
     const v = (e.pageX - clientRect.left) / clientRect.width;
     setOverride(v);
   }, []);
+
   const pointerMoveHandler = useCallback(
     (e: React.PointerEvent) => {
-      if (typeof override !== "number") {
+      if (typeof override !== 'number') {
         return;
       }
-      const clientRect = holder.current.getBoundingClientRect();
+      const clientRect = holder.current!.getBoundingClientRect();
       const v = clamp((e.pageX - clientRect.left) / clientRect.width, 0, 1);
       setOverride(v);
       if (live) {
         onSeek(v);
       }
     },
-    [override, live]
+    [override, live],
   );
+
   const pointerUpHandler = useCallback(
     (e: React.PointerEvent) => {
-      holder.current.releasePointerCapture(e.pointerId);
-      onSeek(override);
+      holder.current!.releasePointerCapture(e.pointerId);
+      onSeek(override!);
       setOverride(null);
     },
-    [override]
+    [override],
   );
 
   return (

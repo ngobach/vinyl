@@ -1,9 +1,8 @@
-/** @jsx jsx */
-import React from "react";
-import { jsx, css } from "@emotion/core";
-import { DEFAULT_THUMBNAIL } from "~/env";
-import { Track } from "~/types";
-import Thumbnail from "./Thumbnail";
+import React from 'react';
+import { css } from '@emotion/react';
+import { DEFAULT_THUMBNAIL } from '@/env';
+import { Track } from '@/types';
+import Thumbnail from './Thumbnail';
 
 interface TrackProps {
   track: Track;

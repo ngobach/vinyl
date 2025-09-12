@@ -1,9 +1,6 @@
-import defaultThumbnail from "./assets/img/thumbnail.jpg";
-export const DEV = process.env.NODE_ENV === "development";
-export const REVISION = process.env.APP_REVISION ?? "development";
-export const MEDIA_SOURCE = DEV
-  ? "http://localhost:3000/"
-  : new URL("/_data/", window.location.href).toString();
+import defaultThumbnail from '@/assets/img/thumbnail.jpg';
+export const DEV = !import.meta.env.PROD;
+export const REVISION = import.meta.env.PROD ? 'prod' : 'dev';
+export const MEDIA_SOURCE = import.meta.env.VITE_MEDIA_SOURCE_BASEURL;
 export const LOG_ENABLED = true;
-export const LOADER_SKIPPED = DEV;
 export const DEFAULT_THUMBNAIL = defaultThumbnail;

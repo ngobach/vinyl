@@ -1,16 +1,22 @@
-/** @jsx jsx */
-import { FC, useCallback } from "react";
-import { jsx, css } from "@emotion/core";
-import { throttle } from "lodash";
-import { PlaybackMode } from "~/services/audioengine";
-import { Track, PlaybackStatus } from "~/types";
-import MQ from "~/utils/mq";
-import Thumbnail from "./Thumbnail";
-import Icon, { Icons } from "./Icon";
-import Slider from "./Slider";
-import { DEFAULT_THUMBNAIL } from "~/env";
+import { FC, useCallback } from 'react';
+import { css } from '@emotion/react';
+import { throttle } from 'lodash';
+import { PlaybackMode } from '@/services/audioengine';
+import { Track, PlaybackStatus } from '@/types';
+import { MediaQueries as MQ } from '@/utils';
+import Thumbnail from './Thumbnail';
+import Icon, { Icons } from './Icon';
+import Slider from './Slider';
+import { DEFAULT_THUMBNAIL } from '@/env';
 
-const IconButton = ({
+const IconButton: React.FC<{
+  icon: Icons;
+  onClick: () => void;
+  color?: string;
+  active?: boolean;
+  size?: number;
+  disabled?: boolean;
+}> = ({
   icon,
   onClick,
   color = null,
@@ -23,7 +29,7 @@ const IconButton = ({
       icon={icon}
       size={size ?? 16}
       css={css`
-        cursor: ${!disabled ? "pointer" : "inherit"};
+        cursor: ${!disabled ? 'pointer' : 'inherit'};
         padding: 4px;
         margin: 0 12px;
         ${MQ.Small} {
@@ -34,14 +40,17 @@ const IconButton = ({
       `}
       color={
         color ??
-        (active ? "var(--color-primary1)" : disabled ? "var(--color-gray)" : "")
+        (active ? 'var(--color-primary1)' : disabled ? 'var(--color-gray)' : '')
       }
       onClick={onClick}
     />
   );
 };
 
-const PlayPauseButton = ({ playing, onClick }) => {
+const PlayPauseButton: FC<{ playing: boolean; onClick: () => void }> = ({
+  playing,
+  onClick,
+}) => {
   return (
     <IconButton
       size={32}
@@ -149,7 +158,7 @@ const Playbar: FC<PlaybarProps> = ({
         onModeChanged(PlaybackMode.RepeatOne);
       }
     },
-    [mode, onModeChanged]
+    [mode, onModeChanged],
   );
 
   return (

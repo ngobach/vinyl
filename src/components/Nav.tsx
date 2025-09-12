@@ -1,7 +1,7 @@
-/** @jsx jsx */
-import React from "react";
-import { jsx } from "@emotion/core";
+import React from 'react';
 
-const Nav: React.FC = ({ children }) => <ul>{children}</ul>;
+const Nav: React.FC<React.PropsWithChildren> = ({ children }) => (
+  <ul>{children}</ul>
+);
 
 export default Nav;

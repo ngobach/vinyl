@@ -1,7 +1,6 @@
-/** @jsx jsx */
-import { jsx, css } from "@emotion/core";
-import { FC } from "react";
-import LogoImage from "~/assets/img/soundwave.svg";
+import { css } from '@emotion/react';
+import { FC } from 'react';
+import LogoImage from '@/assets/img/soundwave.svg';
 
 interface Props {
   size?: number;

@@ -1,7 +1,6 @@
-/** @jsx jsx */
-import React from "react";
-import { jsx, css } from "@emotion/core";
-import BlankLayout from "./BlankLayout";
+import React from 'react';
+import { css } from '@emotion/react';
+import BlankLayout from './BlankLayout';
 
 interface Props {
   sidebar?: React.ReactNode;
@@ -9,9 +8,9 @@ interface Props {
   title?: string;
 }
 
-const SIDEBAR_SIZE = "200px";
+const SIDEBAR_SIZE = '200px';
 
-const MainLayout: React.FC<Props> = ({
+const MainLayout: React.FC<React.PropsWithChildren<Props>> = ({
   sidebar,
   title,
   playerArea,

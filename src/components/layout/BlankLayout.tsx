@@ -1,8 +1,7 @@
-/** @jsx jsx */
-import { jsx, css } from "@emotion/core";
-import React from "react";
+import { css } from '@emotion/react';
+import React from 'react';
 
-const BlankLayout: React.FC = ({ children }) => (
+const BlankLayout: React.FC<React.PropsWithChildren> = ({ children }) => (
   <main
     css={css`
       height: 1px;

@@ -1,8 +1,8 @@
-import { BehaviorSubject } from "rxjs";
-import { sample } from "lodash";
-import { DEV } from "~/env";
-import log from "~/utils/log";
-import { Track, PlayList, PlaybackStatus } from "~/types";
+import { BehaviorSubject } from 'rxjs';
+import { sample } from 'lodash';
+import { DEV } from '@/env';
+import { log } from '@/utils';
+import { Track, PlayList, PlaybackStatus } from '@/types';
 
 export enum PlaybackMode {
   RepeatOne,
@@ -13,34 +13,44 @@ export enum PlaybackMode {
 const audio = createAudio();
 
 export const currentPlayList: BehaviorSubject<PlayList> = new BehaviorSubject(
-  null
+  null! as PlayList,
 );
-export const currentItem: BehaviorSubject<Track> = new BehaviorSubject(null);
+
+export const currentItem: BehaviorSubject<Track> = new BehaviorSubject(
+  null! as Track,
+);
+
 export const currentStatus: BehaviorSubject<PlaybackStatus> =
-  new BehaviorSubject({ playing: false, duration: 0, played: 0 });
+  new BehaviorSubject({
+    playing: false,
+    duration: 0,
+    played: 0,
+  } as PlaybackStatus);
+
 export const mode: BehaviorSubject<PlaybackMode> = new BehaviorSubject(
-  PlaybackMode.RepeatOne
+  PlaybackMode.RepeatOne as PlaybackMode,
 );
+
 export const volume: BehaviorSubject<number> = new BehaviorSubject(1);
 
 function createAudio(): HTMLAudioElement {
   const myAudio = new Audio();
   myAudio.autoplay = false;
-  myAudio.addEventListener("play", () => {
+  myAudio.addEventListener('play', () => {
     currentStatus.next({
       ...currentStatus.value,
       playing: true,
     });
   });
 
-  myAudio.addEventListener("pause", () => {
+  myAudio.addEventListener('pause', () => {
     currentStatus.next({
       ...currentStatus.value,
       playing: false,
     });
   });
 
-  myAudio.addEventListener("progress", () => {
+  myAudio.addEventListener('progress', () => {
     currentStatus.next({
       ...currentStatus.value,
       duration: myAudio.duration ?? 0,
@@ -48,7 +58,7 @@ function createAudio(): HTMLAudioElement {
     });
   });
 
-  myAudio.addEventListener("ended", () => {
+  myAudio.addEventListener('ended', () => {
     switch (mode.value) {
       case PlaybackMode.RepeatOne:
         myAudio.currentTime = 0;
@@ -56,13 +66,13 @@ function createAudio(): HTMLAudioElement {
         break;
       case PlaybackMode.RepeatAll: {
         const tmp = currentPlayList.value.tracks.concat(
-          currentPlayList.value.tracks
+          currentPlayList.value.tracks,
         );
         currentItem.next(tmp[tmp.indexOf(currentItem.value) + 1]);
         break;
       }
       case PlaybackMode.Shuffled:
-        currentItem.next(sample(currentPlayList.value.tracks));
+        currentItem.next(sample(currentPlayList.value.tracks)!);
         break;
     }
   });
@@ -75,26 +85,14 @@ function createAudio(): HTMLAudioElement {
 }
 
 function connect() {
-  currentPlayList.subscribe((pl) => {
-    if (!pl) {
-      return;
-    }
-    log(`🎶 %c${pl.title}`, "font-weight: bold");
-    // if (mode.value === PlaybackMode.Shuffled) {
-    //   currentItem.next(sample(pl.tracks));
-    // } else {
-    //   currentItem.next(pl.tracks[0]);
-    // }
-  });
-
   currentItem.subscribe((track) => {
     if (!track) {
       return;
     }
     log(
       `🎵 %c${track.title} - %c${track.artist}`,
-      "font-weight: bold",
-      "font-weight: normal; color: #888888"
+      'font-weight: bold',
+      'font-weight: normal; color: #888888',
     );
     audio.src = track.url;
     audio.play();
@@ -105,8 +103,8 @@ function connect() {
       artwork: [{ src: track.coverUrl }],
     });
 
-    mediaSession.setActionHandler("nexttrack", () =>
-      playNext(sample(currentPlayList.value.tracks))
+    mediaSession.setActionHandler('nexttrack', () =>
+      playNext(sample(currentPlayList.value.tracks)!),
     );
   });
 
@@ -133,7 +131,7 @@ export function playSingle(track: Track): void {
 
 export function playNext(track: Track): void {
   if (!currentPlayList.value.tracks.includes(track)) {
-    throw new Error("Track not in current playlist");
+    throw new Error('Track not in current playlist');
   }
   currentItem.next(track);
 }

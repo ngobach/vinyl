@@ -1,11 +1,8 @@
-import { memoize } from "lodash";
-import { MEDIA_SOURCE } from "~/env";
-import { PlayList, Track } from "~/types";
-import log from "~/utils/log";
-
-function mediaFileUrl(filename: string): string {
-  return new URL(filename, MEDIA_SOURCE).toString();
-}
+import { memoize } from 'lodash';
+import { ofetch } from 'ofetch';
+import { MEDIA_SOURCE } from '@/env';
+import { PlayList, Track } from '@/types';
+import { log } from '@/utils';
 
 interface MediaList {
   tracks: Track[];
@@ -16,7 +13,7 @@ interface MediaList {
   search: (keyword: string) => Promise<PlayList>;
 }
 
-// eslint-disable-next-line @typescript-eslint/no-namespace
+// eslint-disable-next-line
 namespace API {
   export type Track = {
     url: string;
@@ -31,35 +28,50 @@ namespace API {
   };
 }
 
+const getBaseUrl = (): string => {
+  const mediaSourceUrl = new URL(MEDIA_SOURCE, window.location.href);
+
+  return mediaSourceUrl.toString();
+};
+
+const resolveUrl = (urlOrPath: string): string => {
+  const url = new URL(urlOrPath, baseURL);
+
+  return url.toString();
+};
+
+const baseURL = getBaseUrl();
+
+const fetch = ofetch.create({
+  baseURL,
+});
+
 const MediaList: MediaList = {
   tracks: [],
-  defaultCover: "",
-  all: null,
+  defaultCover: '',
+  all: null!,
 
   async ensureFetched(): Promise<MediaList> {
     try {
-      const mr: API.Response = await (
-        await fetch(mediaFileUrl("index.json"))
-      ).json();
+      const mediaIndex = await fetch<API.Response>('index.json');
+      log('📩 %cResponse received', 'font-weight: bold');
 
-      log("📩 %cResponse received", "font-weight: bold");
-
-      this.tracks = mr.tracks.map<Track>((raw) => ({
+      this.tracks = mediaIndex.tracks.map<Track>((raw) => ({
         title: raw.title,
-        coverUrl: mediaFileUrl(raw.cover ?? mr.default_cover),
+        coverUrl: resolveUrl(raw.cover ?? this.defaultCover),
         artist: raw.artist,
-        url: mediaFileUrl(raw.url),
+        url: resolveUrl(raw.url ?? this.defaultCover),
       }));
 
       this.all = {
-        title: "Everything",
-        cover: this.defaultCover,
+        title: 'Everything',
+        coverUrl: this.defaultCover,
         tracks: this.tracks,
       };
     } catch (error) {
       log(
-        `😱%cCannot fetch media playlists: ${error.message}`,
-        "font-weight: bold"
+        `😱%cCannot fetch media playlists: ${(error as Error).message}`,
+        'font-weight: bold',
       );
       throw error;
     }
@@ -69,7 +81,7 @@ const MediaList: MediaList = {
 
   // eslint-disable-next-line
   async search(keyword: string): Promise<PlayList> {
-    throw new Error("Unimplemented");
+    throw new Error('Unimplemented');
   },
 };
 
