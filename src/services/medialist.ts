@@ -1,19 +1,8 @@
 import { memoize } from 'lodash';
+import { ofetch } from 'ofetch';
 import { MEDIA_SOURCE } from '@/env';
 import { PlayList, Track } from '@/types';
-import log from '@/utils/log';
-
-function genUrlForFile(fileOrUrl: string, fallback = null): string {
-  if (!fileOrUrl) {
-    return fallback;
-  }
-
-  if (fileOrUrl.match(/https?:\/\//)) {
-    return fileOrUrl;
-  }
-
-  return `${MEDIA_SOURCE.replace(/\/$/, '')}/${fileOrUrl.replace(/^\//, '')}`;
-}
+import { log } from '@/utils';
 
 interface MediaList {
   tracks: Track[];
@@ -39,34 +28,49 @@ namespace API {
   };
 }
 
+const getBaseUrl = (): string => {
+  const mediaSourceUrl = new URL(MEDIA_SOURCE, window.location.href);
+
+  return mediaSourceUrl.toString();
+};
+
+const resolveUrl = (urlOrPath: string): string => {
+  const url = new URL(urlOrPath, baseURL);
+
+  return url.toString();
+};
+
+const baseURL = getBaseUrl();
+
+const fetch = ofetch.create({
+  baseURL,
+});
+
 const MediaList: MediaList = {
   tracks: [],
   defaultCover: '',
-  all: null,
+  all: null!,
 
   async ensureFetched(): Promise<MediaList> {
     try {
-      const mr: API.Response = await (
-        await fetch(genUrlForFile('index.json'))
-      ).json();
-
+      const mediaIndex = await fetch<API.Response>('index.json');
       log('📩 %cResponse received', 'font-weight: bold');
 
-      this.tracks = mr.tracks.map<Track>((raw) => ({
+      this.tracks = mediaIndex.tracks.map<Track>((raw) => ({
         title: raw.title,
-        coverUrl: genUrlForFile(raw.cover, mr.default_cover),
+        coverUrl: resolveUrl(raw.cover ?? this.defaultCover),
         artist: raw.artist,
-        url: genUrlForFile(raw.url),
+        url: resolveUrl(raw.url ?? this.defaultCover),
       }));
 
       this.all = {
         title: 'Everything',
-        cover: this.defaultCover,
+        coverUrl: this.defaultCover,
         tracks: this.tracks,
       };
     } catch (error) {
       log(
-        `😱%cCannot fetch media playlists: ${error.message}`,
+        `😱%cCannot fetch media playlists: ${(error as any).message}`,
         'font-weight: bold',
       );
       throw error;

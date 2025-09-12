@@ -1,7 +1,7 @@
 import { BehaviorSubject } from 'rxjs';
 import { sample } from 'lodash';
 import { DEV } from '@/env';
-import log from '@/utils/log';
+import { log } from '@/utils';
 import { Track, PlayList, PlaybackStatus } from '@/types';
 
 export enum PlaybackMode {
@@ -13,14 +13,24 @@ export enum PlaybackMode {
 const audio = createAudio();
 
 export const currentPlayList: BehaviorSubject<PlayList> = new BehaviorSubject(
-  null,
+  null! as PlayList,
 );
-export const currentItem: BehaviorSubject<Track> = new BehaviorSubject(null);
+
+export const currentItem: BehaviorSubject<Track> = new BehaviorSubject(
+  null! as Track,
+);
+
 export const currentStatus: BehaviorSubject<PlaybackStatus> =
-  new BehaviorSubject({ playing: false, duration: 0, played: 0 });
+  new BehaviorSubject({
+    playing: false,
+    duration: 0,
+    played: 0,
+  } as PlaybackStatus);
+
 export const mode: BehaviorSubject<PlaybackMode> = new BehaviorSubject(
-  PlaybackMode.RepeatOne,
+  PlaybackMode.RepeatOne as PlaybackMode,
 );
+
 export const volume: BehaviorSubject<number> = new BehaviorSubject(1);
 
 function createAudio(): HTMLAudioElement {
@@ -62,7 +72,7 @@ function createAudio(): HTMLAudioElement {
         break;
       }
       case PlaybackMode.Shuffled:
-        currentItem.next(sample(currentPlayList.value.tracks));
+        currentItem.next(sample(currentPlayList.value.tracks)!);
         break;
     }
   });
@@ -75,18 +85,6 @@ function createAudio(): HTMLAudioElement {
 }
 
 function connect() {
-  currentPlayList.subscribe((pl) => {
-    if (!pl) {
-      return;
-    }
-    log(`🎶 %c${pl.title}`, 'font-weight: bold');
-    // if (mode.value === PlaybackMode.Shuffled) {
-    //   currentItem.next(sample(pl.tracks));
-    // } else {
-    //   currentItem.next(pl.tracks[0]);
-    // }
-  });
-
   currentItem.subscribe((track) => {
     if (!track) {
       return;
@@ -106,7 +104,7 @@ function connect() {
     });
 
     mediaSession.setActionHandler('nexttrack', () =>
-      playNext(sample(currentPlayList.value.tracks)),
+      playNext(sample(currentPlayList.value.tracks)!),
     );
   });
 

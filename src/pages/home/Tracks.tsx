@@ -1,7 +1,6 @@
-/** @jsx jsx */
 import { useMemo, useState } from 'react';
 import ReactDOM from 'react-dom';
-import { jsx, css } from '@emotion/core';
+import { css } from '@emotion/react';
 import { groupBy } from 'lodash';
 import TVKD from 'tieng-viet-khong-dau';
 import { useMediaController, useMediaList } from '@/hooks';
@@ -9,9 +8,9 @@ import { Track } from '@/types';
 import Section from '@/components/Section';
 import TrackComponent, { DisplayMode } from '@/components/Track';
 import ImgResting from '@/assets/img/undraw_chilling_8tii.svg';
-import { FCWithTitle } from '../types';
 import LetterBoard from '@/components/LetterBoard';
 import { useEffectOnce } from 'react-use';
+import { FCWithTitle } from '../types';
 
 type TrackGroup = {
   name: string;
@@ -52,14 +51,17 @@ const Tracks: FCWithTitle = ({ slotRef }) => {
       console.error('Selector not match');
     }
   };
+
   useEffectOnce(() => {
     const elements = document.querySelectorAll('[data-letter]');
+
     const cb: IntersectionObserverCallback = (entries) => {
-      console.log('Hit');
       setActiveLetters((current) => {
         const cloned = { ...current };
+
         entries.forEach((entry) => {
-          const letter = entry.target.getAttribute('data-letter');
+          const letter = entry.target.getAttribute('data-letter')!;
+
           if (entry.isIntersecting) {
             cloned[letter] = true;
           } else {
@@ -139,7 +141,7 @@ const Tracks: FCWithTitle = ({ slotRef }) => {
         </p>
       </section>
 
-      {slotRef.current &&
+      {slotRef!.current &&
         ReactDOM.createPortal(
           <div
             css={css`
@@ -152,7 +154,7 @@ const Tracks: FCWithTitle = ({ slotRef }) => {
               onSelect={scrollToLetter}
             />
           </div>,
-          slotRef.current,
+          slotRef!.current,
         )}
     </main>
   );

@@ -1,94 +1,94 @@
-/** @jsx jsx */
-import { jsx, css } from '@emotion/core';
-import { FC } from 'react';
-import MQ from '@/utils/mq';
+import { css } from '@emotion/react';
+import { MediaQueries as MQ } from '@/utils';
 
 interface Props {
   error: Error;
 }
 
-const Panic: FC<Props> = ({ error }) => (
-  <div
-    css={css`
-      display: flex;
-      width: 100%;
-      height: 100%;
-      justify-content: center;
-      align-items: center;
-    `}
-  >
+const Panic: React.FC<Props> = ({ error }) => {
+  return (
     <div
       css={css`
         display: flex;
+        width: 100%;
+        height: 100%;
+        justify-content: center;
         align-items: center;
-        ${MQ.Small} {
-          flex-flow: column;
-        }
       `}
     >
-      <i
-        className={`im im-bug`}
-        css={css`
-          display: block;
-          margin-right: 3rem;
-          font-size: 8rem;
-          color: var(--nord3);
-          line-height: 1.5;
-          ${MQ.Small} {
-            margin: 0 auto;
-            font-size: 4rem;
-          }
-        `}
-      />
       <div
         css={css`
-          width: 400px;
-          padding-left: 3rem;
-          border-left: solid 1px var(--nord3);
-          color: var(--nord3);
+          display: flex;
+          align-items: center;
           ${MQ.Small} {
-            border-left: none;
-            width: 100%;
-            padding: 0 2rem;
-            text-align: center;
+            flex-flow: column;
           }
         `}
       >
-        <h1
+        <i
+          className={`im im-bug`}
           css={css`
-            font-size: 2rem;
-            font-weight: 100;
-            color: var(--nord4);
+            display: block;
+            margin-right: 3rem;
+            font-size: 8rem;
+            color: var(--nord3);
+            line-height: 1.5;
             ${MQ.Small} {
-              font-size: 1.5rem;
+              margin: 0 auto;
+              font-size: 4rem;
+            }
+          `}
+        />
+        <div
+          css={css`
+            width: 400px;
+            padding-left: 3rem;
+            border-left: solid 1px var(--nord3);
+            color: var(--nord3);
+            ${MQ.Small} {
+              border-left: none;
+              width: 100%;
+              padding: 0 2rem;
+              text-align: center;
             }
           `}
         >
-          Oh snap!
-        </h1>
-        <p
-          css={css`
-            margin-top: 0.5rem;
-            color: var(--nord4);
-          `}
-        >
-          Some error happened that we are unable to continue.
-          <pre
+          <h1
             css={css`
-              margin-top: 0.5rem;
-              padding: 0.25rem 0.5rem;
-              border-radius: 0.25rem;
-              background: var(--nord1);
-              font-size: 0.8rem;
-              white-space: pre-wrap;
+              font-size: 2rem;
+              font-weight: 100;
+              color: var(--nord4);
+              ${MQ.Small} {
+                font-size: 1.5rem;
+              }
             `}
           >
-            <code>{error.message}</code>
-          </pre>
-        </p>
+            Oh snap!
+          </h1>
+          <p
+            css={css`
+              margin-top: 0.5rem;
+              color: var(--nord4);
+            `}
+          >
+            Some error happened that we are unable to continue.
+            <pre
+              css={css`
+                margin-top: 0.5rem;
+                padding: 0.25rem 0.5rem;
+                border-radius: 0.25rem;
+                background: var(--nord1);
+                font-size: 0.8rem;
+                white-space: pre-wrap;
+              `}
+            >
+              <code>{error.message}</code>
+            </pre>
+          </p>
+        </div>
       </div>
     </div>
-  </div>
-);
+  );
+};
 
 export default Panic;

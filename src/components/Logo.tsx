@@ -1,5 +1,4 @@
-/** @jsx jsx */
-import { jsx, css } from '@emotion/core';
+import { css } from '@emotion/react';
 import { FC } from 'react';
 import LogoImage from '@/assets/img/soundwave.svg';
 

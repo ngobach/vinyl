@@ -1,5 +1,4 @@
-/** @jsx jsx */
-import { jsx, css } from '@emotion/core';
+import { css } from '@emotion/react';
 import { FC } from 'react';
 import { PlayList } from '@/types';
 import { DEFAULT_THUMBNAIL } from '@/env';

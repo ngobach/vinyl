@@ -1,5 +1,4 @@
-/** @jsx jsx */
-import { jsx, css } from '@emotion/core';
+import { css } from '@emotion/react';
 import { FC } from 'react';
 
 const Seed: FC<{}> = ({}) => {

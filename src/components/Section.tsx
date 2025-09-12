@@ -1,6 +1,5 @@
-/** @jsx jsx */
 import React from 'react';
-import { jsx, css } from '@emotion/core';
+import { css } from '@emotion/react';
 import { LinkTarget } from '@/types';
 import Clickable from './Clickable';
 import Text from './Text';
@@ -10,7 +9,11 @@ interface Props {
   target?: LinkTarget;
 }
 
-const Section: React.FC<Props> = ({ title, target = {}, children }) => (
+const Section: React.FC<React.PropsWithChildren<Props>> = ({
+  title,
+  target = {},
+  children,
+}) => (
   <section>
     {title && (
       <Clickable {...target}>

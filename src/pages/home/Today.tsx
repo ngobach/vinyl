@@ -1,6 +1,5 @@
-/** @jsx jsx */
 import { useMemo } from 'react';
-import { jsx, css } from '@emotion/core';
+import { css } from '@emotion/react';
 import fnv from 'fnv-plus';
 import { useMediaController, useMediaList } from '@/hooks';
 import Section from '@/components/Section';
@@ -33,7 +32,7 @@ const Today: FCWithTitle = () => {
 
   const playlist: PlayList = {
     title,
-    coverUrl: null,
+    coverUrl: null!,
     tracks,
   };
 

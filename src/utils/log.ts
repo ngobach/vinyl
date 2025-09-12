@@ -1,9 +1,7 @@
 import { LOG_ENABLED } from '@/env';
 
-function log(...args: unknown[]): void {
+export const log: typeof console.log = (...args: unknown[]) => {
   if (LOG_ENABLED) {
     console.log(...args);
   }
-}
-
-export default log;
+};

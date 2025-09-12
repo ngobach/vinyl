@@ -1,6 +1,5 @@
-@import 'reset-css';
-@import 'nord';
-@import 'common';
+@use 'reset-css';
+@use 'nord';
 
 html {
   font-family:

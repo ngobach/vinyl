@@ -1,6 +1,5 @@
-/** @jsx jsx */
-import { jsx, css } from '@emotion/core';
-import { FC } from 'react';
+import { css } from '@emotion/react';
+import { FC, PropsWithChildren } from 'react';
 
 export enum Color {
   White,
@@ -21,7 +20,11 @@ function colorToCode(color: Color): string {
   }
 }
 
-const Block: FC<Props> = ({ children, title, color = Color.Gray }) => {
+const Block: FC<PropsWithChildren<Props>> = ({
+  children,
+  title,
+  color = Color.Gray,
+}) => {
   return (
     <section>
       <h2

@@ -1,8 +1,6 @@
-/** @jsx jsx */
 import React, { useRef } from 'react';
 import { useRouteMatch } from 'react-router';
-import Helmet from 'react-helmet';
-import { css, jsx } from '@emotion/core';
+import { css } from '@emotion/react';
 import Playbar from '@/components/Playbar';
 import SideBar from '@/components/SideBar';
 import MainLayout from '@/components/layout/MainLayout';
@@ -53,11 +51,11 @@ const HomePage: React.FC = () => {
   const ml = useMediaList();
   const engine = useMediaEngine();
   const controller = useMediaController();
-  const routeParams = useRouteMatch('/:l1?/:l2?/:l3?/:l4?');
+  const routeParams = useRouteMatch('/:l1?/:l2?/:l3?/:l4?')!;
   const [Component, params] = resolveScreen(routeParams.params);
   const update = useUpdate();
   useMount(() => requestAnimationFrame(update));
-  const content = <Component {...params} slotRef={slotRef} />;
+  const content = <Component {...params} slotRef={slotRef as any} />;
 
   const player = (
     <div
@@ -111,21 +109,20 @@ const HomePage: React.FC = () => {
     typeof Component.title === 'function'
       ? Component.title(params)
       : typeof Component.title === 'string'
-      ? Component.title
-      : "I'm feeling happy";
+        ? Component.title
+        : "I'm feeling happy";
+
   const documentTitle = engine.currentTrack
     ? `${engine.currentTrack.title} - ${engine.currentTrack.artist}`
     : pageTitle;
 
   return (
     <MainLayout
-      sidebar={<SideBar medialist={ml} slot={<div ref={slotRef} />} />}
+      sidebar={<SideBar slot={<div ref={slotRef} />} />}
       title={pageTitle}
       playerArea={player}
     >
-      <Helmet>
-        <title>{documentTitle}</title>
-      </Helmet>
+      <title>{documentTitle}</title>
 
       {content}
     </MainLayout>

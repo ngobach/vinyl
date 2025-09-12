@@ -1,6 +1,5 @@
-/** @jsx jsx */
 import React from 'react';
-import { jsx, css } from '@emotion/core';
+import { css } from '@emotion/react';
 import { DEFAULT_THUMBNAIL } from '@/env';
 import { Track } from '@/types';
 import Thumbnail from './Thumbnail';

@@ -1,8 +1,6 @@
-import defaultThumbnail from './assets/img/thumbnail.jpg';
+import defaultThumbnail from '@/assets/img/thumbnail.jpg';
 export const DEV = !import.meta.env.PROD;
-export const REVISION = import.meta.env.PROD ? 'prod' : 'development';
-export const MEDIA_SOURCE = 'https://minio.hub.zsvr.cloud/vinyl/vinyl';
-// export const MEDIA_SOURCE = '/_data';
+export const REVISION = import.meta.env.PROD ? 'prod' : 'dev';
+export const MEDIA_SOURCE = import.meta.env.VITE_MEDIA_SOURCE_BASEURL;
 export const LOG_ENABLED = true;
-export const LOADER_SKIPPED = DEV;
 export const DEFAULT_THUMBNAIL = defaultThumbnail;

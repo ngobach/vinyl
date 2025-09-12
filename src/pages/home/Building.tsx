@@ -1,5 +1,4 @@
-/** @jsx jsx */
-import { jsx, css } from '@emotion/core';
+import { css } from '@emotion/react';
 import { FCWithTitle } from '../types';
 import ImgSourceCode from '@/assets/img/undraw_source_code_xx2e.svg';
 

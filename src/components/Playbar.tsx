@@ -1,16 +1,22 @@
-/** @jsx jsx */
 import { FC, useCallback } from 'react';
-import { jsx, css } from '@emotion/core';
+import { css } from '@emotion/react';
 import { throttle } from 'lodash';
 import { PlaybackMode } from '@/services/audioengine';
 import { Track, PlaybackStatus } from '@/types';
-import MQ from '@/utils/mq';
+import { MediaQueries as MQ } from '@/utils';
 import Thumbnail from './Thumbnail';
 import Icon, { Icons } from './Icon';
 import Slider from './Slider';
 import { DEFAULT_THUMBNAIL } from '@/env';
 
-const IconButton = ({
+const IconButton: React.FC<{
+  icon: Icons;
+  onClick: () => void;
+  color?: string;
+  active?: boolean;
+  size?: number;
+  disabled?: boolean;
+}> = ({
   icon,
   onClick,
   color = null,
@@ -41,7 +47,10 @@ const IconButton = ({
   );
 };
 
-const PlayPauseButton = ({ playing, onClick }) => {
+const PlayPauseButton: FC<{ playing: boolean; onClick: () => void }> = ({
+  playing,
+  onClick,
+}) => {
   return (
     <IconButton
       size={32}

@@ -1,10 +1,6 @@
-/** @jsx jsx */
-/* eslint-disable */
-import { jsx, css } from '@emotion/core';
+import { css } from '@emotion/react';
 import { Fragment, FC, useState } from 'react';
-import Helmet from 'react-helmet';
-
-import log from '@/utils/log';
+import { log } from '@/utils';
 import Logo from '@/components/Logo';
 import Nav from '@/components/Nav';
 import NavItem from '@/components/NavItem';
@@ -28,14 +24,16 @@ const fixtures: {
 
   track: {
     title: 'Something just like this',
-    artists: [],
-    genres: [],
     coverUrl: 'https://i.pravatar.cc/300?u=random@cover.com',
     url: '',
+    artist: 'X',
   },
 };
 
-const Example: FC<{ title: string }> = ({ title, children }) => (
+const Example: FC<React.PropsWithChildren<{ title: string }>> = ({
+  title,
+  children,
+}) => (
   <section
     css={css`
       margin-bottom: 2rem;
@@ -112,9 +110,8 @@ const ExampleSlider = () => {
 
 const KitchenPage: FC<{}> = () => (
   <Fragment>
-    <Helmet>
-      <title>Kitchen sink</title>
-    </Helmet>
+    <title>Kitchen sink</title>
+
     <main
       css={css`
         margin: 2rem auto;
