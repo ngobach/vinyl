@@ -12,13 +12,15 @@ const webfontConfig = {
 };
 
 function loadFonts() {
-  return new Promise<void>((resolve, reject) => {
-    WebFont.load({
-      ...webfontConfig,
-      active: resolve,
-      inactive: reject,
-    });
+  const { promise, reject, resolve } = Promise.withResolvers<void>();
+
+  WebFont.load({
+    ...webfontConfig,
+    active: resolve,
+    inactive: reject,
   });
+
+  return promise;
 }
 
 (async () => {
