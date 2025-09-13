@@ -1,11 +1,12 @@
 {
   "extends": [
     "eslint:recommended",
-    "plugin:react/jsx-runtime",
-    "plugin:@typescript-eslint/recommended"
+    "plugin:@typescript-eslint/recommended",
+    "plugin:react/recommended",
+    "plugin:react/jsx-runtime"
   ],
   "parser": "@typescript-eslint/parser",
-  "ignorePatterns": ["node_modules", "dist"],
+  "ignorePatterns": ["dist"],
   "settings": {
     "react": {
       "version": "detect"

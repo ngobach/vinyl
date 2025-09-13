@@ -1,6 +1,7 @@
 import React from 'react';
 import { css } from '@emotion/react';
 import * as env from '@/env';
+import { resolveMediaUrl } from '@/services/medialist';
 import Clickable from './Clickable';
 import Logo from './Logo';
 import Block from './Block';
@@ -98,7 +99,7 @@ const SideBar: React.FC<{
             </dt>
             <dd>
               <a
-                href={env.MEDIA_SOURCE}
+                href={resolveMediaUrl('index.json')}
                 css={css`
                   text-decoration: none;
                   color: inherit;

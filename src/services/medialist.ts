@@ -3,6 +3,7 @@ import { ofetch } from 'ofetch';
 import { MEDIA_SOURCE } from '@/env';
 import { PlayList, Track } from '@/types';
 import { log } from '@/utils';
+import { hasProtocol, joinURL } from 'ufo';
 
 interface MediaList {
   tracks: Track[];
@@ -34,13 +35,11 @@ const getBaseUrl = (): string => {
   return mediaSourceUrl.toString();
 };
 
-const resolveUrl = (urlOrPath: string): string => {
-  const url = new URL(urlOrPath, baseURL);
-
-  return url.toString();
-};
-
 const baseURL = getBaseUrl();
+
+export const resolveMediaUrl = (urlOrPath: string): string => {
+  return hasProtocol(urlOrPath) ? urlOrPath : joinURL(baseURL, urlOrPath);
+};
 
 const fetch = ofetch.create({
   baseURL,
@@ -58,9 +57,9 @@ const MediaList: MediaList = {
 
       this.tracks = mediaIndex.tracks.map<Track>((raw) => ({
         title: raw.title,
-        coverUrl: resolveUrl(raw.cover ?? this.defaultCover),
+        coverUrl: resolveMediaUrl(raw.cover ?? this.defaultCover),
         artist: raw.artist,
-        url: resolveUrl(raw.url ?? this.defaultCover),
+        url: resolveMediaUrl(raw.url ?? this.defaultCover),
       }));
 
       this.all = {
