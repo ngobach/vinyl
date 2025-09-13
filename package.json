@@ -5,6 +5,7 @@
   "type": "module",
   "scripts": {
     "build": "vite build",
+    "postbuild": "./scripts/postbuild.sh",
     "clean": "rm -rf dist",
     "format": "prettier -w .",
     "lint": "eslint --ext .js,.jsx,.ts,.tsx .",
