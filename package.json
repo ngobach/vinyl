@@ -9,6 +9,7 @@
     "clean": "rm -rf dist",
     "format": "prettier -w .",
     "lint": "eslint --ext .js,.jsx,.ts,.tsx .",
+    "type-check": "tsc --noEmit",
     "start": "vite"
   },
   "dependencies": {
