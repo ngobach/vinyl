@@ -37,7 +37,7 @@ jobs:
 
       - name: Deploy to Netlify (only on push to main)
         if: github.event_name == 'push' && github.ref == 'refs/heads/main'
-        uses: nwtgck/actions-netlify@v2.0.1
+        uses: nwtgck/actions-netlify@v3.0.0
         with:
           publish-dir: ./dist
           production-deploy: true
