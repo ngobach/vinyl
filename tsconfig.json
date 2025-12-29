@@ -1,5 +1,14 @@
 {
   "compilerOptions": {
+    "target": "ESNext",
+    "module": "ESNext",
+    "moduleResolution": "bundler",
+    "paths": {
+      "@/*": [
+        "./src/*"
+      ]
+    },
+    "resolveJsonModule": true,
     "esModuleInterop": true,
     "jsx": "react-jsx",
     "jsxImportSource": "@emotion/react",
@@ -7,18 +16,9 @@
       "DOM",
       "ESNext"
     ],
-    "module": "ESNext",
-    "moduleResolution": "bundler",
     "noEmit": true,
-    "paths": {
-      "@/*": [
-        "./src/*"
-      ]
-    },
-    "resolveJsonModule": true,
     "skipLibCheck": true,
     "strict": true,
-    "target": "ESNext"
   },
   "include": [
     "src"
